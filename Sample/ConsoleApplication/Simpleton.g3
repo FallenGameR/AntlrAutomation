@@ -14,15 +14,17 @@ options {
  * Parser Rules
  */
 
-public
-compileUnit
-    :   EOF
+public file
+    : section+ EOF
+    ;
+
+section
+    : 'start' WORD* 'end'
     ;
 
 /*
  * Lexer Rules
  */
 
-WS
-    :   ' '
-    ;
+WORD: 'a'..'z'+;
+WS	: ' ' | '\t' | '\r' | '\n' { $channel = Hidden;};
