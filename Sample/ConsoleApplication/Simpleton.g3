@@ -15,7 +15,7 @@ options {
  */
 
 public file
-    : section+ EOF
+    : section+ EOF!
     ;
 
 section
