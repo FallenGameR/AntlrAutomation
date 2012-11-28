@@ -12,7 +12,7 @@ namespace ConsoleApplication
         {
             var file = @"d:\Archive\Projects\AntlrAutomation\Sample\Resources\simpleton.txt";
             var stream = new ANTLRFileStream(file);
-            var lexer = new SimpletonLexer();
+            var lexer = new SimpletonLexer(stream);
             var tokens = new CommonTokenStream(lexer);
             var parser = new SimpletonParser(tokens);
             var tree = parser.file().Tree;

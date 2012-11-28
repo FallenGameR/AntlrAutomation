@@ -7,19 +7,22 @@ options {
     ASTLabelType=CommonTree;
 }
 
+tokens {FILE; SECTION;}
+
 @lexer::namespace{ConsoleApplication}
 @parser::namespace{ConsoleApplication}
+
 
 /*
  * Parser Rules
  */
 
 public file
-    : section+ EOF!
+    : section+ EOF -> ^(FILE section+)
     ;
 
 section
-    : 'start' WORD* 'end'
+    : 'start' WORD* 'end' -> ^(SECTION WORD*)
     ;
 
 /*
@@ -27,4 +30,6 @@ section
  */
 
 WORD: 'a'..'z'+;
-WS	: ' ' | '\t' | '\r' | '\n' { $channel = Hidden;};
+NEWLINE
+    : '\r'? '\n' { $channel = Hidden; };
+WS	: ' ' | '\t' | NEWLINE { $channel = Hidden; };
