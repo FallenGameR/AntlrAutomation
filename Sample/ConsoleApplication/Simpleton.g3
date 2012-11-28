@@ -1,0 +1,28 @@
+﻿grammar Simpleton;
+
+options {
+    language=CSharp3;
+    output=AST;
+    TokenLabelType=CommonToken;
+    ASTLabelType=CommonTree;
+}
+
+@lexer::namespace{ConsoleApplication}
+@parser::namespace{ConsoleApplication}
+
+/*
+ * Parser Rules
+ */
+
+public
+compileUnit
+    :   EOF
+    ;
+
+/*
+ * Lexer Rules
+ */
+
+WS
+    :   ' '
+    ;
