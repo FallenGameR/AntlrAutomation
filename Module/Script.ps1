@@ -1,14 +1,31 @@
-antlr3.exe .\Simpleton.g3
-$env:path += ";$([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory())"
-csc.exe /nologo /optimize /out:parser.exe '/lib:d:\Archive\Projects\AntlrAutomation\Libraries\antlr-3.4.1.9004\' /reference:Antlr3.Runtime.dll *.cs .\Properties\AssemblyInfo.cs
-copy d:\Archive\Projects\AntlrAutomation\Libraries\antlr-3.4.1.9004\Antlr3.Runtime.dll .\Antlr3.Runtime.dll
-.\parser.exe
 
 
-<#
-Build dll
-Return tree from it
-dll code should span one single file
+$antlrPath = "d:\Archive\Projects\AntlrAutomation\Libraries\antlr-3.4.1.9004\"
+$antlr = Join-Path $antlrPath "antlr3.exe"
+$csc = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) "csc.exe"
 
-all referenced dlls must be embedded as a resource
-#>
+$param = , ".\Grammar.g3"
+& $antlr $param
+
+$param =
+    "/nologo",
+    "/optimize",
+    "/target:library",
+    "/out:parser.dll",
+    "/lib:$antlrPath",
+    "/reference:Antlr3.Runtime.dll",
+    "*.cs"
+& $csc $param
+
+[Reflection.Assembly]::LoadFrom( (Join-Path $antlrPath "Antlr3.Runtime.dll") )
+[Reflection.Assembly]::LoadFrom( "parser.dll" )
+
+$parser = New-Object ParserLibrary.Loader
+$tree = $parser.Parse( "d:\Archive\Projects\AntlrAutomation\Sample\Resources\simpleton.txt" )
+
+#$tree.Children[0].Children
+#Render trees simplified - text + children
+#Allow syntax like:
+#- get all 'FILE' children +recursive
+#- FILE.some.sub.child (expand for all found children, discard the onces that don not have this path)?
+

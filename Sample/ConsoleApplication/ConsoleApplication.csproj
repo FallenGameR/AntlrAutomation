@@ -48,26 +48,21 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simpleton.g3.lexer.cs">
-      <DependentUpon>Simpleton.g3</DependentUpon>
-    </Compile>
-    <Compile Include="Simpleton.g3.parser.cs">
-      <DependentUpon>Simpleton.g3</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Antlr3 Include="Simpleton.g3">
-      <Generator>MSBuild:Compile</Generator>
-    </Antlr3>
+    <ProjectReference Include="..\ParserLibrary\ParserLibrary.csproj">
+      <Project>{710C5A42-E88D-4D05-959B-181311BC10FC}</Project>
+      <Name>ParserLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>   
-      <!-- Folder containing AntlrBuildTask.dll -->   
-      <AntlrBuildTaskPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004</AntlrBuildTaskPath>
-      <!-- Path to the ANTLR Tool itself. -->
-      <AntlrToolPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.exe</AntlrToolPath>
-  </PropertyGroup> 
-  <Import Project="$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.targets" />   
+  <PropertyGroup>
+    <!-- Folder containing AntlrBuildTask.dll -->
+    <AntlrBuildTaskPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004</AntlrBuildTaskPath>
+    <!-- Path to the ANTLR Tool itself. -->
+    <AntlrToolPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.exe</AntlrToolPath>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
