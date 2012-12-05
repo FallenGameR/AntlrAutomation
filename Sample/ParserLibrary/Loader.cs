@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ParserLibrary
 {
-    public class Class1
+    public class Loader
     {
     }
 }

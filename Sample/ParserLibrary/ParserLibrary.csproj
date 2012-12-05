@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\Libraries\antlr-3.4.1.9004\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,10 +43,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Grammar.g3.lexer.cs">
+      <DependentUpon>Grammar.g3</DependentUpon>
+    </Compile>
+    <Compile Include="Grammar.g3.parser.cs">
+      <DependentUpon>Grammar.g3</DependentUpon>
+    </Compile>
+    <Compile Include="Loader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Antlr3 Include="Grammar.g3">
+      <Generator>MSBuild:Compile</Generator>
+    </Antlr3>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <PropertyGroup>   
+      <!-- Folder containing AntlrBuildTask.dll -->   
+      <AntlrBuildTaskPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004</AntlrBuildTaskPath>
+      <!-- Path to the ANTLR Tool itself. -->
+      <AntlrToolPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.exe</AntlrToolPath>
+  </PropertyGroup> 
+  <Import Project="$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.targets" />   
+
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
