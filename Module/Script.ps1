@@ -22,10 +22,25 @@ $param =
 
 $parser = New-Object ParserLibrary.Loader
 $tree = $parser.Parse( "d:\Archive\Projects\AntlrAutomation\Sample\Resources\simpleton.txt" )
-
 #$tree.Children[0].Children
+
+<#
+Module architecture.
+
+Multiple parsers can be generated in the same Powershell session.
+
 #Render trees simplified - text + children
 #Allow syntax like:
 #- get all 'FILE' children +recursive
 #- FILE.some.sub.child (expand for all found children, discard the onces that don not have this path)?
 
+Automatic temp file cleanup.
+
+Parser caching.
+
+Simplified grammars on input.
+
+Grammar error handling.
+
+Predefined grammars for fuzzy cs filter, csv and ini.
+#>
