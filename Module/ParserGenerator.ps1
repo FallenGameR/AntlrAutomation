@@ -14,10 +14,9 @@ function Test-Parser
         "/out:parser.dll",
         "/lib:$antlrPath",
         "/reference:Antlr3.Runtime.dll",
-        "*.cs"
+        "$PSScriptRoot\..\Sample\ParserLibrary\*.cs"
     & $csc $param
 
-    [Reflection.Assembly]::LoadFrom( (Join-Path $antlrPath "Antlr3.Runtime.dll") ) | Out-Null
     [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "parser.dll") ) | Out-Null
 
     $parser = New-Object ParserLibrary.Loader
