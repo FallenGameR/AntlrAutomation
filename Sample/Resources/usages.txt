@@ -1,0 +1,11 @@
+Test scripts.
+DSL used for specific automation scripts.
+File batch edit.
+External program output processing.
+Log parsing.
+Prototyping.
+Smart IP filtering from the config files.
+Combine tracert and whoisinfo.
+Stack trace retrieval from logs.
+Subnet calculator and aggregator.
+
