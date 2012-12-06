@@ -1,1 +1,2 @@
-*.psd1		text
+# Special treatment for files
+*.psd1 text
