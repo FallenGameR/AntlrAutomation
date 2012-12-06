@@ -17,8 +17,8 @@ function Test-Parser
         "*.cs"
     & $csc $param
 
-    [Reflection.Assembly]::LoadFrom( (Join-Path $antlrPath "Antlr3.Runtime.dll") )
-    [Reflection.Assembly]::LoadFrom( "parser.dll" )
+    [Reflection.Assembly]::LoadFrom( (Join-Path $antlrPath "Antlr3.Runtime.dll") ) | Out-Null
+    [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "parser.dll") ) | Out-Null
 
     $parser = New-Object ParserLibrary.Loader
     $tree = $parser.Parse( "$PSScriptRoot\..\Sample\Resources\simpleton.txt" )
