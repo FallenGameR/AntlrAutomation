@@ -1,10 +1,10 @@
 function Test-Parser
 {
-    $antlrPath = "d:\Archive\Projects\AntlrAutomation\Libraries\antlr-3.4.1.9004\"
+    $antlrPath = "$PSScriptRoot\..\Libraries\antlr-3.4.1.9004\"
     $antlr = Join-Path $antlrPath "antlr3.exe"
     $csc = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) "csc.exe"
 
-    $param = , ".\Grammar.g3"
+    $param = , "$PSScriptRoot\..\Sample\ParserLibrary\Grammar.g3"
     & $antlr $param
 
     $param =
@@ -21,7 +21,7 @@ function Test-Parser
     [Reflection.Assembly]::LoadFrom( "parser.dll" )
 
     $parser = New-Object ParserLibrary.Loader
-    $tree = $parser.Parse( "d:\Archive\Projects\AntlrAutomation\Sample\Resources\simpleton.txt" )
+    $tree = $parser.Parse( "$PSScriptRoot\..\Sample\Resources\simpleton.txt" )
     $tree
 }
 #$tree.Children[0].Children

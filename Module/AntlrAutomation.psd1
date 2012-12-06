@@ -21,7 +21,7 @@ GUID = '19ea125b-6f28-41f2-81e5-199e2cd3c4c4'
 Author = 'FallenGameR'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = 'Home'
 
 # Copyright statement for this module
 Copyright = '(c) 2012 FallenGameR. All rights reserved.'
@@ -54,7 +54,7 @@ CLRVersion = '4.0'
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-ScriptsToProcess = @('Script.ps1')
+ScriptsToProcess = @('ParserGenerator.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
@@ -81,7 +81,7 @@ AliasesToExport = '*'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('Script.ps1')
+FileList = @('ParserGenerator.ps1')
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
 # PrivateData = ''
