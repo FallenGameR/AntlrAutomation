@@ -20,9 +20,10 @@
 
 
     $parserDomain = [AppDomain]::CreateDomain( "ParserDomain" )
-    $loader = [InterfaceLibrary.ILoader] $parserDomain.CreateInstanceFromAndUnwrap( "parser.dll", "ParserLibrary.Loader" )
+    # Transparent proxy cast is not working in Powershell
+    $loader = $parserDomain.CreateInstanceFromAndUnwrap( "parser.dll", "ParserLibrary.Loader" )
     $filePath = "$PSScriptRoot\..\Sample\Resources\simpleton.txt"
-    $tree = $loader.Parse( $filePath )
+    $tree = [InterfaceLibrary.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
     [AppDomain]::Unload($parserDomain)
 
     $tree.ToStringTree()
