@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}</Project>
+      <Name>InterfaceLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ParserLibrary\ParserLibrary.csproj">
       <Project>{710C5A42-E88D-4D05-959B-181311BC10FC}</Project>
       <Name>ParserLibrary</Name>

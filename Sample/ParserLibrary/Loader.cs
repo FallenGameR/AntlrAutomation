@@ -1,10 +1,11 @@
-﻿using Antlr.Runtime;
+﻿using System;
+using Antlr.Runtime;
 using Antlr.Runtime.Tree;
-using System;
+using InterfaceLibrary;
 
 namespace ParserLibrary
 {
-    public class Loader: MarshalByRefObject
+    public class Loader : MarshalByRefObject, ILoader
     {
         public CommonTree Parse(string filePath)
         {
