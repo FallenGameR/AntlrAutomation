@@ -16,11 +16,18 @@
         "$PSScriptRoot\..\Sample\ParserLibrary\*.cs"
     & $csc $param
 
-    [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "parser.dll") ) | Out-Null
+    [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "InterfaceLibrary.dll") ) | Out-Null
 
-    $parser = New-Object ParserLibrary.Loader
-    $tree = $parser.Parse( "$PSScriptRoot\..\Sample\Resources\simpleton.txt" )
-    $tree
+
+    $parserDomain = [AppDomain]::CreateDomain( "ParserDomain" )
+    $loader = [InterfaceLibrary.ILoader] $parserDomain.CreateInstanceFromAndUnwrap( "parser.dll", "ParserLibrary.Loader" )
+    $filePath = "$PSScriptRoot\..\Sample\Resources\simpleton.txt"
+    $tree = $loader.Parse( $filePath )
+    [AppDomain]::Unload($parserDomain)
+
+    $tree.ToStringTree()
+
+
 #}
 #$tree.Children[0].Children
 
