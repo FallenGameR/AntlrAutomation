@@ -1,9 +1,10 @@
 ﻿using Antlr.Runtime;
 using Antlr.Runtime.Tree;
+using System;
 
 namespace ParserLibrary
 {
-    public class Loader
+    public class Loader: MarshalByRefObject
     {
         public CommonTree Parse(string filePath)
         {

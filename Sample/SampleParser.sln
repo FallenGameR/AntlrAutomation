@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserLibrary", "ParserLibrary\ParserLibrary.csproj", "{710C5A42-E88D-4D05-959B-181311BC10FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceLibrary", "InterfaceLibrary\InterfaceLibrary.csproj", "{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{710C5A42-E88D-4D05-959B-181311BC10FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{710C5A42-E88D-4D05-959B-181311BC10FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{710C5A42-E88D-4D05-959B-181311BC10FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EF05D7B4-84F7-4B63-B08C-4B63FC29183F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

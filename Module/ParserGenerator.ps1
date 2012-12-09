@@ -26,9 +26,9 @@ function Test-Parser
 #$tree.Children[0].Children
 
 <#
-Module architecture.
-
 Multiple parsers can be generated in the same Powershell session.
+
+Source files are taken from the module folder itself.
 
 #Render trees simplified - text + children
 #Allow syntax like:
