@@ -1,5 +1,5 @@
-function Test-Parser
-{
+#function Test-Parser
+#{
     $antlrPath = "$PSScriptRoot\..\Libraries\antlr-3.4.1.9004\"
     $antlr = Join-Path $antlrPath "antlr3.exe"
     $csc = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) "csc.exe"
@@ -12,8 +12,7 @@ function Test-Parser
         "/optimize",
         "/target:library",
         "/out:parser.dll",
-        "/lib:$antlrPath",
-        "/reference:Antlr3.Runtime.dll",
+        "/reference:$antlrPath\Antlr3.Runtime.dll,d:\Archive\Projects\AntlrAutomation\Sample\ParserLibrary\bin\Debug\InterfaceLibrary.dll",
         "$PSScriptRoot\..\Sample\ParserLibrary\*.cs"
     & $csc $param
 
@@ -22,8 +21,14 @@ function Test-Parser
     $parser = New-Object ParserLibrary.Loader
     $tree = $parser.Parse( "$PSScriptRoot\..\Sample\Resources\simpleton.txt" )
     $tree
-}
+#}
 #$tree.Children[0].Children
+
+
+
+
+
+
 
 <#
 Multiple parsers can be generated in the same Powershell session.
