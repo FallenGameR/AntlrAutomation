@@ -1,11 +1,15 @@
 #function Test-Parser
 #{
-    $antlrPath = "$PSScriptRoot\Libraries\Antlr\"
+    $root = $PSScriptRoot
+    $antlrPath = "$root\Libraries\Antlr\"
     $antlr = Join-Path $antlrPath "Antlr3.exe"
     $csc = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) "csc.exe"
 
-    $param = , "$PSScriptRoot\Parsers\Grammar\Grammar.g3"
+    $param =
+        "-o", "$root\Parsers\Grammar\src\",
+        "$root\Parsers\Grammar\Grammar.g3"
     & $antlr $param
+    $host.EnterNestedPrompt()
 
     $param =
         "/nologo",
@@ -13,7 +17,7 @@
         "/target:library",
         "/out:parser.dll",
         "/reference:$antlrPath\Antlr3.Runtime.dll,d:\Archive\Projects\AntlrAutomation\Sample\ParserLibrary\bin\Debug\InterfaceLibrary.dll",
-        "$PSScriptRoot\..\Sample\ParserLibrary\*.cs"
+        "$root\..\Sample\ParserLibrary\*.cs"
     & $csc $param
 
     [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "InterfaceLibrary.dll") ) | Out-Null
@@ -22,7 +26,7 @@
     $parserDomain = [AppDomain]::CreateDomain( "ParserDomain" )
     # Transparent proxy cast is not working in Powershell
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( "parser.dll", "ParserLibrary.Loader" )
-    $filePath = "$PSScriptRoot\..\Sample\Resources\simpleton.txt"
+    $filePath = "$root\..\Sample\Resources\simpleton.txt"
     $tree = [InterfaceLibrary.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
     [AppDomain]::Unload($parserDomain)
 
