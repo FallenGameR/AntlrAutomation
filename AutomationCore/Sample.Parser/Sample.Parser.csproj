@@ -69,11 +69,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <!-- Folder containing AntlrBuildTask.dll -->
-    <AntlrBuildTaskPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004</AntlrBuildTaskPath>
+    <AntlrBuildTaskPath>$(SolutionDir)Libraries\antlr-3.4.1.9004</AntlrBuildTaskPath>
     <!-- Path to the ANTLR Tool itself. -->
-    <AntlrToolPath>$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.exe</AntlrToolPath>
+    <AntlrToolPath>$(SolutionDir)Libraries\antlr-3.4.1.9004\Antlr3.exe</AntlrToolPath>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)..\Libraries\antlr-3.4.1.9004\Antlr3.targets" />
+  <Import Project="$(SolutionDir)Libraries\antlr-3.4.1.9004\Antlr3.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
