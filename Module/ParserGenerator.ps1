@@ -22,15 +22,17 @@
         "$grammarRoot\src\*.cs"
     & $csc $param
 
+    # App domain is needed to be able to change parser.dll withing one Powershell session
+    $parserDomain = [AppDomain]::CreateDomain( "GrammarParserDomain" )
+
     $host.EnterNestedPrompt()
 
-    [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "InterfaceLibrary.dll") ) | Out-Null
+    # New app domain doesn't know where to look for referenced assemblies...
 
 
-    $parserDomain = [AppDomain]::CreateDomain( "ParserDomain" )
-    # Transparent proxy cast is not working in Powershell
-    $loader = $parserDomain.CreateInstanceFromAndUnwrap( "parser.dll", "ParserLibrary.Loader" )
+    $loader = $parserDomain.CreateInstanceFromAndUnwrap( "$grammarRoot\bin\parser.dll", "Sample.Parser.Loader" )
     $filePath = "$root\..\Sample\Resources\simpleton.txt"
+    # Transparent proxy cast is not working in Powershell
     $tree = [InterfaceLibrary.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
     [AppDomain]::Unload($parserDomain)
 
