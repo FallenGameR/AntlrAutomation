@@ -1,0 +1,37 @@
+﻿grammar Grammar;
+
+options {
+    language=CSharp3;
+    output=AST;
+    TokenLabelType=CommonToken;
+    ASTLabelType=CommonTree;
+}
+
+tokens {FILE; SECTION;}
+
+@lexer::namespace{Sample.Parser}
+@parser::namespace{Sample.Parser}
+
+
+/*
+ * Parser Rules
+ */
+
+public file
+    : section+ EOF -> ^(FILE section+)
+    ;
+
+section
+    : 'start' WORD* 'end' -> ^(SECTION WORD*)
+    ;
+
+/*
+ * Lexer Rules
+ */
+
+WORD: 'a'..'z'+;
+
+NEWLINE
+    : '\r'? '\n' { $channel = Hidden; };
+
+WS	: (' ' | '\t' | NEWLINE)+ { $channel = Hidden; };
