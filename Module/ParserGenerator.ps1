@@ -1,24 +1,28 @@
 #function Test-Parser
 #{
     $root = $PSScriptRoot
-    $antlrPath = "$root\Libraries\Antlr\"
-    $antlr = Join-Path $antlrPath "Antlr3.exe"
+    $antlrRoot = "$root\Libraries\Antlr"
+    $automationRoot = "$root\Libraries\AutomationCore"
+    $grammarRoot = "$root\Parsers\Grammar"
+
+    $antlr = Join-Path $antlrRoot "Antlr3.exe"
     $csc = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) "csc.exe"
 
     $param =
-        "-o", "$root\Parsers\Grammar\src\",
-        "$root\Parsers\Grammar\Grammar.g3"
+        "-o", "$grammarRoot\src\",
+        "$grammarRoot\Grammar.g3"
     & $antlr $param
-    $host.EnterNestedPrompt()
 
     $param =
         "/nologo",
         "/optimize",
         "/target:library",
-        "/out:parser.dll",
-        "/reference:$antlrPath\Antlr3.Runtime.dll,d:\Archive\Projects\AntlrAutomation\Sample\ParserLibrary\bin\Debug\InterfaceLibrary.dll",
-        "$root\..\Sample\ParserLibrary\*.cs"
+        "/out:$grammarRoot\bin\parser.dll",
+        "/reference:$antlrRoot\Antlr3.Runtime.dll,$automationRoot\Automation.Core.dll",
+        "$grammarRoot\src\*.cs"
     & $csc $param
+
+    $host.EnterNestedPrompt()
 
     [Reflection.Assembly]::LoadFrom( (Join-Path (pwd) "InterfaceLibrary.dll") ) | Out-Null
 
