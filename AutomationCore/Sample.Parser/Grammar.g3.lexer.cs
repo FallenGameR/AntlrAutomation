@@ -1,4 +1,4 @@
-﻿namespace ParserLibrary
+﻿namespace Sample.Parser
 {
     partial class GrammarLexer
     {

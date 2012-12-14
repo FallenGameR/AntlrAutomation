@@ -1,8 +1,7 @@
-﻿using Antlr.Runtime.Tree;
-using System;
-using InterfaceLibrary;
+﻿using System;
+using Automation.Core;
 
-namespace ConsoleApplication
+namespace Sample.ConsoleApp
 {
     public class Program
     {
@@ -12,7 +11,7 @@ namespace ConsoleApplication
 
             var loader = (ILoader)newDomain.CreateInstanceFromAndUnwrap(
                 @"d:\Archive\Projects\AntlrAutomation\AutomationCore\Sample.Parser\bin\Debug\Sample.Parser.dll",
-                "ParserLibrary.Loader");
+                "Sample.Parser.Loader");
 
             var filePath = @"d:\Archive\Projects\AntlrAutomation\AutomationCore\Resources\simpleton.txt";
             var tree = loader.Parse(filePath);

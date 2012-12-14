@@ -1,10 +1,9 @@
 ﻿using System;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
-using InterfaceLibrary;
-using System.Reflection;
+using Automation.Core;
 
-namespace ParserLibrary
+namespace Sample.Parser
 {
     public class Loader : MarshalByRefObject, ILoader
     {

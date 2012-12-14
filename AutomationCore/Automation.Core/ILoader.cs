@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace InterfaceLibrary
+namespace Automation.Core
 {
     using Antlr.Runtime.Tree;
 

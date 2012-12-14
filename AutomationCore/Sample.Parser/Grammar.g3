@@ -9,8 +9,8 @@ options {
 
 tokens {FILE; SECTION;}
 
-@lexer::namespace{ParserLibrary}
-@parser::namespace{ParserLibrary}
+@lexer::namespace{Sample.Parser}
+@parser::namespace{Sample.Parser}
 
 
 /*
