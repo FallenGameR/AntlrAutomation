@@ -13,7 +13,7 @@ namespace Sample.ConsoleApp
                 @"d:\Archive\Projects\AntlrAutomation\AutomationCore\Sample.Parser\bin\Debug\Sample.Parser.dll",
                 "Sample.Parser.Loader");
 
-            var filePath = @"d:\Archive\Projects\AntlrAutomation\AutomationCore\Resources\simpleton.txt";
+            var filePath = @"d:\Archive\Projects\AntlrAutomation\Info\simpleton.txt";
             var tree = loader.Parse(filePath);
 
             Console.WriteLine(tree.ToStringTree());
