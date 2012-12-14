@@ -24,7 +24,7 @@ namespace Automation.Core
             KnownAssemblies.Add(name, path);
         }
 
-        public static Assembly AssemblyResolveHandler(object sender, ResolveEventArgs args)
+        private static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
         {
             var assemblyName = new AssemblyName(args.Name);
 
@@ -35,5 +35,7 @@ namespace Automation.Core
 
             return null;
         }
+
+        public static ResolveEventHandler Handler { get { return ResolveAssembly; } }
     }
 }

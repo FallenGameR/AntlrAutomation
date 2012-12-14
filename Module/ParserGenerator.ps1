@@ -29,6 +29,10 @@
 
     # New app domain doesn't know where to look for referenced assemblies...
 
+ [Automation.Core.AssemblyResolver]::AddKnownAssembly( 'd:\Archive\Projects\AntlrAutomation\Module\Libraries\Antlr\Antlr3.Runtime.dll' )
+ [Automation.Core.AssemblyResolver]::AddKnownAssembly( 'd:\Archive\Projects\AntlrAutomation\Module\Libraries\AutomationCore\Automation.Core.dll' )
+ [Automation.Core.AssemblyResolver]|gm -Static
+
 
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( "$grammarRoot\bin\parser.dll", "Sample.Parser.Loader" )
     $filePath = "$root\..\Sample\Resources\simpleton.txt"
