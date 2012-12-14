@@ -1,10 +1,10 @@
 #function Test-Parser
 #{
-    $antlrPath = "$PSScriptRoot\..\Libraries\antlr-3.4.1.9004\"
-    $antlr = Join-Path $antlrPath "antlr3.exe"
+    $antlrPath = "$PSScriptRoot\Libraries\Antlr\"
+    $antlr = Join-Path $antlrPath "Antlr3.exe"
     $csc = Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) "csc.exe"
 
-    $param = , "$PSScriptRoot\..\Sample\ParserLibrary\Grammar.g3"
+    $param = , "$PSScriptRoot\Parsers\Grammar\Grammar.g3"
     & $antlr $param
 
     $param =

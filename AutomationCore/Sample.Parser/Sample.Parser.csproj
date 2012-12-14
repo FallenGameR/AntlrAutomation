@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
-      <HintPath>..\Libraries\antlr-3.4.1.9004\Antlr3.Runtime.dll</HintPath>
+      <HintPath>$(SolutionDir)..\Module\Libraries\Antlr\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,11 +69,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <!-- Folder containing AntlrBuildTask.dll -->
-    <AntlrBuildTaskPath>$(SolutionDir)Libraries\antlr-3.4.1.9004</AntlrBuildTaskPath>
+    <AntlrBuildTaskPath>$(SolutionDir)..\Module\Libraries\Antlr</AntlrBuildTaskPath>
     <!-- Path to the ANTLR Tool itself. -->
-    <AntlrToolPath>$(SolutionDir)Libraries\antlr-3.4.1.9004\Antlr3.exe</AntlrToolPath>
+    <AntlrToolPath>$(SolutionDir)..\Module\Libraries\Antlr\Antlr3.exe</AntlrToolPath>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)Libraries\antlr-3.4.1.9004\Antlr3.targets" />
+  <Import Project="$(SolutionDir)..\Module\Libraries\Antlr\Antlr3.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
