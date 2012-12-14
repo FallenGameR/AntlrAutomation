@@ -29,9 +29,10 @@
 
     # New app domain doesn't know where to look for referenced assemblies...
 
+ # Would not work since resolver is in a separate AppDomain =)
  [Automation.Core.AssemblyResolver]::AddKnownAssembly( 'd:\Archive\Projects\AntlrAutomation\Module\Libraries\Antlr\Antlr3.Runtime.dll' )
  [Automation.Core.AssemblyResolver]::AddKnownAssembly( 'd:\Archive\Projects\AntlrAutomation\Module\Libraries\AutomationCore\Automation.Core.dll' )
- [Automation.Core.AssemblyResolver]|gm -Static
+ $parserDomain.add_AssemblyResolve( [Automation.Core.AssemblyResolver]::Handler )
 
 
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( "$grammarRoot\bin\parser.dll", "Sample.Parser.Loader" )
