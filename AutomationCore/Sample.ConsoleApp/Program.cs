@@ -11,10 +11,10 @@ namespace ConsoleApplication
             var newDomain = AppDomain.CreateDomain("NewDomain");
 
             var loader = (ILoader)newDomain.CreateInstanceFromAndUnwrap(
-                @"d:\Archive\Projects\AntlrAutomation\Sample\ParserLibrary\bin\Debug\ParserLibrary.dll",
+                @"d:\Archive\Projects\AntlrAutomation\AutomationCore\Sample.Parser\bin\Debug\Sample.Parser.dll",
                 "ParserLibrary.Loader");
 
-            var filePath = @"d:\Archive\Projects\AntlrAutomation\Sample\Resources\simpleton.txt";
+            var filePath = @"d:\Archive\Projects\AntlrAutomation\AutomationCore\Resources\simpleton.txt";
             var tree = loader.Parse(filePath);
 
             Console.WriteLine(tree.ToStringTree());
