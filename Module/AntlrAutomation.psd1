@@ -51,7 +51,7 @@ CLRVersion = '4.0'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-RequiredAssemblies = @('Antlr\3.4.1.9004\Antlr3.Runtime.dll')
+RequiredAssemblies = @('Libraries\Antlr\3.4.1.9004\Antlr3.Runtime.dll')
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @('ParserGenerator.ps1')

@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
-      <HintPath>..\..\Libraries\antlr-3.4.1.9004\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\Libraries\antlr-3.4.1.9004\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
