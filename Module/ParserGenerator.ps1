@@ -1,5 +1,5 @@
-#function Test-Parser
-#{
+function Test-Parser
+{
     $root = $PSScriptRoot
     $antlrRoot = "$root\Libraries\Antlr"
     $automationRoot = "$root\Libraries\AutomationCore"
@@ -23,33 +23,24 @@
     & $csc $param
 
     # App domain is needed to be able to change parser.dll withing one Powershell session
-    $parserDomain = [AppDomain]::CreateDomain( "GrammarParserDomain" )
+    # We need to make sure that new domain would be able to find all referenced assemblies
+    $setup = New-Object AppDomainSetup
+    $setup.ApplicationBase = "$root\Libraries\"
+    $setup.PrivateBinPath = "Antlr;AutomationCore"
+    $evidence = [AppDomain]::CurrentDomain.Evidence
+    $parserDomain = [AppDomain]::CreateDomain( "GrammarParserDomain", $evidence, $setup )
 
-    $host.EnterNestedPrompt()
-
-    # New app domain doesn't know where to look for referenced assemblies...
-
- # Would not work since resolver is in a separate AppDomain =)
- [Automation.Core.AssemblyResolver]::AddKnownAssembly( 'd:\Archive\Projects\AntlrAutomation\Module\Libraries\Antlr\Antlr3.Runtime.dll' )
- [Automation.Core.AssemblyResolver]::AddKnownAssembly( 'd:\Archive\Projects\AntlrAutomation\Module\Libraries\AutomationCore\Automation.Core.dll' )
- $parserDomain.add_AssemblyResolve( [Automation.Core.AssemblyResolver]::Handler )
-
-
+    # Preaparing the loader for the parsing
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( "$grammarRoot\bin\parser.dll", "Sample.Parser.Loader" )
-    $filePath = "$root\..\Sample\Resources\simpleton.txt"
-    # Transparent proxy cast is not working in Powershell
-    $tree = [InterfaceLibrary.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
+    $filePath = "$root\..\Info\simpleton.txt"
+
+    # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
+    $tree = [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
     [AppDomain]::Unload($parserDomain)
 
     $tree.ToStringTree()
-
-
-#}
+}
 #$tree.Children[0].Children
-
-
-
-
 
 
 
