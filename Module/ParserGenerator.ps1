@@ -10,6 +10,7 @@ function Test-Parser
 
     $param =
         "-o", "$grammarRoot\src\",
+        "-language", "CSharp3",
         "$grammarRoot\Grammar.g3"
     & $antlr $param
 
