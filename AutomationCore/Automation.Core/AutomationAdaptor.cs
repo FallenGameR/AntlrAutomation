@@ -6,12 +6,8 @@
 
 namespace Automation.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Antlr.Runtime.Tree;
     using Antlr.Runtime;
+    using Antlr.Runtime.Tree;
 
     public class AutomationAdaptor: CommonTreeAdaptor
     {

@@ -10,6 +10,6 @@ namespace Automation.Core
 
     public interface ILoader
     {
-        CommonTree Parse(string filePath);
+        AutomationTree Parse(string filePath);
     }
 }

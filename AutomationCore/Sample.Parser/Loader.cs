@@ -1,14 +1,11 @@
 ﻿using System;
 using Antlr.Runtime;
-using Antlr.Runtime.Tree;
-using Automation.Core;
-using Automation.Core.Grammar;
 
 namespace Automation.Core.Grammar
 {
     public class Loader : MarshalByRefObject, ILoader
     {
-        public CommonTree Parse(string filePath)
+        public AutomationTree Parse(string filePath)
         {
             var stream = new ANTLRFileStream(filePath);
             var lexer = new GrammarLexer(stream);
