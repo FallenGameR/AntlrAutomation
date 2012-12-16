@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Parser.cs" company="">
+// <copyright file="AutomationAdapter.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,18 +10,14 @@ namespace Automation.Core
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Antlr.Runtime.Tree;
     using Antlr.Runtime;
 
-    public abstract class AutomationParser : Parser
+    public class AutomationAdaptor: CommonTreeAdaptor
     {
-        public AutomationParser(ITokenStream input)
-            : base(input)
+        public override object Create(IToken token)
         {
-        }
-
-        public AutomationParser(ITokenStream input, RecognizerSharedState state)
-            : base(input, state)
-        {
+            return new AutomationTree(token);
         }
     }
 }

@@ -43,10 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutomationAdaptor.cs" />
     <Compile Include="AutomationTree.cs" />
     <Compile Include="ILoader.cs" />
-    <Compile Include="AutomationLexer.cs" />
-    <Compile Include="AutomationParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

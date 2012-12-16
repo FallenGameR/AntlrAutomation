@@ -12,7 +12,7 @@ namespace Sample.Parser
             var stream = new ANTLRFileStream(filePath);
             var lexer = new GrammarLexer(stream);
             var tokens = new CommonTokenStream(lexer);
-            var parser = new GrammarParser(tokens);
+            var parser = new GrammarParser(tokens) { TreeAdaptor = new AutomationAdaptor() };
             return parser.file().Tree;
         }
     }
