@@ -49,7 +49,7 @@
     <Compile Include="Grammar.g3.parser.cs">
       <DependentUpon>Grammar.g3</DependentUpon>
     </Compile>
-    <Compile Include="Loader.cs" />
+    <Compile Include="GrammarLoader.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

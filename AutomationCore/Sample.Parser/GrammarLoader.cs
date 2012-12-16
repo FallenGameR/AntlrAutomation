@@ -3,7 +3,7 @@ using Antlr.Runtime;
 
 namespace Automation.Core.Grammar
 {
-    public class Loader : MarshalByRefObject, ILoader
+    public class GrammarLoader : MarshalByRefObject, ILoader
     {
         public AutomationTree Parse(string filePath)
         {
