@@ -13,6 +13,7 @@ namespace Automation.Core
     using Antlr.Runtime.Tree;
     using Antlr.Runtime;
 
+    [Serializable]
     public class AutomationTree : CommonTree
     {
         public AutomationTree()

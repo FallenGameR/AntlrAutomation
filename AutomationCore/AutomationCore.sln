@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.ConsoleApp", "Sample.ConsoleApp\Sample.ConsoleApp.csproj", "{A87DD89E-C94A-4C70-85A4-8ACF5F6CDC38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{710C5A42-E88D-4D05-959B-181311BC10FC} = {710C5A42-E88D-4D05-959B-181311BC10FC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Parser", "Sample.Parser\Sample.Parser.csproj", "{710C5A42-E88D-4D05-959B-181311BC10FC}"
 EndProject

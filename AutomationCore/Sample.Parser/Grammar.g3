@@ -3,14 +3,15 @@
 options {
     language=CSharp3;
     output=AST;
-    TokenLabelType=CommonToken;
-    ASTLabelType=CommonTree;
+    //TokenLabelType=AutomationToken;
+    //ASTLabelType=AutomationTree;
+    //superClass=AutomationParser;
 }
 
 tokens {FILE; SECTION;}
 
-@lexer::namespace{Sample.Parser}
-@parser::namespace{Sample.Parser}
+@lexer::namespace{Automation.Core}
+@parser::namespace{Automation.Core}
 
 
 /*
