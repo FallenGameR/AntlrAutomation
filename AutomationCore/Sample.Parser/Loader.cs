@@ -2,6 +2,7 @@
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using Automation.Core;
+using Automation.Core.Grammar;
 
 namespace Sample.Parser
 {

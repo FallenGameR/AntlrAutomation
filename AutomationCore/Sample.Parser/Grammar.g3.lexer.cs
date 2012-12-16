@@ -1,4 +1,4 @@
-﻿namespace Automation.Core
+﻿namespace Automation.Core.Grammar
 {
     partial class GrammarLexer
     {
