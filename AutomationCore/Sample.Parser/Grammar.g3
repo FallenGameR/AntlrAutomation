@@ -1,6 +1,7 @@
 ﻿grammar Grammar;
 
-options {
+options 
+{
     language=CSharp3;
     output=AST;
     TokenLabelType=CommonToken;
@@ -13,7 +14,6 @@ tokens {FILE; SECTION;}
 @parser::header{using Automation.Core;}
 @lexer::namespace{Automation.Core.Grammar}
 @parser::namespace{Automation.Core.Grammar}
-
 
 /*
  * Parser Rules
