@@ -69,6 +69,21 @@ function Generate-Parser( [string] $name )
     Write-Verbose "Parser sources generated for parser '$name'"
 }
 
+function Compile-Parser( [string] $name )
+{
+    $param =
+        "/nologo",
+        "/optimize",
+        "/target:library",
+        "/out:$(Get-ParserAssemblyPath $name)",
+        "/reference:$(Get-AntlrRuntimeDll),$(Get-AutomationCoreDll)",
+        "$(Get-ParserSourceFolder $name)\*.cs"
+
+    & (Get-CompilerExe) $param
+
+    Write-Verbose "Parser binaries compiled for parser '$name'"
+}
+
 function Generate-ParserCore( [string] $name )
 {
     $param =
@@ -85,17 +100,3 @@ function Generate-ParserUtils( [string] $name )
     Copy-Item $allTemplates (Get-ParserSourceFolder $name)
 }
 
-function Compile-Parser( [string] $name )
-{
-    $param =
-        "/nologo",
-        "/optimize",
-        "/target:library",
-        "/out:$(Get-ParserAssemblyPath $name)",
-        "/reference:$(Get-AntlrRuntimeDll),$(Get-AutomationCoreDll)",
-        "$(Get-ParserSourceFolder $name)\*.cs"
-
-    & (Get-CompilerExe) $param
-
-    Write-Verbose "Parser binaries compiled for parser '$name'"
-}
