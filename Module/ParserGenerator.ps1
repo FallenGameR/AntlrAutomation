@@ -1,3 +1,13 @@
+
+$librariesRoot = Join-Path $PSScriptRoot Libraries
+$parsersRoot = Join-Path $PSScriptRoot Parsers
+
+function Get-LibrariesRoot { $librariesRoot }
+function Get-ParsersRoot { $parsersRoot }
+
+
+
+
 function Test-Parser
 {
     $root = $PSScriptRoot
@@ -76,6 +86,24 @@ function Set-Grammar
         - Would handle md5 grammar text check.
         - Would handle namespace collisions.
     #>
+
+    param
+    (
+        [string] $FullText
+    )
+
+    $nameFound = $fullText -match "grammar (\w+);"
+    if( -not $nameFound )
+    {
+        throw "Couldn't locate grammar name in full grammar text"
+    }
+
+    $name = $Matches[1]
+
+
+
+
+
 }
 
 filter Parse-Item
