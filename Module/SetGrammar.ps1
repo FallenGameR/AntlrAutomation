@@ -18,13 +18,32 @@ function Set-Grammar
         [string] $FullText
     )
 
+    $name = Get-ParserName $fullText
+    $parserFolder = Get-ParserFolder $name
+
+    if( Test-Path $parserFolder )
+    {
+#Remove-Item $parserFolder
+    }
+
+
+
+}
+
+function Get-ParserName( [string] $fullText )
+{
     $nameFound = $fullText -match "grammar (\w+);"
+
     if( -not $nameFound )
     {
         throw "Couldn't locate grammar name in full grammar text"
     }
 
-    $name = $Matches[1]
+    $Matches[1]
+}
 
+function Get-ParserFolder( [string] $name )
+{
+    Join-Path (Get-ParsersRoot) $name
 }
 
