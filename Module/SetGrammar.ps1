@@ -18,36 +18,12 @@ function Set-Grammar
         [string] $FullText
     )
 
-    # Preparing grammar folder and file
     $name = Get-ParserName $fullText
-    $parserFolder = Get-ParserFolder $name
 
-    if( Test-Path $parserFolder )
-    {
-        #Remove-Item $parserFolder
-    }
-
-    $fullGrammarPath = Get-GrammarFullTextPath $name
-    $fullText | Set-Content $fullGrammarPath
-
-    # Generating parser
-    $antlr = Get-AntlrExe
-    $param =
-        "-o", (Get-GrammarSourceFolder $name),
-        "-language", "CSharp3",
-        $fullGrammarPath
-    & $antlr $param
-
-    # Compiling parser
-    $compiler = Get-CompilerExe
-    $param =
-        "/nologo",
-        "/optimize",
-        "/target:library",
-        "/out:$(Get-GrammarAssemblyPath $name)",
-        "/reference:$(Get-AntlrRuntimeDll),$(Get-AutomationCoreDll)",
-        "$(Get-GrammarSourceFolder $name)\*.cs"
-    & $compiler $param
+    Clean-ParserFolder $name
+    Set-GrammarText $name $fullText
+    Generate-Parser $name
+    Compile-Parser $name
 }
 
 function Get-ParserName( [string] $fullText )
@@ -62,48 +38,40 @@ function Get-ParserName( [string] $fullText )
     $Matches[1]
 }
 
-function Get-ParserFolder( [string] $name )
+function Clean-ParserFolder( [string] $name )
 {
-    Join-Path (Get-ParsersRoot) $name
+    $parserFolder = Get-ParserFolder $name
+
+    if( Test-Path $parserFolder )
+    {
+        #Remove-Item $parserFolder
+    }
 }
 
-function Get-LibraryFolder( [string] $name )
+function Set-GrammarText( [string] $name, [string] $fullText )
 {
-    Join-Path (Get-LibrariesRoot) $name
+    $fullText | Set-Content (Get-FullGrammarPath $name)
 }
 
-function Get-AntlrExe
+function Generate-Parser( [string] $name )
 {
-    Join-Path (Get-LibraryFolder Antlr) Antlr3.exe
+    $param =
+        "-o", (Get-ParserSourceFolder $name),
+        "-language", "CSharp3",
+        (Get-FullGrammarPath $name)
+
+    & (Get-AntlrExe) $param
 }
 
-function Get-AntlrRuntimeDll
+function Compile-Parser( [string] $name )
 {
-    Join-Path (Get-LibraryFolder Antlr) Antlr3.Runtime.dll
-}
+    $param =
+        "/nologo",
+        "/optimize",
+        "/target:library",
+        "/out:$(Get-ParserAssemblyPath $name)",
+        "/reference:$(Get-AntlrRuntimeDll),$(Get-AutomationCoreDll)",
+        "$(Get-ParserSourceFolder $name)\*.cs"
 
-function Get-AutomationCoreDll
-{
-    Join-Path (Get-LibraryFolder AutomationCore) Automation.Core.dll
-}
-
-function Get-CompilerExe
-{
-    Join-Path ([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()) csc.exe
-}
-
-function Get-GrammarFullTextPath( [string] $name )
-{
-    Join-Path (Get-ParserFolder $name) ($name + ".g3")
-}
-
-function Get-GrammarSourceFolder( [string] $name )
-{
-    Join-Path (Get-ParserFolder $name) src
-}
-
-function Get-GrammarAssemblyPath( [string] $name )
-{
-    $folder = Join-Path (Get-ParserFolder $name) bin
-    Join-Path $folder parser.dll
+    & (Get-CompilerExe) $param
 }
