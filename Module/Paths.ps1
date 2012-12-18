@@ -1,5 +1,6 @@
 $SCRIPT:librariesRoot = Join-Path $PSScriptRoot Libraries
 $SCRIPT:parsersRoot = Join-Path $PSScriptRoot Parsers
+$SCRIPT:templatesRoot = Join-Path $PSScriptRoot Templates
 
 function Get-LibrariesRoot
 {
@@ -9,6 +10,11 @@ function Get-LibrariesRoot
 function Get-ParsersRoot
 {
     $SCRIPT:parsersRoot
+}
+
+function Get-TemplatesRoot
+{
+    $SCRIPT:templatesRoot
 }
 
 function Get-AntlrExe
@@ -52,8 +58,12 @@ function Get-ParserSourceFolder( [string] $name )
     Join-Path (Get-ParserFolder $name) src
 }
 
+function Get-ParserBinaryFolder( [string] $name )
+{
+    Join-Path (Get-ParserFolder $name) bin
+}
+
 function Get-ParserAssemblyPath( [string] $name )
 {
-    $folder = Join-Path (Get-ParserFolder $name) bin
-    Join-Path $folder parser.dll
+    Join-Path (Get-ParserBinaryFolder $name) parser.dll
 }

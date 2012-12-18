@@ -44,8 +44,12 @@ function Clean-ParserFolder( [string] $name )
 
     if( Test-Path $parserFolder )
     {
-        #Remove-Item $parserFolder
+        Remove-Item $parserFolder -Recurse
     }
+
+    New-Item (Get-ParserFolder $name) -ItemType Directory | Out-Null
+    New-Item (Get-ParserSourceFolder $name) -ItemType Directory | Out-Null
+    New-Item (Get-ParserBinaryFolder $name) -ItemType Directory | Out-Null
 }
 
 function Set-GrammarText( [string] $name, [string] $fullText )
@@ -55,12 +59,24 @@ function Set-GrammarText( [string] $name, [string] $fullText )
 
 function Generate-Parser( [string] $name )
 {
+    Generate-ParserCore $name
+    Generate-ParserUtils $name
+}
+
+function Generate-ParserCore( [string] $name )
+{
     $param =
         "-o", (Get-ParserSourceFolder $name),
         "-language", "CSharp3",
         (Get-FullGrammarPath $name)
 
     & (Get-AntlrExe) $param
+}
+
+function Generate-ParserUtils( [string] $name )
+{
+    $allTemplates = Join-Path (Get-TemplatesRoot) "*.cs"
+    Copy-Item $allTemplates (Get-ParserSourceFolder $name)
 }
 
 function Compile-Parser( [string] $name )
