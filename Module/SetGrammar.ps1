@@ -50,17 +50,23 @@ function Clean-ParserFolder( [string] $name )
     New-Item (Get-ParserFolder $name) -ItemType Directory | Out-Null
     New-Item (Get-ParserSourceFolder $name) -ItemType Directory | Out-Null
     New-Item (Get-ParserBinaryFolder $name) -ItemType Directory | Out-Null
+
+    Write-Verbose "Parser folder '$parserFolder' is cleaned"
 }
 
 function Set-GrammarText( [string] $name, [string] $fullText )
 {
     $fullText | Set-Content (Get-FullGrammarPath $name)
+
+    Write-Verbose "Grammar text is set for parser '$name'"
 }
 
 function Generate-Parser( [string] $name )
 {
     Generate-ParserCore $name
     Generate-ParserUtils $name
+
+    Write-Verbose "Parser sources generated for parser '$name'"
 }
 
 function Generate-ParserCore( [string] $name )
@@ -90,4 +96,6 @@ function Compile-Parser( [string] $name )
         "$(Get-ParserSourceFolder $name)\*.cs"
 
     & (Get-CompilerExe) $param
+
+    Write-Verbose "Parser binaries compiled for parser '$name'"
 }
