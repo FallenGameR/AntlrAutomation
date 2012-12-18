@@ -1,3 +1,5 @@
+$fullText = type "d:\Archive\Projects\AntlrAutomation\AutomationCore\Sample.Parser\Grammar.g3" | Out-String
+
 function Test-Parser
 {
     $root = $PSScriptRoot

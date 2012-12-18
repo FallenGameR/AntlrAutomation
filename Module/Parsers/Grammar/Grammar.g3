@@ -1,17 +1,19 @@
-﻿grammar Grammar;
+grammar Grammar;
 
-options {
+options 
+{
     language=CSharp3;
     output=AST;
     TokenLabelType=CommonToken;
-    ASTLabelType=CommonTree;
+    ASTLabelType=AutomationTree;
 }
 
 tokens {FILE; SECTION;}
 
-@lexer::namespace{Sample.Parser}
-@parser::namespace{Sample.Parser}
-
+@lexer::header{using Automation.Core;}
+@parser::header{using Automation.Core;}
+@lexer::namespace{Automation.Core.Grammar}
+@parser::namespace{Automation.Core.Grammar}
 
 /*
  * Parser Rules
@@ -35,3 +37,4 @@ NEWLINE
     : '\r'? '\n' { $channel = Hidden; };
 
 WS	: (' ' | '\t' | NEWLINE)+ { $channel = Hidden; };
+
