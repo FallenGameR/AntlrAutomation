@@ -65,7 +65,7 @@ function Get-ParserBinaryFolder( [string] $name )
 
 function Get-ParserAssemblyPath( [string] $name )
 {
-    Join-Path (Get-ParserBinaryFolder $name) parser.dll
+    Join-Path (Get-ParserBinaryFolder $name) "$($name)Parser.dll"
 }
 
 function Get-ParserSourceFile( [string] $name, [string] $file )
