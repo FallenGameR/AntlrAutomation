@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle("Sample.Parser")]
+[assembly: AssemblyTitle("Automation.Core.Grammar")]
 [assembly: AssemblyDescription("Automatically generated parser for 'Grammar' grammar")]
-[assembly: AssemblyCopyright("Copyright © 2012")]
-[assembly: CLSCompliant(false)]
+[assembly: AssemblyCopyright("Copyright � 2012")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: CLSCompliant(false)]

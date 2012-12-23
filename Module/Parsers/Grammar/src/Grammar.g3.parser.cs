@@ -1,4 +1,4 @@
-﻿namespace Automation.Core.Grammar
+namespace Automation.Core.Grammar
 {
     partial class GrammarParser
     {
