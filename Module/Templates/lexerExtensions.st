@@ -1,6 +1,6 @@
 ﻿lexerExtensions (name) ::=
 <<
-namespace Automation.Core.<name>
+namespace Automation.Parsers.<name>
 {
     partial class <name>Lexer
     {

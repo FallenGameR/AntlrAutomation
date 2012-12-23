@@ -1,4 +1,4 @@
-namespace Automation.Core.Simpleton
+namespace Automation.Parsers.Simpleton
 {
     partial class SimpletonLexer
     {

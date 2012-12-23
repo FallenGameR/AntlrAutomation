@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.4.1.9004 S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3 2012-12-23 00:27:30
+// $ANTLR 3.4.1.9004 S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3 2012-12-23 00:30:22
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using Antlr.Runtime;
 using Antlr.Runtime.Misc;
 
-namespace Automation.Core.Simpleton
+namespace Automation.Parsers.Simpleton
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.4.1.9004")]
 [System.CLSCompliant(false)]
@@ -625,4 +625,4 @@ public partial class SimpletonLexer : Antlr.Runtime.Lexer
 
 }
 
-} // namespace Automation.Core.Simpleton
+} // namespace Automation.Parsers.Simpleton

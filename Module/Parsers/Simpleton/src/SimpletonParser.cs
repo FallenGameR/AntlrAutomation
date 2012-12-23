@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.4.1.9004 S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3 2012-12-23 00:27:29
+// $ANTLR 3.4.1.9004 S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3 2012-12-23 00:30:22
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -29,7 +29,7 @@ using Antlr.Runtime.Misc;
 using Antlr.Runtime.Tree;
 using RewriteRuleITokenStream = Antlr.Runtime.Tree.RewriteRuleTokenStream;
 
-namespace Automation.Core.Simpleton
+namespace Automation.Parsers.Simpleton
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.4.1.9004")]
 [System.CLSCompliant(false)]
@@ -403,4 +403,4 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 	#endregion Follow sets
 }
 
-} // namespace Automation.Core.Simpleton
+} // namespace Automation.Parsers.Simpleton

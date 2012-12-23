@@ -1,7 +1,8 @@
 using System;
 using Antlr.Runtime;
+using Automation.Core;
 
-namespace Automation.Core.Simpleton
+namespace Automation.Parsers.Simpleton
 {
     public class SimpletonLoader : MarshalByRefObject, ILoader
     {

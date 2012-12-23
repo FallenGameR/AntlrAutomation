@@ -2,8 +2,9 @@
 <<
 using System;
 using Antlr.Runtime;
+using Automation.Core;
 
-namespace Automation.Core.<name>
+namespace Automation.Parsers.<name>
 {
     public class <name>Loader : MarshalByRefObject, ILoader
     {
