@@ -67,3 +67,16 @@ function Get-ParserAssemblyPath( [string] $name )
 {
     Join-Path (Get-ParserBinaryFolder $name) parser.dll
 }
+
+function Get-ParserSourceFile( [string] $name, [string] $file )
+{
+    $folder = Get-ParserSourceFolder $name
+    Join-Path $folder $file
+}
+
+filter Set-ParserSourceFile( [string] $name, [string] $file )
+{
+    $path = Get-ParserSourceFile $name $file
+    $psitem | Set-Content $path
+}
+

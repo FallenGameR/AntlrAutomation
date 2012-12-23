@@ -1,18 +1,5 @@
 $SCRIPT:Templates = New-Object Antlr4.StringTemplate.TemplateGroupDirectory (Get-TemplatesRoot)
 
-function Get-Render( [string] $templateName )
-{
-    $template = $templates.GetInstanceOf($templateName)
-
-    foreach( $arg in $args )
-    {
-        $value = (Get-Variable $arg).Value
-        $template.Add($arg, $value) | Out-Null
-    }
-
-    $template.Render()
-}
-
 function Set-Grammar
 {
     <#
@@ -111,15 +98,22 @@ function Generate-ParserCore( [string] $name )
 
 function Generate-ParserExtensions( [string] $name )
 {
-    $assemblyInfo = Get-Render assemblyInfo name
-    $loader = Get-Render loader name
-    $lexerExtensions = Get-Render lexerExtensions name
-    $parserExtensions = Get-Render parserExtensions name
+    Get-Render assemblyInfo name     | Set-ParserSourceFile $name "AssemblyInfo.cs"
+    Get-Render loader name           | Set-ParserSourceFile $name "$($name)Loader.cs"
+    Get-Render lexerExtensions name  | Set-ParserSourceFile $name "$($name)Lexer.Partial.cs"
+    Get-Render parserExtensions name | Set-ParserSourceFile $name "$($name)Parser.Patial.cs"
+}
 
-    $parserSourceFolder = Get-ParserSourceFolder $name
+function Get-Render( [string] $templateName )
+{
+    $template = $templates.GetInstanceOf($templateName)
 
+    foreach( $arg in $args )
+    {
+        $value = (Get-Variable $arg).Value
+        $template.Add($arg, $value) | Out-Null
+    }
 
-    $allTemplates = Join-Path (Get-TemplatesRoot) "*.cs"
-    Copy-Item $allTemplates (Get-ParserSourceFolder $name)
+    $template.Render()
 }
 
