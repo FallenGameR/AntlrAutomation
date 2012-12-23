@@ -1,4 +1,4 @@
-$fullText = type "$PSScriptRoot\..\AutomationCore\Sample.Parser\Grammar.g3" | Out-String
+$fullText = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
 
 function Test-Parser
 {
