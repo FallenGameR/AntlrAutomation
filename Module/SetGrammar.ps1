@@ -1,3 +1,10 @@
+<#
+$d = New-Object Antlr4.StringTemplate.TemplateGroupDirectory D:\Archive\Projects\AntlrAutomation\Module\Templates
+$a = $d.GetInstanceOf("assemblyInfo")
+$a.Add('name', "Grammar")
+$a.Render()
+#>
+
 function Set-Grammar
 {
     <#

@@ -51,7 +51,7 @@ CLRVersion = '4.0'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-RequiredAssemblies = @('Libraries\Antlr\Antlr3.Runtime.dll', 'Libraries\AutomationCore\Automation.Core.dll')
+RequiredAssemblies = @('Libraries\Antlr\Antlr3.Runtime.dll', 'Libraries\Antlr\Antlr4.StringTemplate.dll', 'Libraries\AutomationCore\Automation.Core.dll')
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @('Paths.ps1', 'SetGrammar.ps1', 'TestGrammar.ps1')
