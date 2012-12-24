@@ -54,7 +54,7 @@ CLRVersion = '4.0'
 RequiredAssemblies = @('Libraries\Antlr\Antlr3.Runtime.dll', 'Libraries\Antlr\Antlr4.StringTemplate.dll', 'Libraries\AutomationCore\Automation.Core.dll')
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-ScriptsToProcess = @('Paths.ps1', 'SetGrammar.ps1', 'TestGrammar.ps1')
+ScriptsToProcess = @('Paths.ps1', 'SetGrammar.ps1', 'ParseItem.ps1', 'TestGrammar.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
@@ -81,7 +81,7 @@ AliasesToExport = '*'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('Paths.ps1', 'SetGrammar.ps1', 'TestGrammar.ps1')
+FileList = @('Paths.ps1', 'SetGrammar.ps1', 'ParseItem.ps1', 'TestGrammar.ps1')
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
 # PrivateData = ''
