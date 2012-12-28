@@ -1,0 +1,39 @@
+﻿grammar SimpletonDuplicate;
+
+options 
+{
+    language=CSharp3;
+    output=AST;
+    TokenLabelType=CommonToken;
+    ASTLabelType=AutomationTree;
+}
+
+tokens {FILE; SECTION;}
+
+@lexer::header{using Automation.Core;}
+@parser::header{using Automation.Core;}
+@lexer::namespace{Automation.Parsers.Simpleton}
+@parser::namespace{Automation.Parsers.Simpleton}
+
+/*
+ * Parser Rules
+ */
+
+public file
+    : section+ EOF -> ^(FILE section+)
+    ;
+
+section
+    : 'start' WORD* 'end' -> ^(SECTION WORD*)
+    ;
+
+/*
+ * Lexer Rules
+ */
+
+WORD: 'a'..'z'+;
+
+NEWLINE
+    : '\r'? '\n' { $channel = Hidden; };
+
+WS	: (' ' | '\t' | NEWLINE)+ { $channel = Hidden; };
