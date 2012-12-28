@@ -1,4 +1,4 @@
-﻿grammar SimpletonDuplicate;
+grammar SimpletonCopy;
 
 options 
 {
@@ -37,3 +37,4 @@ NEWLINE
     : '\r'? '\n' { $channel = Hidden; };
 
 WS	: (' ' | '\t' | NEWLINE)+ { $channel = Hidden; };
+
