@@ -11,7 +11,13 @@ Set-Grammar $fullText
 # Parse-Item works with regex matched grammar name
 "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
 
-# Parse-Item works with regex matched grammar name with warning in case of ambiguity
+# SimpletonCopy grammar compiles without errors despite it's partial name overlap
+# TODO: Right now the test fails - grammar can't be compiled since namespace generated is wrong
 $fullTextCopy = type "$PSScriptRoot\..\Info\simpletonCopy.g3" | Out-String
 Set-Grammar $fullTextCopy
+
+# Parse-Item works with regex matched grammar name with warning in case of ambiguity
+# TODO: Right now this test doesn't capture warning output at all
 "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
+
+
