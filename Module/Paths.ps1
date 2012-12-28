@@ -42,8 +42,42 @@ function Get-LibraryFolder( [string] $name )
     Join-Path (Get-LibrariesRoot) $name
 }
 
-function Get-ParserFolder( [string] $name )
+function Get-ParserName( [string] $name )
 {
+    (Get-Item (Get-ParserFolder $name -LooseMatch)).Name
+}
+
+function Get-ParserFolder
+{
+    param
+    (
+        # Name of the parser
+        [string] $Name,
+        # Perform loose regex-based name matching
+        [switch] $LooseMatch
+    )
+
+    # Loose match is needed
+    if( $LooseMatch )
+    {
+        $parserFolders = Get-ChildItem (Get-ParsersRoot)
+
+        # Exact match for an existing parser
+        $findings = $parserFolders | where Name -eq $name
+        if( $findings )
+        {
+            return $findings.FullName
+        }
+
+        # Regex match for an existing parser
+        $findings = $parserFolders | where Name -match $name | select -First 1
+        if( $findings )
+        {
+            return $findings.FullName
+        }
+    }
+
+    # Strict match is needed
     Join-Path (Get-ParsersRoot) $name
 }
 

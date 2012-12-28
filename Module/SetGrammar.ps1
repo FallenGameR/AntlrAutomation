@@ -20,7 +20,7 @@ function Set-Grammar
         [string] $FullText
     )
 
-    $name = Get-ParserName $fullText
+    $name = Parse-ParserName $fullText
 
     Clean-ParserFolder $name
     Set-GrammarText $name $fullText
@@ -28,7 +28,7 @@ function Set-Grammar
     Compile-Parser $name
 }
 
-function Get-ParserName( [string] $fullText )
+function Parse-ParserName( [string] $fullText )
 {
     $nameFound = $fullText -match "grammar (\w+);"
 

@@ -30,8 +30,9 @@ filter Parse-Item
     $parserDomain = [AppDomain]::CreateDomain( $domainName, $evidence, $setup )
 
     # Preaparing the loader for the parsing
-    $dllPath = Get-ParserAssemblyPath $name
-    $namespace = "Automation.Parsers.$($name).$($name)Loader" # NOTE: Capitalization issue here
+    $parserName = Get-ParserName $name
+    $dllPath = Get-ParserAssemblyPath $parserName
+    $namespace = "Automation.Parsers.$($parserName).$($parserName)Loader" # NOTE: Capitalization issue here
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $namespace )
 
 
