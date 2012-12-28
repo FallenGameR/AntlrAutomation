@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.4.1.9004 S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3 2012-12-23 00:32:31
+// $ANTLR 3.4.1.9004 D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3 2012-12-27 23:03:22
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -78,7 +78,7 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 	}
 
 	public override string[] TokenNames { get { return SimpletonParser.tokenNames; } }
-	public override string GrammarFileName { get { return "S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3"; } }
+	public override string GrammarFileName { get { return "D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3"; } }
 
 
 	partial void OnCreated();
@@ -89,7 +89,7 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 	partial void EnterRule_file();
 	partial void LeaveRule_file();
 	// $ANTLR start "file"
-	// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:22:8: public file : ( section )+ EOF -> ^( FILE ( section )+ ) ;
+	// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:22:8: public file : ( section )+ EOF -> ^( FILE ( section )+ ) ;
 	[GrammarRule("file")]
 	public AstParserRuleReturnScope<AutomationTree, CommonToken> file()
 	{
@@ -111,12 +111,12 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 		DebugLocation(22, 4);
 		try
 		{
-			// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:5: ( ( section )+ EOF -> ^( FILE ( section )+ ) )
+			// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:5: ( ( section )+ EOF -> ^( FILE ( section )+ ) )
 			DebugEnterAlt(1);
-			// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:7: ( section )+ EOF
+			// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:7: ( section )+ EOF
 			{
 			DebugLocation(23, 7);
-			// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:7: ( section )+
+			// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:7: ( section )+
 			int cnt1=0;
 			try { DebugEnterSubRule(1);
 			while (true)
@@ -136,7 +136,7 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:7: section
+					// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:7: section
 					{
 					DebugLocation(23, 7);
 					PushFollow(Follow._section_in_file98);
@@ -184,7 +184,7 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 			// 23:20: -> ^( FILE ( section )+ )
 			{
 				DebugLocation(23, 23);
-				// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:23: ^( FILE ( section )+ )
+				// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:23:23: ^( FILE ( section )+ )
 				{
 				AutomationTree root_1 = (AutomationTree)adaptor.Nil();
 				DebugLocation(23, 25);
@@ -242,7 +242,7 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 	partial void EnterRule_section();
 	partial void LeaveRule_section();
 	// $ANTLR start "section"
-	// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:26:1: section : 'start' ( WORD )* 'end' -> ^( SECTION ( WORD )* ) ;
+	// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:26:1: section : 'start' ( WORD )* 'end' -> ^( SECTION ( WORD )* ) ;
 	[GrammarRule("section")]
 	private AstParserRuleReturnScope<AutomationTree, CommonToken> section()
 	{
@@ -268,16 +268,16 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 		DebugLocation(26, 4);
 		try
 		{
-			// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:5: ( 'start' ( WORD )* 'end' -> ^( SECTION ( WORD )* ) )
+			// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:5: ( 'start' ( WORD )* 'end' -> ^( SECTION ( WORD )* ) )
 			DebugEnterAlt(1);
-			// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:7: 'start' ( WORD )* 'end'
+			// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:7: 'start' ( WORD )* 'end'
 			{
 			DebugLocation(27, 7);
 			string_literal3=(CommonToken)Match(input,10,Follow._10_in_section127);  
 			stream_10.Add(string_literal3);
 
 			DebugLocation(27, 15);
-			// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:15: ( WORD )*
+			// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:15: ( WORD )*
 			try { DebugEnterSubRule(2);
 			while (true)
 			{
@@ -296,7 +296,7 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:15: WORD
+					// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:15: WORD
 					{
 					DebugLocation(27, 15);
 					WORD4=(CommonToken)Match(input,WORD,Follow._WORD_in_section129);  
@@ -337,14 +337,14 @@ public partial class SimpletonParser : Antlr.Runtime.Parser
 			// 27:27: -> ^( SECTION ( WORD )* )
 			{
 				DebugLocation(27, 30);
-				// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:30: ^( SECTION ( WORD )* )
+				// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:30: ^( SECTION ( WORD )* )
 				{
 				AutomationTree root_1 = (AutomationTree)adaptor.Nil();
 				DebugLocation(27, 32);
 				root_1 = (AutomationTree)adaptor.BecomeRoot((AutomationTree)adaptor.Create(SECTION, "SECTION"), root_1);
 
 				DebugLocation(27, 40);
-				// S:\\github\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:40: ( WORD )*
+				// D:\\Archive\\Projects\\AntlrAutomation\\Module\\Parsers\\Simpleton\\Simpleton.g3:27:40: ( WORD )*
 				while ( stream_WORD.HasNext )
 				{
 					DebugLocation(27, 40);
