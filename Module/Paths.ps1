@@ -70,10 +70,15 @@ function Get-ParserFolder
         }
 
         # Regex match for an existing parser
-        $findings = $parserFolders | where Name -match $name | select -First 1
+        $findings = $parserFolders | where Name -match $name
         if( $findings )
         {
-            return $findings.FullName
+            if( ($findings | measure).Count -gt 1 )
+            {
+                $names = ($findings | foreach Name) -join ", "
+                Write-Warning "Grammar '$name' can be resolved as: $names. First grammar would be used."
+            }
+            return ($findings | select -First 1).FullName
         }
     }
 

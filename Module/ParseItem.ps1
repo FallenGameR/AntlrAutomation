@@ -19,8 +19,7 @@ filter Parse-Item
 
     $filePath = (Get-Item $psitem).FullName
 
-
-    # App domain is needed to be able to change parser.dll withing one Powershell session
+    # App domain is needed to be able to change parser assemby without closing current Powershell session
     # We need to make sure that new domain would be able to find all referenced assemblies
     $setup = New-Object AppDomainSetup
     $setup.ApplicationBase = Get-LibrariesRoot
