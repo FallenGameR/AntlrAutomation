@@ -34,11 +34,11 @@ filter Parse-Item
     $namespace = "Automation.Parsers.$($parserName).$($parserName)Loader" # NOTE: Capitalization issue here
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $namespace )
 
-
     # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
     $tree = [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
     [AppDomain]::Unload($parserDomain)
 
-    $tree.ToStringTree()
+    # Return parsed AST
+    $tree
 }
 

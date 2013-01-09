@@ -24,3 +24,13 @@ function Run-Tests
     # Parse-Item works with regex matched grammar name with warning in case of ambiguity
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
 }
+
+function test( [switch] $Force )
+{
+    if( $Force )
+    {
+        $fullText = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
+        Set-Grammar $fullText
+    }
+    "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item Simpleton
+}
