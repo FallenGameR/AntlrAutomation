@@ -25,6 +25,8 @@ function Run-Tests
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
 }
 
+Update-FormatData -AppendPath .\AntlrAutomation.ps1xml
+
 function test( [switch] $Force )
 {
     if( $Force )
@@ -32,5 +34,7 @@ function test( [switch] $Force )
         $fullText = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
         Set-Grammar $fullText
     }
-    "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item Simpleton
+    $GLOBAL:a = "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item Simpleton
+    Update-FormatData
+    $a | fc
 }
