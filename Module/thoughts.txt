@@ -34,28 +34,5 @@ tags that can contain a variety of tags that specify contents and formatting
 of the specified location in the view, including <Text>, <Indentation>,
 <ExpressionBinding>, and <NewLine> tags.
 
-        <View>
-        <Name>Microsoft.Management.Infrastructure.CimInstance#__PartialCIMInstance</Name>
-            <ViewSelectedBy>
-                <TypeName>Microsoft.Management.Infrastructure.CimInstance#__PartialCIMInstance</TypeName>
-            </ViewSelectedBy>
-            <CustomControl>
-                <CustomEntries>
-                    <CustomEntry>
-                        <CustomItem>
-                            <Frame>
-                                <CustomItem>
-                                    <ExpressionBinding>
-                                        <ScriptBlock>
-                                            $str = $_ | Microsoft.PowerShell.Utility\Format-List -Property * | Microsoft.PowerShell.Utility\Out-String
-                                            $str
-                                        </ScriptBlock>
-                                    </ExpressionBinding>
-                                </CustomItem>
-                            </Frame>
-                        </CustomItem>
-                    </CustomEntry>
-                </CustomEntries>
-            </CustomControl>
-        </View>
+
 

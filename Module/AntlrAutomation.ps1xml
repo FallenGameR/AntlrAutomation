@@ -38,16 +38,26 @@
                 <CustomEntries>
                     <CustomEntry>
                         <CustomItem>
-                            <Frame>
-                                <CustomItem>
-                                    <ExpressionBinding>
-                                        <ScriptBlock>
-                                            $_.Text
-                                            "yay!"
-                                        </ScriptBlock>
-                                    </ExpressionBinding>
-                                </CustomItem>                                
-                            </Frame>
+                          <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>smth</Text>
+                  <ExpressionBinding>
+                     <ScriptBlock>
+                        $_.Text
+                        "yay!"
+                     </ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>smth</Text>
+                  <ExpressionBinding>
+                     <ScriptBlock>
+                        $_.Text
+                        "yay!"
+                     </ScriptBlock>
+                  </ExpressionBinding>
+                </CustomItem>
+                          </Frame>
                         </CustomItem>
                     </CustomEntry>
                 </CustomEntries>
