@@ -37,19 +37,22 @@
             <CustomControl>
                 <CustomEntries>
                     <CustomEntry>
-                        <CustomItem>
-                            <NewLine/>
-
+            <CustomItem>
               <Frame>
-                <LeftIndent>4</LeftIndent>
+                <LeftIndent>2</LeftIndent>
                 <CustomItem>
-                  <Text>Node text: </Text>
+                  <Text>Node: </Text>
                   <ExpressionBinding>
                       <PropertyName>Text</PropertyName>
                   </ExpressionBinding>
                   <NewLine/>
-              
-                  <Text>Node children: </Text>
+                </CustomItem>
+              </Frame>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <NewLine/>              
+                  <Text>Children: </Text>
                   <ExpressionBinding>
                       <PropertyName>Children</PropertyName>
                       <EnumerateCollection/>
@@ -66,9 +69,8 @@
                   </ExpressionBinding>
                 </CustomItem>
               </Frame>
-
-
-                        </CustomItem>
+            </CustomItem>
+            
                     </CustomEntry>
                 </CustomEntries>
             </CustomControl>
