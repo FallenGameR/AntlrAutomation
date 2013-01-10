@@ -48,6 +48,14 @@
                       <PropertyName>Text</PropertyName>
                   </ExpressionBinding>
                   <NewLine/>
+              
+                  <Text>Node children: </Text>
+                  <ExpressionBinding>
+                      <PropertyName>Children</PropertyName>
+                      <EnumerateCollection/>
+                  </ExpressionBinding>
+                  <NewLine/>
+
                   <NewLine/>
                   <Text>Node script: </Text>
                   <ExpressionBinding>
