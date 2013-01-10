@@ -53,6 +53,7 @@
                   <ExpressionBinding>
                       <PropertyName>Children</PropertyName>
                       <EnumerateCollection/>
+                      <CustomControlName>AutomationTree-Table</CustomControlName>
                   </ExpressionBinding>
                   <NewLine/>
 
