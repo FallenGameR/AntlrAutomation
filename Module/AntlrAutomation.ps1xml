@@ -3,7 +3,7 @@
 <Configuration>
     <ViewDefinitions>
         <View>
-            <Name>AutomationTree</Name>
+            <Name>AutomationTree-Table</Name>
             <ViewSelectedBy>
                 <TypeName>Antlr.Runtime.Tree.CommonTree</TypeName>
                 <TypeName>CSV:Antlr.Runtime.Tree.CommonTree</TypeName>
@@ -28,5 +28,30 @@
                 </TableRowEntries>
             </TableControl>
         </View>
+        <View>
+            <Name>AutomationTree-Custom</Name>
+            <ViewSelectedBy>
+                <TypeName>Antlr.Runtime.Tree.CommonTree</TypeName>
+                <TypeName>CSV:Antlr.Runtime.Tree.CommonTree</TypeName>
+            </ViewSelectedBy>
+            <CustomControl>
+                <CustomEntries>
+                    <CustomEntry>
+                        <CustomItem>
+                            <Frame>
+                                <CustomItem>
+                                    <ExpressionBinding>
+                                        <ScriptBlock>
+                                            $_.Text
+                                            "yay!"
+                                        </ScriptBlock>
+                                    </ExpressionBinding>
+                                </CustomItem>                                
+                            </Frame>
+                        </CustomItem>
+                    </CustomEntry>
+                </CustomEntries>
+            </CustomControl>
+        </View>        
     </ViewDefinitions>
-</Configuration>
+</Configuration>                

@@ -20,3 +20,42 @@ Error handling:
 - NoViableAltExceptions is as much verbose as possible
 - Compilation warnings to warnings
 - Compilation errors to errors. The grammar is discarded since it is not valid.
+
+
+
+select-string -path $pshome\*format.ps1xml -pattern CustomControl
+
+<CustomControl>
+
+The <CustomControl> tag lets you use a script block to define a format.
+A <CustomControl> tag typically contains a <CustomEntries> tag that contains
+multiple <CustomEntry> tags. Each <CustomEntry> tag contains a <CustomItem>
+tags that can contain a variety of tags that specify contents and formatting
+of the specified location in the view, including <Text>, <Indentation>,
+<ExpressionBinding>, and <NewLine> tags.
+
+        <View>
+        <Name>Microsoft.Management.Infrastructure.CimInstance#__PartialCIMInstance</Name>
+            <ViewSelectedBy>
+                <TypeName>Microsoft.Management.Infrastructure.CimInstance#__PartialCIMInstance</TypeName>
+            </ViewSelectedBy>
+            <CustomControl>
+                <CustomEntries>
+                    <CustomEntry>
+                        <CustomItem>
+                            <Frame>
+                                <CustomItem>
+                                    <ExpressionBinding>
+                                        <ScriptBlock>
+                                            $str = $_ | Microsoft.PowerShell.Utility\Format-List -Property * | Microsoft.PowerShell.Utility\Out-String
+                                            $str
+                                        </ScriptBlock>
+                                    </ExpressionBinding>
+                                </CustomItem>
+                            </Frame>
+                        </CustomItem>
+                    </CustomEntry>
+                </CustomEntries>
+            </CustomControl>
+        </View>
+
