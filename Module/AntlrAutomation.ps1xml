@@ -60,8 +60,7 @@
                   <Text>Node script: </Text>
                   <ExpressionBinding>
                      <ScriptBlock>
-                        $_.Text
-                        "yay!"
+                        $_.ToString() + " ee!"
                      </ScriptBlock>
                   </ExpressionBinding>
                 </CustomItem>
