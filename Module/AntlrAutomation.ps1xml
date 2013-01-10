@@ -5,8 +5,8 @@
         <View>
             <Name>AutomationTree</Name>
             <ViewSelectedBy>
-                <TypeName>Automation.Core.AutomationTree</TypeName>
-                <TypeName>CSV:Automation.Core.AutomationTree</TypeName>
+                <TypeName>Antlr.Runtime.Tree.CommonTree</TypeName>
+                <TypeName>CSV:Antlr.Runtime.Tree.CommonTree</TypeName>
             </ViewSelectedBy>
             <TableControl>
                 <AutoSize/>
