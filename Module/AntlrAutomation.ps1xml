@@ -38,18 +38,18 @@
                 <CustomEntries>
                     <CustomEntry>
                         <CustomItem>
-                          <Frame>
+                            <NewLine/>
+
+              <Frame>
                 <LeftIndent>4</LeftIndent>
                 <CustomItem>
-                  <Text>smth</Text>
+                  <Text>Node text: </Text>
                   <ExpressionBinding>
-                     <ScriptBlock>
-                        $_.Text
-                        "yay!"
-                     </ScriptBlock>
+                      <PropertyName>Text</PropertyName>
                   </ExpressionBinding>
                   <NewLine/>
-                  <Text>smth</Text>
+                  <NewLine/>
+                  <Text>Node script: </Text>
                   <ExpressionBinding>
                      <ScriptBlock>
                         $_.Text
@@ -57,7 +57,9 @@
                      </ScriptBlock>
                   </ExpressionBinding>
                 </CustomItem>
-                          </Frame>
+              </Frame>
+
+
                         </CustomItem>
                     </CustomEntry>
                 </CustomEntries>
