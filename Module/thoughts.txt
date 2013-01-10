@@ -1,5 +1,4 @@
 Render trees simplified - text + children
-select-string -path $pshome\*format.ps1xml -pattern CustomControl
 
 Allow syntax like: FILE.some.sub.child (expand for all found children, discard the onces that don not have this path)?
 

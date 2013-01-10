@@ -25,8 +25,6 @@ function Run-Tests
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
 }
 
-Update-FormatData -AppendPath .\AntlrAutomation.ps1xml
-
 function test( [switch] $Force )
 {
     if( $Force )

@@ -60,7 +60,7 @@ ScriptsToProcess = @('GetGrammar.ps1', 'GetNode.ps1', 'ParseItem.ps1', 'Paths.ps
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-# FormatsToProcess = @()
+FormatsToProcess = @('AntlrAutomation.ps1xml')
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
@@ -89,7 +89,8 @@ FileList = @(
     'Paths.ps1', 
     'SetGrammar.ps1', 
     'TestGrammar.ps1', 
-    'AntlrAutomation.psd1', 
+    'AntlrAutomation.psd1',
+    'AntlrAutomation.ps1xml', 
     'thoughts.txt')
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
