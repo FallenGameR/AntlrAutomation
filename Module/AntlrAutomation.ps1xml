@@ -37,40 +37,30 @@
             <CustomControl>
                 <CustomEntries>
                     <CustomEntry>
-            <CustomItem>
-              <Frame>
-                <LeftIndent>2</LeftIndent>
-                <CustomItem>
-                  <Text>Node: </Text>
-                  <ExpressionBinding>
-                      <PropertyName>Text</PropertyName>
-                  </ExpressionBinding>
-                  <NewLine/>
-                </CustomItem>
-              </Frame>
-              <Frame>
-                <LeftIndent>4</LeftIndent>
-                <CustomItem>
-                  <NewLine/>              
-                  <Text>Children: </Text>
-                  <ExpressionBinding>
-                      <PropertyName>Children</PropertyName>
-                      <EnumerateCollection/>
-                      <CustomControlName>AutomationTree-Table</CustomControlName>
-                  </ExpressionBinding>
-                  <NewLine/>
-
-                  <NewLine/>
-                  <Text>Node script: </Text>
-                  <ExpressionBinding>
-                     <ScriptBlock>
-                        $_.ToString() + " ee!"
-                     </ScriptBlock>
-                  </ExpressionBinding>
-                </CustomItem>
-              </Frame>
-            </CustomItem>
-            
+                        <CustomItem>
+                            <Frame>
+                                <LeftIndent>2</LeftIndent>
+                                <CustomItem>
+                                    <Text>{{ </Text>
+                                    <ExpressionBinding>
+                                        <PropertyName>Text</PropertyName>
+                                    </ExpressionBinding>
+                                    <Text> }}</Text>
+                                    <NewLine/>
+                                </CustomItem>
+                            </Frame>
+                            <Frame>
+                                <LeftIndent>4</LeftIndent>
+                                <CustomItem>
+                                    <ExpressionBinding>
+                                        <ScriptBlock>
+($_.Children | ft | Out-String).TrimEnd()
+                                        </ScriptBlock>
+                                    </ExpressionBinding>
+                                    <NewLine/>
+                                </CustomItem>
+                            </Frame>
+                        </CustomItem>
                     </CustomEntry>
                 </CustomEntries>
             </CustomControl>
