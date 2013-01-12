@@ -27,12 +27,11 @@ function Run-Tests
 
 function test( [switch] $Force )
 {
-    if( $Force )
-    {
-        $fullText = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
-        Set-Grammar $fullText
-    }
-    $GLOBAL:a = "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item Simpleton
-    Update-FormatData
-    $a | fc
+#    if( $Force )
+#    {
+        $GLOBAL:text = type "$PSScriptRoot\..\Info\simpletonShort.g3" | Out-String
+        Set-Grammar short $text
+#    }
+#    $GLOBAL:a = "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item short
+#    $a
 }
