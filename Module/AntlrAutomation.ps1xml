@@ -39,25 +39,34 @@
                     <CustomEntry>
                         <CustomItem>
                             <Frame>
-                                <LeftIndent>2</LeftIndent>
-                                <CustomItem>
-                                    <Text>{{ </Text>
-                                    <ExpressionBinding>
-                                        <PropertyName>Text</PropertyName>
-                                    </ExpressionBinding>
-                                    <Text> }}</Text>
-                                    <NewLine/>
-                                </CustomItem>
-                            </Frame>
-                            <Frame>
-                                <LeftIndent>4</LeftIndent>
                                 <CustomItem>
                                     <ExpressionBinding>
                                         <ScriptBlock>
-($_.Children | ft | Out-String).TrimEnd()
+$step = 2
+
+function print( $text, $indent )
+{
+    "{0,$indent}{1}" -f "", $text
+}
+
+function render( $node, $indent = 2 )
+{
+    if( $node -eq $null )
+    {
+        return    
+    }
+
+    print $node.Text $indent
+
+    foreach( $child in $node.Children )
+    {
+        render $child ($indent + $step)
+    }
+}
+
+render $_ | Out-String
                                         </ScriptBlock>
                                     </ExpressionBinding>
-                                    <NewLine/>
                                 </CustomItem>
                             </Frame>
                         </CustomItem>
