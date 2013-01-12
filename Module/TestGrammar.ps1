@@ -23,6 +23,12 @@ function Run-Tests
 
     # Parse-Item works with regex matched grammar name with warning in case of ambiguity
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
+
+    # AST can be rendered via format-custom (tree view) and format-table (table view)
+    $ast = "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item Simpleton
+    $ast | fc
+    $ast | ft
+    ($ast | Out-String) -eq ($ast | fc | Out-String) # custom view is used by default
 }
 
 function test( [switch] $Force )
