@@ -1,0 +1,8 @@
+﻿// Simple parser grammar
+
+file: section+ EOF -> ^(FILE section+);
+
+section
+    : 'start' WORD* 'end' -> ^(SECTION WORD*);
+
+WORD: 'a'..'z'+;
