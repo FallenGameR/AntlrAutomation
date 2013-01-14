@@ -4,7 +4,7 @@ using System;
 using Antlr.Runtime;
 using Automation.Core;
 
-namespace Automation.Parsers.<name>
+namespace Automation.Parsers.<name>Grammar
 {
     public class <name>Loader : MarshalByRefObject, ILoader
     {

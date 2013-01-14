@@ -14,8 +14,8 @@ tokens {FILE; SECTION;}
 
 @lexer::header{using Automation.Core;}
 @parser::header{using Automation.Core;}
-@lexer::namespace{Automation.Parsers.<name>}
-@parser::namespace{Automation.Parsers.<name>}
+@lexer::namespace{Automation.Parsers.<name>Grammar}
+@parser::namespace{Automation.Parsers.<name>Grammar}
 
 /*
  * User Rules

@@ -17,11 +17,11 @@ function Set-Grammar
 
     param
     (
-        [string] $Name
+        [string] $Name,
         [string] $Text
     )
 
-    $isFullText = $name -ne ""
+    $isFullText = $name -eq ""
 
     if( $isFullText )
     {
