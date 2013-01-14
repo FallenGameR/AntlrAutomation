@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.4.1.9004 C:\\src\\github\\AntlrAutomation\\Module\\Parsers\\SimpletonCopy\\SimpletonCopy.g3 2013-01-07 23:58:55
+// $ANTLR 3.4.1.9004 C:\\src\\github\\AntlrAutomation\\Module\\Parsers\\SimpletonCopy\\SimpletonCopy.g3 2013-01-14 00:03:52
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219

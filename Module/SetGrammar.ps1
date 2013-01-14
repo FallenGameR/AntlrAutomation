@@ -22,6 +22,7 @@ function Set-Grammar
     )
 
     $isFullText = $name -eq ""
+    $fullText = $text
 
     if( $isFullText )
     {
@@ -30,11 +31,7 @@ function Set-Grammar
 
     Clean-ParserFolder $name
 
-    if( $isFullText )
-    {
-        $fullText = $text
-    }
-    else
+    if( -not $isFullText )
     {
         $rules = $text
         $fullText = Get-Render grammar name rules

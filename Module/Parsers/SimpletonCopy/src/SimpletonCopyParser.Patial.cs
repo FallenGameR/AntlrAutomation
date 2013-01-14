@@ -1,4 +1,4 @@
-namespace Automation.Parsers.SimpletonCopy
+namespace Automation.Parsers.SimpletonCopyGrammar
 {
     partial class SimpletonCopyParser
     {
