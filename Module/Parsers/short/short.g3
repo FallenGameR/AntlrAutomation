@@ -12,8 +12,8 @@ tokens {FILE; SECTION;}
 
 @lexer::header{using Automation.Core;}
 @parser::header{using Automation.Core;}
-@lexer::namespace{Automation.Parsers.short}
-@parser::namespace{Automation.Parsers.short}
+@lexer::namespace{Automation.Parsers.shortGrammar}
+@parser::namespace{Automation.Parsers.shortGrammar}
 
 /*
  * User Rules

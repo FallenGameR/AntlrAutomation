@@ -2,7 +2,7 @@ using System;
 using Antlr.Runtime;
 using Automation.Core;
 
-namespace Automation.Parsers.short
+namespace Automation.Parsers.shortGrammar
 {
     public class shortLoader : MarshalByRefObject, ILoader
     {
