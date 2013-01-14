@@ -29,9 +29,13 @@ filter Parse-Item
     $parserDomain = [AppDomain]::CreateDomain( $domainName, $evidence, $setup )
 
     # Preaparing the loader for the parsing
+    # NOTE: Need to have namespace string template for that
+    # TODO: find out how to use templates withing each other
+    # TODO: find out how to handle capitalization in templates
     $parserName = Get-ParserName $name
+    $parserNamespace = $parserName + "Grammar"
     $dllPath = Get-ParserAssemblyPath $parserName
-    $namespace = "Automation.Parsers.$($parserName).$($parserName)Loader" # NOTE: Capitalization issue here
+    $namespace = "Automation.Parsers.$($parserNamespace).$($parserName)Loader" # NOTE: Capitalization issue here
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $namespace )
 
     # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
