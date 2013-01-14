@@ -17,13 +17,17 @@ function Set-Grammar
 
     param
     (
-        [string] $FullText
+        [string] $Name
+        [string] $Text
     )
 
-    $name = Parse-ParserName $fullText
+    if( -not $name )
+    {
+        $name = Parse-ParserName $text
+    }
 
     Clean-ParserFolder $name
-    Set-GrammarText $name $fullText
+    Set-GrammarText $name $text
     Generate-Parser $name
     Compile-Parser $name
 }

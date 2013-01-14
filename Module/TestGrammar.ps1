@@ -6,7 +6,7 @@ function Run-Tests
 
     # Simpleton grammar compiles without errors
     $fullText = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
-    Set-Grammar $fullText
+    Set-Grammar -Text $fullText
 
     # Parse-Item works with exact grammar name
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item Simpleton
@@ -19,7 +19,7 @@ function Run-Tests
 
     # SimpletonCopy grammar compiles without errors despite it's partial name overlap
     $fullTextCopy = type "$PSScriptRoot\..\Info\simpletonCopy.g3" | Out-String
-    Set-Grammar $fullTextCopy
+    Set-Grammar -Text $fullTextCopy
 
     # Parse-Item works with regex matched grammar name with warning in case of ambiguity
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simple
