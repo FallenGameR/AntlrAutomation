@@ -21,13 +21,26 @@ function Set-Grammar
         [string] $Text
     )
 
-    if( -not $name )
+    $isFullText = $name -ne ""
+
+    if( $isFullText )
     {
         $name = Parse-ParserName $text
     }
 
     Clean-ParserFolder $name
-    Set-GrammarText $name $text
+
+    if( $isFullText )
+    {
+        $fullText = $text
+    }
+    else
+    {
+        $rules = $text
+        $fullText = Get-Render grammar name rules
+    }
+
+    Set-GrammarText $name $fullText
     Generate-Parser $name
     Compile-Parser $name
 }
