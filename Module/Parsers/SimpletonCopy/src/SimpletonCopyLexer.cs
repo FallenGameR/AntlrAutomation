@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.4.1.9004 C:\\src\\github\\AntlrAutomation\\Module\\Parsers\\SimpletonCopy\\SimpletonCopy.g3 2013-01-14 00:03:52
+// $ANTLR 3.4.1.9004 C:\\src\\github\\AntlrAutomation\\Module\\Parsers\\SimpletonCopy\\SimpletonCopy.g3 2013-01-14 00:10:18
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using Antlr.Runtime;
 using Antlr.Runtime.Misc;
 
-namespace Automation.Parsers.SimpletonCopy
+namespace Automation.Parsers.SimpletonCopyGrammar
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.4.1.9004")]
 [System.CLSCompliant(false)]
@@ -625,4 +625,4 @@ public partial class SimpletonCopyLexer : Antlr.Runtime.Lexer
 
 }
 
-} // namespace Automation.Parsers.SimpletonCopy
+} // namespace Automation.Parsers.SimpletonCopyGrammar

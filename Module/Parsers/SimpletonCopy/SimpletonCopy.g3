@@ -12,8 +12,8 @@ tokens {FILE; SECTION;}
 
 @lexer::header{using Automation.Core;}
 @parser::header{using Automation.Core;}
-@lexer::namespace{Automation.Parsers.SimpletonCopy}
-@parser::namespace{Automation.Parsers.SimpletonCopy}
+@lexer::namespace{Automation.Parsers.SimpletonCopyGrammar}
+@parser::namespace{Automation.Parsers.SimpletonCopyGrammar}
 
 /*
  * Parser Rules
