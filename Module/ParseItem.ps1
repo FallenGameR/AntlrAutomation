@@ -18,6 +18,7 @@ filter Parse-Item
     )
 
     $filePath = (Get-Item $psitem).FullName
+    $name = Get-ParserName $name
 
     # App domain is needed to be able to change parser assemby without closing current Powershell session
     # We need to make sure that new domain would be able to find all referenced assemblies
@@ -25,17 +26,12 @@ filter Parse-Item
     $setup.ApplicationBase = Get-LibrariesRoot
     $setup.PrivateBinPath = (Get-ChildItem (Get-LibrariesRoot) | where PSIsContainer | foreach Name) -join ";"
     $evidence = [AppDomain]::CurrentDomain.Evidence
-    $domainName = $name + "ParserDomain"
+    $domainName = Get-Render domainName name
     $parserDomain = [AppDomain]::CreateDomain( $domainName, $evidence, $setup )
 
     # Preaparing the loader for the parsing
-    # NOTE: Need to have namespace string template for that
-    # TODO: find out how to use templates withing each other
-    # TODO: find out how to handle capitalization in templates
-    $parserName = Get-ParserName $name
-    $parserNamespace = $parserName + "Grammar"
-    $dllPath = Get-ParserAssemblyPath $parserName
-    $namespace = "Automation.Parsers.$($parserNamespace).$($parserName)Loader" # NOTE: Capitalization issue here
+    $dllPath = Get-ParserAssemblyPath $name
+    $namespace = "{0}.{1}" -f (Get-Render namespace name), (Get-Render lexerName name)
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $namespace )
 
     # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
