@@ -11,7 +11,10 @@ namespace Automation.Parsers.shortGrammar
             var stream = new ANTLRFileStream(filePath);
             var lexer = new shortLexer(stream);
             var tokens = new CommonTokenStream(lexer);
-            var parser = new shortParser(tokens) { TreeAdaptor = new AutomationAdaptor() };
+            var parser = new shortParser(tokens) 
+            { 
+                TreeAdaptor = new AutomationAdaptor(),
+            };
             return parser.file().Tree;
         }
     }

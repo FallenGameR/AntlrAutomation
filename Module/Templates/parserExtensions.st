@@ -1,8 +1,8 @@
 ﻿parserExtensions (name) ::=
 <<
-namespace Automation.Parsers.<name>Grammar
+namespace <namespace(name=name)>
 {
-    partial class <name>Parser
+    partial class <parserName(name=name)>
     {
     }
 }

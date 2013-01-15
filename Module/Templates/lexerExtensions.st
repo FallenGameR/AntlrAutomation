@@ -1,8 +1,8 @@
 ﻿lexerExtensions (name) ::=
 <<
-namespace Automation.Parsers.<name>Grammar
+namespace <namespace(name=name)>
 {
-    partial class <name>Lexer
+    partial class <lexerName(name=name)>
     {
         public const int HIDDEN = Hidden;
     }

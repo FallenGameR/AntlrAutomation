@@ -1,1 +1,1 @@
-namespace (name) ::= "<name>Grammar"
+namespace (name) ::= "Automation.Parsers.<name>Grammar"
