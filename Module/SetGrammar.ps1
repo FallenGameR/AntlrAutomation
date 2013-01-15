@@ -21,9 +21,10 @@ function Set-Grammar
         [string] $Text
     )
 
+    $isShort = $name
     $name = Parse-ParserName $name $text
     Clean-ParserFolder $name
-    Generate-Grammar $name $text
+    Generate-Grammar $isShort $name $text
     Generate-Parser $name
     Compile-Parser $name
 }
@@ -61,9 +62,9 @@ function Clean-ParserFolder( [string] $name )
     Write-Verbose "Parser folder '$parserFolder' is cleaned"
 }
 
-function Generate-Grammar( [string] $name, [string] $text )
+function Generate-Grammar( $isShort, [string] $name, [string] $text )
 {
-    if( $name )
+    if( $isShort )
     {
         $text = Get-Render grammar name text
     }

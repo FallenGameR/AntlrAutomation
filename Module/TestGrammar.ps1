@@ -31,13 +31,17 @@ function Run-Tests
     ($ast | Out-String) -eq ($ast | fc | Out-String) # custom view is used by default
 }
 
-function test( [switch] $Force )
+function test
 {
-#    if( $Force )
-#    {
-        $GLOBAL:text = type "$PSScriptRoot\..\Info\simpletonShort.g3" | Out-String
-        Set-Grammar short $text
-#    }
-#    $GLOBAL:a = "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item short
-#    $a
+    $GLOBAL:test = type "$PSScriptRoot\..\Info\simpletonShort.g3" | Out-String
+    Set-Grammar short $test
+    "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item short
 }
+
+function test2
+{
+    $GLOBAL:test2 = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
+    Set-Grammar -Text $test2
+    "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simpleton
+}
+
