@@ -83,7 +83,7 @@ function Get-ParserFolder
     }
 
     # Strict match is needed
-    Join-Path (Get-ParsersRoot) $name
+    Join-Path (Get-ParsersRoot) (Normalize-ParserName $name)
 }
 
 function Get-FullGrammarPath( [string] $name )
@@ -119,3 +119,7 @@ filter Set-ParserSourceFile( [string] $name, [string] $file )
     $psitem | Set-Content $path
 }
 
+function Normalize-ParserName( [string] $name )
+{
+    (Get-Culture).TextInfo.ToTitleCase( $name )
+}

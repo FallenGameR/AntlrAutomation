@@ -29,6 +29,7 @@ function Set-Grammar
         $name = Parse-ParserName $text
     }
 
+    $name = Normalize-ParserName $name
     Clean-ParserFolder $name
 
     if( -not $isFullText )
