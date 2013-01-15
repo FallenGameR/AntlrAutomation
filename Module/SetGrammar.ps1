@@ -21,38 +21,28 @@ function Set-Grammar
         [string] $Text
     )
 
-    $isFullText = $name -eq ""
-    $fullText = $text
-
-    if( $isFullText )
-    {
-        $name = Parse-ParserName $text
-    }
-
-    $name = Normalize-ParserName $name
+    $name = Parse-ParserName $name $text
     Clean-ParserFolder $name
-
-    if( -not $isFullText )
-    {
-        $rules = $text
-        $fullText = Get-Render grammar name rules
-    }
-
-    Set-GrammarText $name $fullText
+    Generate-Grammar $name $text
     Generate-Parser $name
     Compile-Parser $name
 }
 
-function Parse-ParserName( [string] $fullText )
+function Parse-ParserName( [string] $name, [string] $fullText )
 {
-    $nameFound = $fullText -match "grammar (\w+);"
-
-    if( -not $nameFound )
+    if( -not $name )
     {
-        throw "Couldn't locate grammar name in full grammar text"
+        $nameFound = $fullText -match "grammar (\w+);"
+
+        if( -not $nameFound )
+        {
+            throw "Couldn't locate grammar name in full grammar text"
+        }
+
+        $name = $Matches[1]
     }
 
-    $Matches[1]
+    Normalize-ParserName $name
 }
 
 function Clean-ParserFolder( [string] $name )
@@ -69,6 +59,15 @@ function Clean-ParserFolder( [string] $name )
     New-Item (Get-ParserBinaryFolder $name) -ItemType Directory | Out-Null
 
     Write-Verbose "Parser folder '$parserFolder' is cleaned"
+}
+
+function Generate-Grammar( [string] $name, [string] $text )
+{
+    if( $name )
+    {
+        $text = Get-Render grammar name text
+    }
+    Set-GrammarText $name $text
 }
 
 function Set-GrammarText( [string] $name, [string] $fullText )

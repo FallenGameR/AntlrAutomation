@@ -1,4 +1,4 @@
-grammar (name, rules) ::=
+grammar (name, text) ::=
 <<
 grammar <name>;
 
@@ -20,7 +20,7 @@ tokens {FILE; SECTION;}
 /*
  * User Rules
  */
-public <rules>
+public <text>
 
 /*
  * Pre-defined Lexer Rules
