@@ -13,7 +13,8 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void Indentions_are_defined()
         {
-            Assert.Inconclusive();
+            Assert.IsNotNull(Indentions.Indent);
+            Assert.IsNotNull(Indentions.Dedent);
         }
     }
 }
