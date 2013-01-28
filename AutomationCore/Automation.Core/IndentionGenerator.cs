@@ -12,20 +12,45 @@ namespace Automation.Core
         private int indentType = 10;
         private int dedentType = 20;
         private IndentionDetector detector = IndentionDetector.GetInstance();
+        private readonly Queue<IToken> queuedTokens;
 
-
-        public IEnumerable<IToken> Process(IToken token)
+        private IndentionGenerator()
         {
+            this.queuedTokens = new Queue<IToken>();
+        }
+
+        public bool HasTokens
+        {
+            get { return this.queuedTokens.Any(); }
+        }
+
+        public static IndentionGenerator GetInstance()
+        {
+            return new IndentionGenerator();
+        }
+
+        public void Process(IToken token)
+        {
+            // Queue indentation tokens if needed
             if (this.IsTrigger(token))
             {
-                return this.detector
-                .Detect(this.GetPosition(token))
-                .Select(ind => this.GenerateImaginaryToken(ind, token));
+                var toEnqueue = this.detector
+                    .Detect(this.GetPosition(token))
+                    .Select(ind => this.GenerateImaginaryToken(ind, token));
+
+                foreach (var generatedToken in toEnqueue)
+                {
+                    this.queuedTokens.Enqueue(generatedToken);
+                }
             }
-            else
-            {
-                return new IToken[0];
-            }
+
+            // Preserve original token
+            this.queuedTokens.Enqueue(token);
+        }
+
+        public IToken NextToken()
+        {
+            return this.queuedTokens.Dequeue();
         }
 
         private bool IsTrigger(IToken token)
@@ -61,14 +86,16 @@ namespace Automation.Core
 
         public int GetPosition(IToken indentationToken)
         {
-            // Indention is always 0 for EOF
             if (indentationToken.IsEof())
             {
+                // Indention is always 0 for EOF
                 return 0;
             }
-
-            // Indention for whitespace tokens must be calculated
-            return indentationToken.CharPositionInLine + indentationToken.Text.AsEnumerable().Sum(c => this.GetWhitespaceLength(c));
+            else
+            {
+                // Indention for whitespace tokens must be calculated
+                return indentationToken.CharPositionInLine + indentationToken.Text.AsEnumerable().Sum(c => this.GetWhitespaceLength(c));
+            }
         }
 
         private int GetWhitespaceLength(char character)
