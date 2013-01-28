@@ -1,8 +1,8 @@
 function Run-Tests
 {
     # Removing old compiled grammars for clear test run
-    del "$PSScriptRoot\Parsers\Simpleton" -Recurse
-    del "$PSScriptRoot\Parsers\SimpletonCopy" -Recurse
+    del "$PSScriptRoot\Parsers\Simpleton" -Recurse *> $null
+    del "$PSScriptRoot\Parsers\SimpletonCopy" -Recurse *> $null
 
     # Simpleton grammar compiles without errors
     $fullText = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
@@ -40,8 +40,9 @@ function test
 
 function test2
 {
-    $GLOBAL:test2 = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
+    $GLOBAL:simpletonGrammar = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
     Set-Grammar -Text $test2
-    "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item simpleton
+    $GLOBAL:simpletonSample = "$PSScriptRoot\..\Info\simpleton.txt"
+    $GLOBAL:simpletonSample | Parse-Item simpleton
 }
 

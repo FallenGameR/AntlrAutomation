@@ -31,8 +31,8 @@ filter Parse-Item
 
     # Preaparing the loader for the parsing
     $dllPath = Get-ParserAssemblyPath $name
-    $namespace = "{0}.{1}" -f (Get-Render namespace name), (Get-Render lexerName name)
-    $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $namespace )
+    $loaderFullName = "{0}.{1}" -f (Get-Render namespace name), (Get-Render loaderName name)
+    $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $loaderFullName )
 
     # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
     $tree = [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
