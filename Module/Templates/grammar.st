@@ -29,6 +29,6 @@ public <text>
 NEWLINE
     : '\r'? '\n' { $channel = Hidden; };
 
-WS	: (' ' | '\t' | NEWLINE)+ { $channel = Hidden; };
+WS  : (' ' | '\t' )+ { $channel = Hidden; };
 >>
 

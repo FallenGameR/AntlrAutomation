@@ -29,20 +29,14 @@ function Run-Tests
     $ast | fc
     $ast | ft
     ($ast | Out-String) -eq ($ast | fc | Out-String) # custom view is used by default
-}
 
-function test
-{
-    $GLOBAL:test = type "$PSScriptRoot\..\Info\simpletonShort.g3" | Out-String
+    # Short grammars are accepted
+    $short = type "$PSScriptRoot\..\Info\simpletonShort.g3" | Out-String
     Set-Grammar short $test
     "$PSScriptRoot\..\Info\simpleton.txt" | Parse-Item short
 }
 
-function test2
+function test
 {
-    $GLOBAL:simpletonGrammar = type "$PSScriptRoot\..\Info\simpleton.g3" | Out-String
-    Set-Grammar -Text $test2
-    $GLOBAL:simpletonSample = "$PSScriptRoot\..\Info\simpleton.txt"
-    $GLOBAL:simpletonSample | Parse-Item simpleton
 }
 
