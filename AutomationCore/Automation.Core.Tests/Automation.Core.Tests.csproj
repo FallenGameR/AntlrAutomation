@@ -50,8 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="IndentionsTests.cs" />
+    <Compile Include="IndentionDetectorTests.cs" />
+    <Compile Include="IndentionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Automation.Core\Automation.Core.csproj">
+      <Project>{ef05d7b4-84f7-4b63-b08c-4b63fc29183f}</Project>
+      <Name>Automation.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

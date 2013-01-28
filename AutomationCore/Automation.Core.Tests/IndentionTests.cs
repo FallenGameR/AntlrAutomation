@@ -8,13 +8,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Automation.Core.Tests
 {
     [TestClass]
-    public class IndentionsTests
+    public class IndentionTests
     {
         [TestMethod]
         public void Indentions_are_defined()
         {
-            Assert.IsNotNull(Indentions.Indent);
-            Assert.IsNotNull(Indentions.Dedent);
+            Assert.IsNotNull(Indention.Indent);
+            Assert.IsNotNull(Indention.Dedent);
         }
     }
 }
