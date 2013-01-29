@@ -18,6 +18,7 @@ namespace Automation.Core.Tests
 
         private const int leadingPosition = 0;
 
+        private const int anyPosition = 1;
         private const int anyLine = 2;
         private const int anyIndex = 3;
         private const int anyChannel = 4;
@@ -102,7 +103,32 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void Generated_DEDENT_token_is_correct()
         {
-            Assert.Inconclusive();
+            var eofToken = new CommonToken
+            {
+                Type = Constant.Eof,
+                Text = "EOF",
+                CharPositionInLine = anyPosition,
+                Line = anyLine,
+                StartIndex = anyIndex,
+                TokenIndex = anyIndex,
+                StopIndex = anyIndex,
+                Channel = anyChannel,
+            };
+
+            this.generator.Process(this.GetToken(whitespace, 1));
+            this.generator.NextToken();
+            this.generator.NextToken();
+            this.generator.Process(eofToken);
+            var token = this.generator.NextToken();
+
+            Assert.AreEqual(dedent, token.Type);
+            Assert.AreEqual("DEDENT", token.Text);
+            Assert.AreEqual(Lexer.DefaultTokenChannel, token.Channel);
+            Assert.AreEqual(anyPosition, token.CharPositionInLine);
+            Assert.AreEqual(anyLine, token.Line);
+            Assert.AreEqual(anyIndex, token.StartIndex);
+            Assert.AreEqual(anyIndex, token.StopIndex);
+            Assert.AreEqual(anyIndex, token.TokenIndex);
         }
 
         [TestMethod]
