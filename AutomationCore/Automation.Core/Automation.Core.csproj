@@ -41,6 +41,7 @@
     <Compile Include="AutomationAdaptor.cs" />
     <Compile Include="AutomationException.cs" />
     <Compile Include="AutomationTree.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="IndentionDetector.cs" />
     <Compile Include="Indention.cs" />

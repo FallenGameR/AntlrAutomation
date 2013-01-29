@@ -11,13 +11,21 @@ namespace Automation.Core.Tests
     [TestClass]
     public class IndentionGeneratorTests
     {
+        private IToken GetToken(int type, int length = 0)
+        {
+            return new CommonToken(type, new string(' ', length));
+        }
+
         [TestMethod]
         public void Token_generation_workflow_works_correctly()
         {
+            var any = 42;
+            var whitespace = 32;
             var generator = IndentionGenerator.GetInstance();
-            var anyToken = new CommonToken(42);
-            var whitespace = new CommonToken(32);
-            var eof = new CommonToken(-1);
+
+            var anyToken = this.GetToken(any);
+            var whitespaceToken = new CommonToken(whitespace);
+            var eofToken = new CommonToken(Constant.Eof);
 
             // HasTokens shows if there are tokens left in the queue
             Assert.IsFalse(generator.HasTokens);
@@ -32,24 +40,21 @@ namespace Automation.Core.Tests
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts indention tokens on whitespaces 
-            generator.Process(whitespace);
-            token = generator.NextToken();
-            Assert.AreEqual("INDENT", token.Text);
+            generator.Process(this.GetToken(whitespace, 1));
+            Assert.AreEqual("INDENT", generator.NextToken().Text);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on whitespaces
-            generator.Process(whitespace);
-            generator.Process(whitespace);
-            token = generator.NextToken();
-            Assert.AreEqual("INDENT", token.Text);
+            generator.Process(this.GetToken(whitespace, 2));
+            generator.Process(this.GetToken(whitespace, 1));
+            Assert.AreEqual("INDENT", generator.NextToken().Text);
             Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual("DEDENT", token.Text);
+            Assert.AreEqual("DEDENT", generator.NextToken().Text);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on EOF
-            generator.Process(eof);
-            token = generator.NextToken();
-            Assert.AreEqual("DEDENT", token.Text);
+            generator.Process(eofToken);
+            Assert.AreEqual("DEDENT", generator.NextToken().Text);
             Assert.IsFalse(generator.HasTokens);
         }
 

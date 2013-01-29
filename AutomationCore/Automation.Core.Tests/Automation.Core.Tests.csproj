@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ConstantTests.cs" />
     <Compile Include="IndentionDetectorTests.cs" />
     <Compile Include="IndentionGeneratorTests.cs" />
     <Compile Include="IndentionTests.cs" />
