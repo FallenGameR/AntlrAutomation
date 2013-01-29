@@ -13,7 +13,7 @@ namespace Automation.Core.Tests
     {
         private IToken GetToken(int type, int length = 0)
         {
-            return new CommonToken(type, new string(' ', length));
+            return new CommonToken(type, new string(' ', length)) { CharPositionInLine = 0 };
         }
 
         [TestMethod]
@@ -25,25 +25,22 @@ namespace Automation.Core.Tests
             var whitespace = 32;
             var generator = IndentionGenerator.GetInstance(indent, dedent, whitespace);
 
-            var anyToken = this.GetToken(any);
-            var whitespaceToken = new CommonToken(whitespace);
-            var eofToken = new CommonToken(Constant.Eof);
-
             // HasTokens shows if there are tokens left in the queue
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts any token in the queue
-            generator.Process(anyToken);
+            generator.Process(this.GetToken(any));
             Assert.IsTrue(generator.HasTokens);
 
             // NextToken drains the queue
-            var token = generator.NextToken();
-            Assert.AreSame(anyToken, token);
+            Assert.AreEqual(any, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts indention tokens on whitespaces 
             generator.Process(this.GetToken(whitespace, 1));
             Assert.AreEqual(indent, generator.NextToken().Type);
+            Assert.IsTrue(generator.HasTokens);
+            Assert.AreEqual(whitespace, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on whitespaces
@@ -51,12 +48,18 @@ namespace Automation.Core.Tests
             generator.Process(this.GetToken(whitespace, 1));
             Assert.AreEqual(indent, generator.NextToken().Type);
             Assert.IsTrue(generator.HasTokens);
+            Assert.AreEqual(whitespace, generator.NextToken().Type);
+            Assert.IsTrue(generator.HasTokens);
             Assert.AreEqual(dedent, generator.NextToken().Type);
+            Assert.IsTrue(generator.HasTokens);
+            Assert.AreEqual(whitespace, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on EOF
-            generator.Process(eofToken);
+            generator.Process(this.GetToken(Constant.Eof));
             Assert.AreEqual(dedent, generator.NextToken().Type);
+            Assert.IsTrue(generator.HasTokens);
+            Assert.AreEqual(Constant.Eof, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
         }
 
