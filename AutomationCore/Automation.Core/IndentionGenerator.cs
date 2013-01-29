@@ -84,7 +84,7 @@ namespace Automation.Core
             }
         }
 
-        public int GetPosition(IToken indentationToken)
+        private int GetPosition(IToken indentationToken)
         {
             if (indentationToken.IsEof())
             {
