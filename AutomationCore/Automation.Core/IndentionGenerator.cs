@@ -8,14 +8,18 @@ namespace Automation.Core
 {
     public class IndentionGenerator
     {
-        private int whitespaceType = 32;
-        private int indentType = 10;
-        private int dedentType = 20;
-        private IndentionDetector detector = IndentionDetector.GetInstance();
+        private readonly int indentType;
+        private readonly int dedentType;
+        private readonly int whitespaceType;
+        private readonly IndentionDetector detector;
         private readonly Queue<IToken> queuedTokens;
 
-        private IndentionGenerator()
+        private IndentionGenerator(int indentType, int dedentType, int whitespaceType)
         {
+            this.indentType = indentType;
+            this.dedentType = dedentType;
+            this.whitespaceType = whitespaceType;
+            this.detector = IndentionDetector.GetInstance();
             this.queuedTokens = new Queue<IToken>();
         }
 
@@ -24,9 +28,9 @@ namespace Automation.Core
             get { return this.queuedTokens.Any(); }
         }
 
-        public static IndentionGenerator GetInstance()
+        public static IndentionGenerator GetInstance(int indentType, int dedentType, int whitespaceType)
         {
-            return new IndentionGenerator();
+            return new IndentionGenerator(indentType, dedentType, whitespaceType);
         }
 
         public void Process(IToken token)

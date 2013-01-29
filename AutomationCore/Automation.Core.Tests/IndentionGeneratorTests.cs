@@ -19,9 +19,11 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void Token_generation_workflow_works_correctly()
         {
-            var any = 42;
+            var any = 99;
+            var indent = 5;
+            var dedent = 10;
             var whitespace = 32;
-            var generator = IndentionGenerator.GetInstance();
+            var generator = IndentionGenerator.GetInstance(indent, dedent, whitespace);
 
             var anyToken = this.GetToken(any);
             var whitespaceToken = new CommonToken(whitespace);
@@ -41,20 +43,20 @@ namespace Automation.Core.Tests
 
             // Process puts indention tokens on whitespaces 
             generator.Process(this.GetToken(whitespace, 1));
-            Assert.AreEqual("INDENT", generator.NextToken().Text);
+            Assert.AreEqual(indent, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on whitespaces
             generator.Process(this.GetToken(whitespace, 2));
             generator.Process(this.GetToken(whitespace, 1));
-            Assert.AreEqual("INDENT", generator.NextToken().Text);
+            Assert.AreEqual(indent, generator.NextToken().Type);
             Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual("DEDENT", generator.NextToken().Text);
+            Assert.AreEqual(dedent, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on EOF
             generator.Process(eofToken);
-            Assert.AreEqual("DEDENT", generator.NextToken().Text);
+            Assert.AreEqual(dedent, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
         }
 
