@@ -46,15 +46,15 @@ namespace Automation.Core.Tests
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts indention tokens on whitespaces 
-            generator.Process(this.GetToken(whitespace, 1));
+            generator.Process(this.GetToken(whitespace, " "));
             Assert.AreEqual(indent, generator.NextToken().Type);
             Assert.IsTrue(generator.HasTokens);
             Assert.AreEqual(whitespace, generator.NextToken().Type);
             Assert.IsFalse(generator.HasTokens);
 
             // Process puts dedention tokens on whitespaces
-            generator.Process(this.GetToken(whitespace, 2));
-            generator.Process(this.GetToken(whitespace, 1));
+            generator.Process(this.GetToken(whitespace, "    "));
+            generator.Process(this.GetToken(whitespace, " "));
             Assert.AreEqual(indent, generator.NextToken().Type);
             Assert.IsTrue(generator.HasTokens);
             Assert.AreEqual(whitespace, generator.NextToken().Type);
@@ -115,7 +115,7 @@ namespace Automation.Core.Tests
                 Channel = anyChannel,
             };
 
-            this.generator.Process(this.GetToken(whitespace, 1));
+            this.generator.Process(this.GetToken(whitespace, " "));
             this.generator.NextToken();
             this.generator.NextToken();
             this.generator.Process(eofToken);
@@ -134,12 +134,25 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void Position_uses_1_for_spaces_and_4_for_tabs()
         {
-            Assert.Inconclusive();
+            var spaceLength = 1;
+            var tabLength = 4;
+            
+            this.generator.Process(this.GetToken(whitespace, new string(' ', tabLength - spaceLength)));
+            Assert.AreEqual(indent, generator.NextToken().Type);
+            Assert.AreEqual(whitespace, generator.NextToken().Type);
+
+            this.generator.Process(this.GetToken(whitespace, "\t"));
+            Assert.AreEqual(indent, generator.NextToken().Type);
+            Assert.AreEqual(whitespace, generator.NextToken().Type);
+
+            this.generator.Process(this.GetToken(whitespace, new string(' ', tabLength + spaceLength)));
+            Assert.AreEqual(indent, generator.NextToken().Type);
+            Assert.AreEqual(whitespace, generator.NextToken().Type);
         }
 
-        private IToken GetToken(int type, int length = 0)
+        private IToken GetToken(int type, string text = "")
         {
-            return new CommonToken(type, new string(' ', length)) { CharPositionInLine = 0 };
+            return new CommonToken(type, text) { CharPositionInLine = 0 };
         }
     }
 }
