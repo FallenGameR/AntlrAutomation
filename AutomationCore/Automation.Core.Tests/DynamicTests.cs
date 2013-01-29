@@ -27,14 +27,14 @@ namespace Automation.Core.Tests
 
     public class DynamicDictionary : IDynamicMetaObjectProvider
     {
-        DynamicMetaObject IDynamicMetaObjectProvider.GetMetaObject(Expression parameter)
+        public DynamicMetaObject GetMetaObject(Expression parameter)
         {
-            return new DynamicDictionaryMetaObject(parameter, this);
+            return new Helper(parameter, this);
         }
 
-        private class DynamicDictionaryMetaObject : DynamicMetaObject
+        private class Helper : DynamicMetaObject
         {
-            internal DynamicDictionaryMetaObject(Expression parameter, DynamicDictionary value)
+            public Helper(Expression parameter, DynamicDictionary value)
                 : base(parameter, BindingRestrictions.Empty, value)
             {
             }
@@ -45,23 +45,23 @@ namespace Automation.Core.Tests
                 string methodName = "SetDictionaryEntry";
 
                 // setup the binding restrictions.
-                BindingRestrictions restrictions = BindingRestrictions.GetTypeRestriction(Expression, LimitType);
+                var restrictions = BindingRestrictions.GetTypeRestriction(Expression, LimitType);
 
                 // setup the parameters:
-                Expression[] args = new Expression[2];
+                var args = new Expression[2];
                 // First parameter is the name of the property to Set
                 args[0] = Expression.Constant(binder.Name);
                 // Second parameter is the value
                 args[1] = Expression.Convert(value.Expression, typeof(object));
 
                 // Setup the 'this' reference
-                Expression self = Expression.Convert(Expression, LimitType);
+                var self = Expression.Convert(Expression, LimitType);
 
                 // Setup the method call expression
-                Expression methodCall = Expression.Call(self, typeof(DynamicDictionary).GetMethod(methodName), args);
+                var methodCall = Expression.Call(self, typeof(DynamicDictionary).GetMethod(methodName), args);
 
                 // Create a meta object to invoke Set later:
-                DynamicMetaObject setDictionaryEntry = new DynamicMetaObject(methodCall, restrictions);
+                var setDictionaryEntry = new DynamicMetaObject(methodCall, restrictions);
 
                 Console.WriteLine("Set");
 
@@ -72,15 +72,15 @@ namespace Automation.Core.Tests
             public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
             {
                 // Method call in the containing class:
-                string methodName = "GetDictionaryEntry";
+                var methodName = "GetDictionaryEntry";
 
                 // One parameter
-                Expression[] parameters = new Expression[]
-           {
-               Expression.Constant(binder.Name)
-           };
+                var parameters = new []
+                {
+                    Expression.Constant(binder.Name)
+                };
 
-                DynamicMetaObject getDictionaryEntry = new DynamicMetaObject(
+                var getDictionaryEntry = new DynamicMetaObject(
                     Expression.Call(
                         Expression.Convert(Expression, LimitType),
                         typeof(DynamicDictionary).GetMethod(methodName),
@@ -94,19 +94,19 @@ namespace Automation.Core.Tests
 
             public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args)
             {
-                StringBuilder paramInfo = new StringBuilder();
+                var paramInfo = new StringBuilder();
 
                 paramInfo.AppendFormat("Calling {0}(", binder.Name);
                 foreach (var item in args)
                     paramInfo.AppendFormat("{0}, ", item.Value);
                 paramInfo.Append(")");
 
-                Expression[] parameters = new Expression[]
-           {
-               Expression.Constant(paramInfo.ToString())
-           };
+                var parameters = new []
+                {
+                    Expression.Constant(paramInfo.ToString())
+                };
 
-                DynamicMetaObject methodInfo = new DynamicMetaObject(
+                var methodInfo = new DynamicMetaObject(
                     Expression.Call(
                     Expression.Convert(Expression, LimitType),
                     typeof(DynamicDictionary).GetMethod("WriteMethodInfo"),
