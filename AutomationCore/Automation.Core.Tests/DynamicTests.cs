@@ -6,14 +6,26 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Core.Tests
 {
-    class DynamicTests
+    [TestClass]
+    public class DynamicTests
     {
+        [TestMethod]
+        public void Test()
+        {
+            dynamic dict = new DynamicDictionary();
+
+            dict.SetDictionaryEntry("test", "me");
+            Console.WriteLine(dict.GetDictionaryEntry("test"));
+            dict.WriteMethodInfo("method info");
+            Console.WriteLine(dict.ToString());
+        }
     }
 
-    class DynamicDictionary : IDynamicMetaObjectProvider
+    public class DynamicDictionary : IDynamicMetaObjectProvider
     {
         DynamicMetaObject IDynamicMetaObjectProvider.GetMetaObject(Expression parameter)
         {
