@@ -11,24 +11,20 @@ namespace Automation.Core.Tests
     [TestClass]
     public class IndentionGeneratorTests
     {
-        private IToken GetToken(int type, int length = 0)
-        {
-            return new CommonToken(type, new string(' ', length)) { CharPositionInLine = 0 };
-        }
+        private const int any = 99;
+        private const int indent = 5;
+        private const int dedent = 10;
+        private const int whitespace = 32;
 
         [TestMethod]
         public void Token_generation_workflow_works_correctly()
         {
-            var any = 99;
-            var indent = 5;
-            var dedent = 10;
-            var whitespace = 32;
             var generator = IndentionGenerator.GetInstance(indent, dedent, whitespace);
 
             // HasTokens shows if there are tokens left in the queue
             Assert.IsFalse(generator.HasTokens);
 
-            // Process puts any token in the queue
+            // Process preserves original token in the queue
             generator.Process(this.GetToken(any));
             Assert.IsTrue(generator.HasTokens);
 
@@ -79,6 +75,11 @@ namespace Automation.Core.Tests
         public void Position_uses_1_for_spaces_and_4_for_tabs()
         {
             Assert.Inconclusive();
+        }
+
+        private IToken GetToken(int type, int length = 0)
+        {
+            return new CommonToken(type, new string(' ', length)) { CharPositionInLine = 0 };
         }
     }
 }
