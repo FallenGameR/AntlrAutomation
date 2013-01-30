@@ -55,11 +55,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConstantTests.cs" />
+    <Compile Include="Utils\ConstantTests.cs" />
     <Compile Include="DynamicTests.cs" />
-    <Compile Include="IndentionDetectorTests.cs" />
-    <Compile Include="IndentionGeneratorTests.cs" />
-    <Compile Include="IndentionTests.cs" />
+    <Compile Include="Indentation\IndentionDetectorTests.cs" />
+    <Compile Include="Indentation\IndentionGeneratorTests.cs" />
+    <Compile Include="Indentation\IndentionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +68,7 @@
       <Name>Automation.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

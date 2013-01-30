@@ -38,17 +38,18 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutomationAdaptor.cs" />
-    <Compile Include="AutomationException.cs" />
-    <Compile Include="AutomationTree.cs" />
-    <Compile Include="Constant.cs" />
-    <Compile Include="ILoader.cs" />
-    <Compile Include="IndentionDetector.cs" />
-    <Compile Include="Indention.cs" />
-    <Compile Include="IndentionGenerator.cs" />
+    <Compile Include="Shared\AutomationAdaptor.cs" />
+    <Compile Include="Shared\AutomationException.cs" />
+    <Compile Include="Shared\AutomationTree.cs" />
+    <Compile Include="Utils\Constant.cs" />
+    <Compile Include="Shared\ILoader.cs" />
+    <Compile Include="Indentation\IndentionDetector.cs" />
+    <Compile Include="Indentation\Indention.cs" />
+    <Compile Include="Indentation\IndentionGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TokenExtensions.cs" />
+    <Compile Include="Utils\TokenExtensions.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -1,7 +1,7 @@
 ## Short grammars
 ## Set-Grammar
 
-Allow syntax like: FILE.some.sub.child (expand for all found children, discard the onces that don not have this path)?
+Allow syntax like: $file | % section | % sub
 
 Parse-Items -tokens
 

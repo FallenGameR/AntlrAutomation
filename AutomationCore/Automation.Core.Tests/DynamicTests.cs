@@ -43,7 +43,7 @@ namespace Automation.Core.Tests
             return new DynamicMetaObject(
                 Expression.Convert(Expression.Constant("text"), typeof(string)),
                 BindingRestrictions.GetExpressionRestriction(Expression.Constant(true)));
-                    //BindingRestrictions.GetTypeRestriction(this.Expression, this.LimitType));
+                //BindingRestrictions.GetTypeRestriction(this.Expression, this.LimitType));
         }
     }
 }
