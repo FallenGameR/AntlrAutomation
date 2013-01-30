@@ -43,7 +43,13 @@ namespace Automation.Core
 
         public IEnumerable<AutomationTree> Find(string name)
         {
-            throw new NotImplementedException();
+            foreach (var child in Children)
+            {
+                if (child.Text == name)
+                {
+                    yield return (AutomationTree)child;
+                }
+            }
         }
 >>>>>>> d37def1... Failing test for AutomationTreeTests
     }
