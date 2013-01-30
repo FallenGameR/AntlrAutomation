@@ -12,6 +12,9 @@ namespace Automation.Core
 
         public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
         {
+            // What if "Text" is searched? It is defined by CommonTree already.
+            // Do we care about case sensitivity?
+
             if (binder.Name == "SomeText")
             {
                 return new DynamicMetaObject(
