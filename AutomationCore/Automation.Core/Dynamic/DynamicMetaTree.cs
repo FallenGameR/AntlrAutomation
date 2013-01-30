@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 
 namespace Automation.Core
 {
-    public class DynamicMeta : DynamicMetaObject
+    public class DynamicMetaTree : DynamicMetaObject
     {
-        public DynamicMeta(Expression parameter, object value)
+        public DynamicMetaTree(Expression parameter, AutomationTree value)
             : base(parameter, BindingRestrictions.Empty, value)
         {
         }

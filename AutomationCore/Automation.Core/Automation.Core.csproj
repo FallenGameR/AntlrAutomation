@@ -38,6 +38,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="Dynamic\DynamicMetaTree.cs" />
+>>>>>>> d37def1... Failing test for AutomationTreeTests
     <Compile Include="Shared\AutomationAdaptor.cs" />
     <Compile Include="Shared\AutomationException.cs" />
     <Compile Include="Shared\AutomationTree.cs" />

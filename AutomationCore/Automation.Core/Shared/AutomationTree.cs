@@ -7,6 +7,12 @@
 namespace Automation.Core
 {
     using System;
+<<<<<<< HEAD
+=======
+    using System.Collections.Generic;
+    using System.Dynamic;
+    using System.Linq.Expressions;
+>>>>>>> d37def1... Failing test for AutomationTreeTests
     using Antlr.Runtime;
     using Antlr.Runtime.Tree;
 
@@ -27,5 +33,18 @@ namespace Automation.Core
             : base(node)
         {
         }
+<<<<<<< HEAD
+=======
+
+        public DynamicMetaObject GetMetaObject(Expression parameter)
+        {
+            return new DynamicMetaTree(parameter, this);
+        }
+
+        public IEnumerable<AutomationTree> Find(string name)
+        {
+            throw new NotImplementedException();
+        }
+>>>>>>> d37def1... Failing test for AutomationTreeTests
     }
 }
