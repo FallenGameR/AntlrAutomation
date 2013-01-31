@@ -38,7 +38,12 @@ namespace Automation.Core
 
         public IEnumerable<AutomationTree> Find(string name)
         {
-            foreach (var child in Children)
+            if (this.Children == null)
+            {
+                yield break;
+            }
+
+            foreach (var child in this.Children)
             {
                 if (child.Text == name)
                 {
