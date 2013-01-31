@@ -13,9 +13,17 @@ namespace Automation.Core.Tests
     [TestClass]
     public class DynamicTests
     {
-        // Static properties can be accessed with case insensitive names
+        [TestMethod]
+        public void Static_properties_can_be_accessed_with_case_insensitive_names()
+        {
+            Assert.Inconclusive();
+        }
 
-        // Dynamic properties return children with corresponding name
+        [TestMethod]
+        public void Dynamic_properties_return_children_with_corresponding_name()
+        {
+            Assert.Inconclusive();
+        }
 
         [TestMethod]
         [Ignore]

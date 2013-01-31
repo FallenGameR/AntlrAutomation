@@ -27,7 +27,11 @@ namespace Automation.Core.Tests.Shared
             Assert.AreSame(matchNoSub, found.Last());
         }
 
-        // Handles no children without exception
+        [TestMethod]
+        public void Handles_no_children_without_exception()
+        {
+            Assert.Inconclusive();
+        }
 
         private AutomationTree Node(string text, params ITree[] children)
         {
