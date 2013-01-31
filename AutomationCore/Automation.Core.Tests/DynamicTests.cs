@@ -16,7 +16,7 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void DynamicTest()
         {
-            dynamic obj = (dynamic)new AutomationTree();
+            dynamic obj = new AutomationTree();
             Assert.AreEqual("text", obj.SomeText);
         }
     }
