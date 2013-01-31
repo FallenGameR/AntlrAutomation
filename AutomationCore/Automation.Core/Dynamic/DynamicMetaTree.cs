@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Automation.Core
 {
@@ -14,7 +15,7 @@ namespace Automation.Core
             BindingRestrictions.GetExpressionRestriction(Expression.Constant(true));
 
         public DynamicMetaTree(Expression parameter, AutomationTree value)
-            : base(parameter, BindingRestrictions.Empty, value)
+            : base(parameter, alwaysTrue, value)
         {
         }
 
@@ -25,9 +26,12 @@ namespace Automation.Core
                 return base.BindGetMember(binder);
             }
 
-            var expression = Expression.Constant("text");
-            return new DynamicMetaObject(expression, alwaysTrue);
+            var result = this.Node.Find(binder.Name);
+            var expression = Expression.Constant(result);
+            return new DynamicMetaObject(expression, this.Restrictions);
          
         }
+
+        private AutomationTree Node { get { return (AutomationTree)this.Value; } }
     }
 }

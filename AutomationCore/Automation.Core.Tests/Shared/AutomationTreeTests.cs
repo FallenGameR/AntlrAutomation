@@ -27,6 +27,8 @@ namespace Automation.Core.Tests.Shared
             Assert.AreSame(matchNoSub, found.Last());
         }
 
+        // Handles no children without exception
+
         private AutomationTree Node(string text, params ITree[] children)
         {
             var token = new CommonToken(anyType, text);

@@ -13,10 +13,15 @@ namespace Automation.Core.Tests
     [TestClass]
     public class DynamicTests
     {
+        // Static tree properties can be accessed
+
+        // Dynamic properties return children with corresponding name
+
         [TestMethod]
         public void DynamicTest()
         {
             dynamic obj = new AutomationTree();
+            var test = obj.Test;
             Assert.AreEqual("text", obj.SomeText);
         }
     }
