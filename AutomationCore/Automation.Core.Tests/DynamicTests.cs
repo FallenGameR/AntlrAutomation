@@ -16,34 +16,8 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void DynamicTest()
         {
-            dynamic obj = new DynamicObject();
+            dynamic obj = (dynamic)new AutomationTree();
             Assert.AreEqual("text", obj.SomeText);
-        }
-    }
-
-    public class DynamicObject : IDynamicMetaObjectProvider
-    {
-        public DynamicMetaObject GetMetaObject(Expression parameter)
-        {
-            return new DynamicMeta(parameter, this);
-        }
-    }
-
-    public class DynamicMeta : DynamicMetaObject
-    {
-        public DynamicMeta(Expression parameter, DynamicObject value)
-            : base(parameter, BindingRestrictions.Empty, value)
-        {
-        }
-
-        public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
-        {
-            var methodName = "GetDictionaryEntry";
-
-            return new DynamicMetaObject(
-                Expression.Convert(Expression.Constant("text"), typeof(string)),
-                BindingRestrictions.GetExpressionRestriction(Expression.Constant(true)));
-                //BindingRestrictions.GetTypeRestriction(this.Expression, this.LimitType));
         }
     }
 }

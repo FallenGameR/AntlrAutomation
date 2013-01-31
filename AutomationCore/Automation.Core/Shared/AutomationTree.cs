@@ -14,7 +14,7 @@ namespace Automation.Core
     using Antlr.Runtime.Tree;
 
     [Serializable]
-    public class AutomationTree : CommonTree
+    public class AutomationTree : CommonTree, IDynamicMetaObjectProvider
     {
         public AutomationTree()
             : base()
