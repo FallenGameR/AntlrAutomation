@@ -1,6 +1,7 @@
 ﻿using System.Dynamic;
 using System.Linq.Expressions;
 using System.Linq;
+using System;
 
 namespace Automation.Core
 {
@@ -8,6 +9,9 @@ namespace Automation.Core
     {
         private static readonly string[] knownPropertyNames =
             typeof(AutomationTree).GetProperties().Select(p => p.Name).ToArray();
+
+        private static readonly BindingRestrictions alwaysTrue =
+            BindingRestrictions.GetExpressionRestriction(Expression.Constant(true));
 
         public DynamicMetaTree(Expression parameter, AutomationTree value)
             : base(parameter, BindingRestrictions.Empty, value)
@@ -21,14 +25,8 @@ namespace Automation.Core
                 return base.BindGetMember(binder);
             }
 
-
-
-            // What if "Text" is searched? It is defined by CommonTree already.
-            // Do we care about case sensitivity?
-
-            return new DynamicMetaObject(
-                Expression.Convert(Expression.Constant("text"), typeof(string)),
-                BindingRestrictions.Empty);
+            var expression = Expression.Constant("text");
+            return new DynamicMetaObject(expression, alwaysTrue);
          
         }
     }
