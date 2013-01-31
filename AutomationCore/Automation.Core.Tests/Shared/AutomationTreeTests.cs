@@ -30,7 +30,9 @@ namespace Automation.Core.Tests.Shared
         [TestMethod]
         public void Handles_no_children_without_exception()
         {
-            Assert.Inconclusive();
+            var nodeWithoutChildren = Node("root");
+            var noFindings = nodeWithoutChildren.Find("child");
+            Assert.AreEqual(0, noFindings.Count());
         }
 
         private AutomationTree Node(string text, params ITree[] children)
