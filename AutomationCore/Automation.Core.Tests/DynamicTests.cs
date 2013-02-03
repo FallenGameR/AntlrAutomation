@@ -15,22 +15,47 @@ namespace Automation.Core.Tests
     [TestClass]
     public class DynamicTests
     {
+        private const int anyType = 1;
+        private const string anyText = "text";
+        private const int anyPosition = 2;
+        private const int anyLine = 3;
+        private const int anyTokenIndex = 4;
+        private const int anyStartIndex = 5;
+        private const int anyStopIndex = 6;
+
         [TestMethod]
         public void Static_properties_can_be_accessed_with_case_insensitive_names()
         {
-            var node = new AutomationTree(new CommonToken());
-            //node.CharPositionInLine
-            //node.ChildCount
-            //node.ChildIndex
-            //node.Children
-            //node.IsNil
-            //node.Line
-            //node.Parent
-            //node.Text
-            //node.Token
-            //node.TokenStartIndex
-            //node.TokenStopIndex
-            //node.Type
+            var child = new AutomationTree(new CommonToken());
+            var token = new CommonToken
+            {
+                Type = anyType,
+                Text = anyText,
+                CharPositionInLine = anyPosition,
+                Line = anyLine,
+                TokenIndex = anyTokenIndex,
+                StartIndex = anyStartIndex,
+                StopIndex = anyStopIndex,
+            };
+            var node = new AutomationTree(token);
+            node.AddChild(child);
+
+            dynamic tree = node;
+            Assert.AreEqual(anyType, tree.Type);
+            Assert.AreEqual(anyType, tree.type);
+
+            //tree.CharPositionInLine
+            //tree.ChildCount
+            //tree.ChildIndex
+            //tree.Children
+            //tree.IsNil
+            //tree.Line
+            //tree.Parent
+            //tree.Text
+            //tree.Token
+            //tree.TokenStartIndex
+            //tree.TokenStopIndex
+            //
 
             Assert.Inconclusive();
         }
