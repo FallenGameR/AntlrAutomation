@@ -45,7 +45,7 @@ namespace Automation.Core
 
             foreach (var child in this.Children)
             {
-                if (child.Text == name)
+                if (StringComparer.OrdinalIgnoreCase.Equals(child.Text, name))
                 {
                     yield return (AutomationTree)child;
                 }

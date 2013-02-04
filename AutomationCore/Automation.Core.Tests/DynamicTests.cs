@@ -55,12 +55,12 @@ namespace Automation.Core.Tests
             root.AddChild(otherChild);
             root.AddChild(anySectionUpper);
 
-            IEnumerable<AutomationTree> found = root.Find("Section");
+            dynamic node = root;
+            IEnumerable<AutomationTree> found = node.Section;
 
             Assert.AreEqual(2, found.Count());
             Assert.AreSame(anySectionLower, found.First());
             Assert.AreSame(anySectionUpper, found.Last());
-            Assert.Inconclusive();
         }
     }
 }
