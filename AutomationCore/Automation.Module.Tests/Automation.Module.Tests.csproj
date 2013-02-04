@@ -50,8 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PowershellTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestUtils\Powershell.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
