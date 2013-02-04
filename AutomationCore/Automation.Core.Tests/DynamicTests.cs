@@ -1,4 +1,6 @@
-﻿using Antlr.Runtime;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Antlr.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Core.Tests
@@ -45,6 +47,19 @@ namespace Automation.Core.Tests
         [TestMethod]
         public void Dynamic_properties_return_children_with_corresponding_case_insensitive_name()
         {
+            var anySectionLower = new AutomationTree(new CommonToken(anyType, "section"));
+            var anySectionUpper = new AutomationTree(new CommonToken(anyType, "SECTION"));
+            var otherChild = new AutomationTree(new CommonToken(anyType, "other"));
+            var root = new AutomationTree(new CommonToken(anyType, "root"));
+            root.AddChild(anySectionLower);
+            root.AddChild(otherChild);
+            root.AddChild(anySectionUpper);
+
+            IEnumerable<AutomationTree> found = root.Find("Section");
+
+            Assert.AreEqual(2, found.Count());
+            Assert.AreSame(anySectionLower, found.First());
+            Assert.AreSame(anySectionUpper, found.Last());
             Assert.Inconclusive();
         }
     }

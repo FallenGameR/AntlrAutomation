@@ -11,16 +11,16 @@ namespace Automation.Core.Tests.Shared
         private const int anyType = 4;
 
         [TestMethod]
-        public void Retrieves_children_by_name_correctly()
+        public void Retrieves_children_by_name_case_insensitive()
         {
-            var matchWithSub = Node("match", Node("sub node"));
-            var matchNoSub = Node("match");
-            var root = Node("root", matchWithSub, Node("no match"), matchNoSub);
+            var matchWithSubLower = Node("match", Node("sub node"));
+            var matchNoSubUpper = Node("match");
+            var root = Node("root", matchWithSubLower, Node("no match"), matchNoSubUpper);
 
-            var found = root.Find("match").ToArray();
+            var found = root.Find("Match").ToArray();
             Assert.AreEqual(2, found.Count());
-            Assert.AreSame(matchWithSub, found.First());
-            Assert.AreSame(matchNoSub, found.Last());
+            Assert.AreSame(matchWithSubLower, found.First());
+            Assert.AreSame(matchNoSubUpper, found.Last());
         }
 
         [TestMethod]
