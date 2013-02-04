@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Antlr.Runtime;
-using Antlr.Runtime.Tree;
+﻿using Antlr.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Core.Tests
@@ -20,11 +11,9 @@ namespace Automation.Core.Tests
         private const int anyPosition = 2;
         private const int anyLine = 3;
         private const int anyTokenIndex = 4;
-        private const int anyStartIndex = 5;
-        private const int anyStopIndex = 6;
 
         [TestMethod]
-        public void Static_properties_can_be_accessed_with_case_insensitive_names()
+        public void Static_properties_can_be_accessed_with_case_sensitive_names()
         {
             var child = new AutomationTree(new CommonToken());
             var token = new CommonToken
@@ -34,45 +23,29 @@ namespace Automation.Core.Tests
                 CharPositionInLine = anyPosition,
                 Line = anyLine,
                 TokenIndex = anyTokenIndex,
-                StartIndex = anyStartIndex,
-                StopIndex = anyStopIndex,
             };
             var node = new AutomationTree(token);
             node.AddChild(child);
 
             dynamic tree = node;
             Assert.AreEqual(anyType, tree.Type);
-            Assert.AreEqual(anyType, tree.type);
-
-            //tree.CharPositionInLine
-            //tree.ChildCount
-            //tree.ChildIndex
-            //tree.Children
-            //tree.IsNil
-            //tree.Line
-            //tree.Parent
-            //tree.Text
-            //tree.Token
-            //tree.TokenStartIndex
-            //tree.TokenStopIndex
-            //
-
-            Assert.Inconclusive();
+            Assert.AreEqual(anyPosition, tree.CharPositionInLine);
+            Assert.AreEqual(1, tree.ChildCount);
+            Assert.AreEqual(-1, tree.ChildIndex);
+            Assert.AreEqual(anyLine, tree.Line);
+            Assert.AreEqual(anyText, tree.Text);
+            Assert.AreEqual(anyTokenIndex, tree.TokenStartIndex);
+            Assert.AreEqual(anyTokenIndex, tree.TokenStopIndex);
+            Assert.AreSame(child, tree.Children[0]);
+            Assert.AreSame(token, tree.Token);
+            Assert.IsFalse(tree.IsNil);
+            Assert.IsNull(tree.Parent);
         }
 
         [TestMethod]
         public void Dynamic_properties_return_children_with_corresponding_case_insensitive_name()
         {
             Assert.Inconclusive();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void DynamicTest()
-        {
-            dynamic obj = new AutomationTree();
-            var test = obj.Test;
-            Assert.AreEqual("text", obj.SomeText);
         }
     }
 }

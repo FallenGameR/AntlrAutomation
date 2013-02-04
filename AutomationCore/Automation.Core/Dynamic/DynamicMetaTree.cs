@@ -21,6 +21,7 @@ namespace Automation.Core
 
         public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
         {
+            // What about powershell?
             if (knownPropertyNames.Contains(binder.Name))
             {
                 return base.BindGetMember(binder);
