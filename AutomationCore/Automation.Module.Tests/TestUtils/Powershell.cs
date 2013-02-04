@@ -6,25 +6,40 @@ using System.Threading.Tasks;
 
 namespace Automation.Module.Tests.TestUtils
 {
-    public class Powershell
+    public sealed class Powershell: IDisposable
     {
         private Powershell()
         {
-
+            // create temp file
         }
+
+        public static string Out { get; private set; }
+
+        public static string Err { get; private set; }
 
         public static Powershell GetInstance()
         {
             return new Powershell();
         }
 
-        internal static string Script(string p)
+        public static string Script(string text)
         {
-            throw new NotImplementedException();
+            using (var powershell = GetInstance())
+            {
+                return powershell.Execute(text);
+            }
         }
 
-        public static string Out { get; set; }
+        public string Execute(string script)
+        {
+            // Write to temp file, call, process out and err
+            return null;
+        }
 
-        public static string Err { get; set; }
+
+        public void Dispose()
+        {
+            // remove temp file
+        }
     }
 }
