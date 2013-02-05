@@ -28,6 +28,9 @@ namespace Automation.Module.Tests
             {
                 Directory.Delete(parserFolder, recursive: true);
             }
+
+            // Create temp files used in tests
+            File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
         }
 
         [TestMethod]
@@ -45,6 +48,7 @@ Import-Module .\AntlrAutomation.psd1
         {
             Powershell.Script(
 @"
+Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
