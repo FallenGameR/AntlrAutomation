@@ -35,7 +35,7 @@ function Set-Grammar
 
     if( -not $name )
     {
-        $name = (Get-Item $filePath).Name
+# $name = (Get-Item $filePath).BaseName
     }
     $text = Get-Content $filePath
 
