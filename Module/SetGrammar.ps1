@@ -13,10 +13,22 @@ function Set-Grammar
         - Would handle compilation and cleanup.
         - Would handle md5 grammar text check.
         - Would handle namespace collisions.
+
+        name is taken
+        - grammar name in the file
+        - explicit name (no name in the file) short; if there is a name in file, warning
+        - file name (no name in the file) short;
+
+        text is taken
+        - from the file
+        - generated via template (short)
+
+        analyse verbose output in tests
     #>
 
     param
     (
+        [Parameter(Mandatory = $true)]
         [string] $FilePath,
         [string] $Name
     )
@@ -29,6 +41,7 @@ function Set-Grammar
 
     $isShort = $name
     $name = Parse-ParserName $name $text
+
     Clean-ParserFolder $name
     Generate-Grammar $isShort $name $text
     Generate-Parser $name
