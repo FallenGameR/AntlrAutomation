@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Automation.Module.Tests.TestUtils;
+﻿using Automation.Module.Tests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Module.Tests
@@ -14,7 +9,8 @@ namespace Automation.Module.Tests
         [TestMethod]
         public void Module_can_be_imported_without_errors()
         {
-            Powershell.Script(@"
+            Powershell.Script(
+@"
 Import-Module ..\..\..\..\Module\AntlrAutomation.psd1
 ");
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -23,9 +19,20 @@ Import-Module ..\..\..\..\Module\AntlrAutomation.psd1
         [TestMethod]
         public void Set_Grammar_accepts_full_text_grammar_without_errors()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+# Removing old compiled grammars for clear test run
+del '$PSScriptRoot\Parsers\Simpleton' -Recurse *> $null
+
+# Simpleton grammar compiles without errors
+$fullText = type '$PSScriptRoot\..\Info\simpleton.g3' | Out-String
+Set-Grammar -Text $fullText
+");
+
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
+        /*
         [TestMethod]
         public void Set_Grammar_accepts_short_text_grammar_without_errors()
         {
@@ -73,5 +80,6 @@ Import-Module ..\..\..\..\Module\AntlrAutomation.psd1
         {
             Assert.Inconclusive();
         }
+        /**/
     }
 }
