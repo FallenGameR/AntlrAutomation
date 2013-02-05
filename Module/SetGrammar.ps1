@@ -35,34 +35,23 @@ function Set-Grammar
 
     if( -not $name )
     {
-# $name = (Get-Item $filePath).BaseName
+        $nameFound = $fullText -match "grammar (\w+);"
+        $name = $Matches[1]
+        if( $name )
+        {
+            $fullText = $true
+        }
+    }
+    if( -not $name )
+    {
+        $name = (Get-Item $filePath).BaseName
     }
     $text = Get-Content $filePath
 
-    $isShort = $name
-    $name = Parse-ParserName $name $text
-
     Clean-ParserFolder $name
-    Generate-Grammar $isShort $name $text
+    Generate-Grammar $fullText $name $text
     Generate-Parser $name
     Compile-Parser $name
-}
-
-function Parse-ParserName( [string] $name, [string] $fullText )
-{
-    if( -not $name )
-    {
-        $nameFound = $fullText -match "grammar (\w+);"
-
-        if( -not $nameFound )
-        {
-            throw "Couldn't locate grammar name in full grammar text"
-        }
-
-        $name = $Matches[1]
-    }
-
-    Normalize-ParserName $name
 }
 
 function Clean-ParserFolder( [string] $name )
@@ -81,9 +70,9 @@ function Clean-ParserFolder( [string] $name )
     Write-Verbose "Parser folder '$parserFolder' is cleaned"
 }
 
-function Generate-Grammar( $isShort, [string] $name, [string] $text )
+function Generate-Grammar( [bool] $fullText, [string] $name, [string] $text )
 {
-    if( $isShort )
+    if( -not $fullText )
     {
         $text = Get-Render grammar name text
     }
