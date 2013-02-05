@@ -10,15 +10,64 @@ namespace Automation.Module.Tests
     [TestClass]
     public class ModuleTests
     {
-        // Module can be imported without errors
-        // Set Grammar accepts full text grammar without errors
-        // Set Grammar accepts short text grammar without errors
-        // Parse Item parses input with case insensitive grammar name
-        // Parse Item parses input with regex matches grammar name
-        // Parse Item chooses first matching grammar and print warning if grammar name ambiguity
-        // Format custom is used by default
-        // Format custom renders output as tree
-        // Format table renders output as table
-        // Dynamic children access works
+        [TestMethod]
+        public void Module_can_be_imported_without_errors()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Set_Grammar_accepts_full_text_grammar_without_errors()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Set_Grammar_accepts_short_text_grammar_without_errors()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Parse_Item_parses_input_with_case_insensitive_grammar_name()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Parse_Item_parses_input_with_regex_matches_grammar_name()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Parse_Item_chooses_first_matching_grammar_and_print_warning_if_grammar_name_ambiguity()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Format_custom_is_used_by_default()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Format_custom_renders_output_as_tree()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Format_table_renders_output_as_table()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Dynamic_children_access_works()
+        {
+            Assert.Inconclusive();
+        }
     }
 }
