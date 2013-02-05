@@ -1,4 +1,4 @@
-filter Parse-Item
+function Parse-Item
 {
     <#
     .ABSTRACT
@@ -14,10 +14,11 @@ filter Parse-Item
 
     param
     (
-        [string] $name
+        [string] $name,
+        [string] $filePath
     )
 
-    $filePath = (Get-Item $psitem).FullName
+    $filePath = (Get-Item $filePath).FullName
     $name = Get-ParserName $name
 
     # App domain is needed to be able to change parser assemby without closing current Powershell session
