@@ -54,6 +54,7 @@
     <Compile Include="PowershellTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils\Powershell.cs" />
+    <Compile Include="TestUtils\Resources.cs" />
   </ItemGroup>
   <ItemGroup />
   <Choose>

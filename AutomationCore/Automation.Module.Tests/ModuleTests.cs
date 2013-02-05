@@ -22,11 +22,10 @@ Import-Module .\AntlrAutomation.psd1
             Powershell.Script(
 @"
 # Removing old compiled grammars for clear test run
-del '$PSScriptRoot\Parsers\Simpleton' -Recurse *> $null
+del 'Parsers\SampleFull' -Recurse *> $null
 
 # Simpleton grammar compiles without errors
-$fullText = type '$PSScriptRoot\..\Info\simpleton.g3' | Out-String
-Set-Grammar -Text $fullText
+Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
             Assert.AreEqual(string.Empty, Powershell.Err);
