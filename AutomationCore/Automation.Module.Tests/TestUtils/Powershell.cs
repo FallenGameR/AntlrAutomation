@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace Automation.Module.Tests.TestUtils
 {
-    public sealed class Powershell: IDisposable
+    public sealed class Powershell : IDisposable
     {
+        private static readonly string scriptFolder;
+
+        static Powershell()
+        {
+            scriptFolder = Path.GetTempPath() + @"AntlrAutomation\";
+
+            if (!Directory.Exists(scriptFolder))
+            {
+                Directory.CreateDirectory(scriptFolder);
+            }
+        }
+
         private readonly string scriptPath;
         private readonly ProcessStartInfo startInfo;
         private Process process;
@@ -40,10 +52,7 @@ namespace Automation.Module.Tests.TestUtils
 
         private static string GetTempScriptPath()
         {
-            return
-                Path.GetTempPath() +
-                @"AntlrAutomation\" +
-                Path.ChangeExtension(Path.GetRandomFileName(), ".ps1");
+            return scriptFolder + Path.ChangeExtension(Path.GetRandomFileName(), ".ps1");
         }
 
         public static string Script(string text)

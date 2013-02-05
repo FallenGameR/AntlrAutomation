@@ -19,7 +19,6 @@ namespace Automation.Module.Tests
         [TestMethod]
         public void Powershell_stderr_is_returned_sucessfully()
         {
-            // net use xxx
             var actual = Powershell.Script("[Console]::Error.WriteLine('test')");
             var expected = "test";
             Assert.AreEqual(expected, actual);
