@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Automation.Module.Tests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Module.Tests
@@ -13,7 +14,10 @@ namespace Automation.Module.Tests
         [TestMethod]
         public void Module_can_be_imported_without_errors()
         {
-            Assert.Inconclusive();
+            Powershell.Script(@"
+Import-Module ..\..\..\..\Module\AntlrAutomation.psd1
+");
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]
