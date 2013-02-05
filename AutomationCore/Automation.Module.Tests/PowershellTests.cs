@@ -1,4 +1,5 @@
-﻿using Automation.Module.Tests.TestUtils;
+﻿using System;
+using Automation.Module.Tests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Module.Tests
@@ -27,22 +28,16 @@ namespace Automation.Module.Tests
         }
 
         [TestMethod]
-        public void Powershell_write_error_is_returned_sucessfully()
+        public void Powershell_mixed_output_is_returned_sucessfully()
         {
-            var actual = Powershell.Script("Write-Error 'message'");
-            var expected = "message";
+            var actual = Powershell.Script(@"
+'stdout'
+[Console]::Error.WriteLine('stderr')
+");
+            var expected = "stdout" + Environment.NewLine + "stderr";
             Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expected, Powershell.Err);
-        }
-
-        [TestMethod]
-        public void Powershell_throw_is_returned_sucessfully()
-        {
-            var actual = Powershell.Script("throw 'info'");
-            var expected = "info";
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expected, Powershell.Out);
-            Assert.IsTrue(string.IsNullOrEmpty(Powershell.Out));
+            Assert.AreEqual("stdout", Powershell.Out);
+            Assert.AreEqual("stderr", Powershell.Err);
         }
     }
 }
