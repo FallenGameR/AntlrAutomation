@@ -39,5 +39,14 @@ namespace Automation.Module.Tests
             Assert.AreEqual("stdout", Powershell.Out);
             Assert.AreEqual("stderr", Powershell.Err);
         }
+
+        [TestMethod]
+        public void Powershell_playground()
+        {
+            var test = Powershell.Script("ls env: ; pwd");
+
+
+            Assert.Inconclusive();
+        }
     }
 }
