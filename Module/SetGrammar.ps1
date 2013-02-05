@@ -17,9 +17,15 @@ function Set-Grammar
 
     param
     (
-        [string] $Name,
-        [string] $Text
+        [string] $FilePath,
+        [string] $Name
     )
+
+    if( -not $name )
+    {
+        $name = (Get-Item $filePath).Name
+    }
+    $text = Get-Content $filePath
 
     $isShort = $name
     $name = Parse-ParserName $name $text

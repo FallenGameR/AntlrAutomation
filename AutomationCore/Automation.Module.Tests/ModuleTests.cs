@@ -11,7 +11,7 @@ namespace Automation.Module.Tests
         {
             Powershell.Script(
 @"
-Import-Module ..\..\..\..\Module\AntlrAutomation.psd1
+Import-Module .\AntlrAutomation.psd1
 ");
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
