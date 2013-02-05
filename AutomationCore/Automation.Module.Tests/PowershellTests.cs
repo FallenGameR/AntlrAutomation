@@ -43,7 +43,10 @@ namespace Automation.Module.Tests
         [TestMethod]
         public void Powershell_playground()
         {
-            var test = Powershell.Script("ls env: ; pwd");
+            var test = Powershell.Script(@"
+Import-Module ..\..\..\..\Module\AntlrAutomation.psd1
+");
+            
 
 
             Assert.Inconclusive();
