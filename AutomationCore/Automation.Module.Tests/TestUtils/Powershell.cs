@@ -8,7 +8,6 @@ namespace Automation.Module.Tests.TestUtils
 {
     public sealed class Powershell : IDisposable
     {
-        private static readonly string defaultFolder = @"..\..\..\..\Module\";
         private static readonly string scriptFolder;
 
         static Powershell()
@@ -66,9 +65,6 @@ namespace Automation.Module.Tests.TestUtils
 
         public string Execute(string script)
         {
-            // Add default folder
-            script = "cd " + defaultFolder + Environment.NewLine + script;
-
             // Save script content
             File.WriteAllText(this.scriptPath, script);
 

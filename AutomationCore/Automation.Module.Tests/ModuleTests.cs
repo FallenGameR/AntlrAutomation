@@ -1,4 +1,6 @@
-﻿using Automation.Module.Tests.TestUtils;
+﻿using System;
+using System.IO;
+using Automation.Module.Tests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Module.Tests
@@ -6,6 +8,28 @@ namespace Automation.Module.Tests
     [TestClass]
     public class ModuleTests
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+            // Current folder is Module root
+            Environment.CurrentDirectory = Environment.CurrentDirectory + @"\..\..\..\..\Module\";
+
+            // Delete Temp folder is exists
+            if (Directory.Exists("Temp"))
+            {
+                Directory.Delete("Temp", recursive: true);
+            }
+
+            // Create new temp folder
+            Directory.CreateDirectory("Temp");
+
+            // Delete all sample parsers
+            foreach (var parserFolder in Directory.GetDirectories("Parsers", "Sample*"))
+            {
+                Directory.Delete(parserFolder, recursive: true);
+            }
+        }
+
         [TestMethod]
         public void Module_can_be_imported_without_errors()
         {
@@ -21,13 +45,10 @@ Import-Module .\AntlrAutomation.psd1
         {
             Powershell.Script(
 @"
-# Removing old compiled grammars for clear test run
-del 'Parsers\SampleFull' -Recurse *> $null
-
-# Simpleton grammar compiles without errors
 Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
+            Assert.AreEqual(string.Empty, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 

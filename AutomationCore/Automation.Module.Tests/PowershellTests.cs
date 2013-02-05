@@ -39,13 +39,5 @@ namespace Automation.Module.Tests
             Assert.AreEqual("stdout", Powershell.Out);
             Assert.AreEqual("stderr", Powershell.Err);
         }
-
-        [TestMethod]
-        public void Module_root_folder_is_used_by_default()
-        {
-            var actual = Powershell.Script("Test-Path AntlrAutomation.psd1");
-            var expected = "True";
-            Assert.AreEqual(expected, actual);
-        }
     }
 }
