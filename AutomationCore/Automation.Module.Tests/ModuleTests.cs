@@ -8,6 +8,7 @@ namespace Automation.Module.Tests
     [TestClass]
     public class ModuleTests
     {
+        private static bool PowershellDebug = true;
         private string oldCurrentDirectory;
 
         [TestInitialize]
@@ -36,21 +37,25 @@ namespace Automation.Module.Tests
             // Create temp files used in tests
             File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
             File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
+            File.WriteAllText("Temp/Sample.txt", Resources.SampleText);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            // Delete all sample parsers
-            foreach (var parserFolder in Directory.GetDirectories("Parsers", "Sample*"))
+            if (!PowershellDebug)
             {
-                Directory.Delete(parserFolder, recursive: true);
-            }
+                // Delete all sample parsers
+                foreach (var parserFolder in Directory.GetDirectories("Parsers", "Sample*"))
+                {
+                    Directory.Delete(parserFolder, recursive: true);
+                }
 
-            // Delete Temp folder is exists
-            if (Directory.Exists("Temp"))
-            {
-                Directory.Delete("Temp", recursive: true);
+                // Delete Temp folder is exists
+                if (Directory.Exists("Temp"))
+                {
+                    //Directory.Delete("Temp", recursive: true);
+                }
             }
 
             // Restore original current folder
@@ -108,19 +113,36 @@ VERBOSE: Grammar file set for parser 'SampleShort'
 VERBOSE: Sources generated for parser 'SampleShort'
 VERBOSE: Binaries compiled for parser 'SampleShort'
 "
-                .Replace("<PARSER FOLDER>", parserFolder)
-                .Trim();
+.Replace("<PARSER FOLDER>", parserFolder)
+.Trim();
 
             Assert.AreEqual(expected, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        /*
         [TestMethod]
         public void Parse_Item_parses_input_with_case_insensitive_grammar_name()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+$ast = Parse-Item sampleSHORT 'Temp\Sample.txt'
+$ast.Text
+$ast.ChildCount
+");
+            var expected =
+@"
+FILE
+2
+"
+.Trim();
+
+            Assert.AreEqual(expected, Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
+        
+        /*
 
         [TestMethod]
         public void Parse_Item_parses_input_with_regex_matched_grammar_name()
