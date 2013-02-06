@@ -16,43 +16,42 @@ function Set-Grammar
 
         name is taken
         - grammar name in the file
-        - explicit name (no name in the file) short; if there is a name in file, warning
         - file name (no name in the file) short;
 
         text is taken
         - from the file
         - generated via template (short)
-
-        analyse verbose output in tests
     #>
 
     param
     (
         [Parameter(Mandatory = $true)]
-        [string] $FilePath,
-        [string] $Name
+        [string] $GrammarPath
     )
 
-    $text = Get-Content $filePath | Out-String
-
-    if( -not $name )
-    {
-        $nameFound = $text -match "grammar (\w+);"
-        $name = $Matches[1]
-        if( $name )
-        {
-            $fullText = $true
-        }
-    }
-    if( -not $name )
-    {
-        $name = (Get-Item $filePath).BaseName
-    }
-
+    $name, $text = Read-Grammar $grammarPath
     Clean-ParserFolder $name
-    Generate-Grammar $fullText $name $text
+    Set-GrammarFile $name $text
     Generate-Parser $name
     Compile-Parser $name
+}
+
+function Read-Grammar( [string] $GrammarPath )
+{
+    $text = Get-Content $grammarPath | Out-String
+    $nameFound = $text -match "grammar (\w+);"
+
+    if( $nameFound )
+    {
+        $name = $matches[1]
+    }
+    else
+    {
+        $name = (Get-Item $grammarPath).BaseName
+        $text = Get-Render grammar name text
+    }
+
+    $name, $text
 }
 
 function Clean-ParserFolder( [string] $name )
@@ -71,16 +70,7 @@ function Clean-ParserFolder( [string] $name )
     Write-Verbose "Parser folder '$parserFolder' is cleaned for parser '$name'"
 }
 
-function Generate-Grammar( [bool] $fullText, [string] $name, [string] $text )
-{
-    if( -not $fullText )
-    {
-        $text = Get-Render grammar name text
-    }
-    Set-GrammarText $name $text
-}
-
-function Set-GrammarText( [string] $name, [string] $fullText )
+function Set-GrammarFile( [string] $name, [string] $fullText )
 {
     $fullText | Set-Content (Get-FullGrammarPath $name)
 
