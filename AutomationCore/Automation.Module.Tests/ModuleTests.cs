@@ -111,6 +111,7 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
 Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
 ");
+
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -124,6 +125,7 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
 Parse-Item short 'Temp\Sample.txt' | % Text
 ");
+
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -143,6 +145,7 @@ Parse-Item sample 'Temp\Sample.txt' | % Text
 WARNING: Grammar 'sample' can be resolved as: SampleFull, SampleShort. Grammar 'SampleFull' would be used.
 FILE
 ";
+
             Assert.AreEqual(expected.Trim(), Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -172,12 +175,27 @@ Parse-Item sample 'Temp\Sample.txt' | Format-Custom
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        /*
         [TestMethod]
         public void Format_table_renders_output_as_table()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item sample 'Temp\Sample.txt' | Format-Table
+");
+            var expected =
+@"
+Text Children          
+---- --------          
+FILE {SECTION, SECTION}
+";
+
+            Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
+            Assert.AreEqual(string.Empty, Powershell.Err); 
         }
+        
+        /*
 
         [TestMethod]
         public void Format_custom_is_used_by_default()
