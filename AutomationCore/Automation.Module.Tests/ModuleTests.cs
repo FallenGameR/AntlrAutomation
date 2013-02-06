@@ -73,10 +73,9 @@ VERBOSE: Grammar file set for parser 'SampleFull'
 VERBOSE: Sources generated for parser 'SampleFull'
 VERBOSE: Binaries compiled for parser 'SampleFull'
 "
-                .Replace("<PARSER FOLDER>", parserFolder)
-                .Trim();
+.Replace("<PARSER FOLDER>", parserFolder);
 
-            Assert.AreEqual(expected, Powershell.Out);
+            Assert.AreEqual(expected.Trim(), Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
@@ -97,10 +96,9 @@ VERBOSE: Grammar file set for parser 'SampleShort'
 VERBOSE: Sources generated for parser 'SampleShort'
 VERBOSE: Binaries compiled for parser 'SampleShort'
 "
-.Replace("<PARSER FOLDER>", parserFolder)
-.Trim();
+.Replace("<PARSER FOLDER>", parserFolder);
 
-            Assert.AreEqual(expected, Powershell.Out);
+            Assert.AreEqual(expected.Trim(), Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
@@ -130,12 +128,28 @@ Parse-Item short 'Temp\Sample.txt' | % Text
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        /*
         [TestMethod]
         public void Parse_Item_chooses_first_matching_grammar_and_prints_warning_about_grammar_name_ambiguity()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleFull.g3'
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item sample 'Temp\Sample.txt' | % Text
+");
+            var expected =
+@"
+WARNING: Grammar 'sample' can be resolved as: SampleFull, SampleShort. Grammar 'SampleFull' would be used.
+FILE
+";
+            Assert.AreEqual(expected.Trim(), Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
+        
+        
+        
+        /*
 
         [TestMethod]
         public void Format_custom_is_used_by_default()

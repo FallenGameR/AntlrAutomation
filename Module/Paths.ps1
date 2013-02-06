@@ -75,8 +75,10 @@ function Get-ParserFolder
         {
             if( ($findings | measure).Count -gt 1 )
             {
-                $names = ($findings | foreach Name) -join ", "
-                Write-Warning "Grammar '$name' can be resolved as: $names. First grammar would be used."
+                $names = $findings | foreach Name
+                $first = $names | select -First 1
+                $joined = $names -join ", "
+                Write-Warning "Grammar '$name' can be resolved as: $joined. Grammar '$first' would be used."
             }
             return ($findings | select -First 1).FullName
         }
