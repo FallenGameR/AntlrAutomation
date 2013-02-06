@@ -127,29 +127,26 @@ VERBOSE: Binaries compiled for parser 'SampleShort'
 @"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
-$ast = Parse-Item sampleSHORT 'Temp\Sample.txt'
-$ast.Text
-$ast.ChildCount
+Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
 ");
-            var expected =
-@"
-FILE
-2
-"
-.Trim();
-
-            Assert.AreEqual(expected, Powershell.Out);
+            Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
         
-        /*
-
         [TestMethod]
         public void Parse_Item_parses_input_with_regex_matched_grammar_name()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item sample 'Temp\Sample.txt' | % Text
+");
+            Assert.AreEqual("FILE", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
+        /*
         [TestMethod]
         public void Parse_Item_chooses_first_matching_grammar_and_prints_warning_about_grammar_name_ambiguity()
         {
