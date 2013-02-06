@@ -83,7 +83,7 @@ function Get-ParserFolder
     }
 
     # Strict match is needed
-    Join-Path (Get-ParsersRoot) (Get-Culture).TextInfo.ToTitleCase($name)
+    Join-Path (Get-ParsersRoot) $name
 }
 
 function Get-FullGrammarPath( [string] $name )

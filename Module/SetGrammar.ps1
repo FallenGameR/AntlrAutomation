@@ -33,9 +33,11 @@ function Set-Grammar
         [string] $Name
     )
 
+    $text = Get-Content $filePath | Out-String
+
     if( -not $name )
     {
-        $nameFound = $fullText -match "grammar (\w+);"
+        $nameFound = $text -match "grammar (\w+);"
         $name = $Matches[1]
         if( $name )
         {
