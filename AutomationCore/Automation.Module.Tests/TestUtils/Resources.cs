@@ -18,8 +18,8 @@ tokens {FILE; SECTION;}
 
 @lexer::header{using Automation.Core;}
 @parser::header{using Automation.Core;}
-@lexer::namespace{Automation.Parsers.SimpletonGrammar}
-@parser::namespace{Automation.Parsers.SimpletonGrammar}
+@lexer::namespace{Automation.Parsers.SampleFullGrammar}
+@parser::namespace{Automation.Parsers.SampleFullGrammar}
 
 /*
  * Parser Rules
