@@ -48,7 +48,6 @@ function Set-Grammar
     {
         $name = (Get-Item $filePath).BaseName
     }
-    $text = Get-Content $filePath
 
     Clean-ParserFolder $name
     Generate-Grammar $fullText $name $text
