@@ -195,14 +195,22 @@ FILE {SECTION, SECTION}
             Assert.AreEqual(string.Empty, Powershell.Err); 
         }
         
-        /*
-
         [TestMethod]
         public void Format_custom_is_used_by_default()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+$ast = Parse-Item sample 'Temp\Sample.txt'
+($ast | Out-String) -eq ($ast | fc | Out-String)
+");
+           
+            Assert.AreEqual("True", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err); 
         }
 
+        /*
         [TestMethod]
         public void Dynamic_children_access_works()
         {
