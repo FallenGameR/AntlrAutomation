@@ -52,6 +52,13 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
+            /*
+out: VERBOSE: Parser folder 'C:\src\github\AntlrAutomation\Module\Parsers\SampleFull' is cleaned for parser 'SampleFull'
+out: VERBOSE: Parser grammar text set for parser 'SampleFull'
+out: VERBOSE: Parser sources generated for parser 'SampleFull'
+out: VERBOSE: Parser binaries compiled for parser 'SampleFull'
+            /**/
+
             Assert.AreEqual(string.Empty, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
