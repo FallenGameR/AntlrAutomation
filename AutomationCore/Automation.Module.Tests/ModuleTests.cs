@@ -8,7 +8,6 @@ namespace Automation.Module.Tests
     [TestClass]
     public class ModuleTests
     {
-        private static bool PowershellDebug = true;
         private string oldCurrentDirectory;
 
         [TestInitialize]
@@ -43,21 +42,6 @@ namespace Automation.Module.Tests
         [TestCleanup]
         public void Cleanup()
         {
-            if (!PowershellDebug)
-            {
-                // Delete all sample parsers
-                foreach (var parserFolder in Directory.GetDirectories("Parsers", "Sample*"))
-                {
-                    Directory.Delete(parserFolder, recursive: true);
-                }
-
-                // Delete Temp folder is exists
-                if (Directory.Exists("Temp"))
-                {
-                    //Directory.Delete("Temp", recursive: true);
-                }
-            }
-
             // Restore original current folder
             Environment.CurrentDirectory = oldCurrentDirectory;
         }
@@ -140,7 +124,7 @@ Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
 @"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
-Parse-Item sample 'Temp\Sample.txt' | % Text
+Parse-Item short 'Temp\Sample.txt' | % Text
 ");
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
