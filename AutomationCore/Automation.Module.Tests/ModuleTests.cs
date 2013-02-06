@@ -35,6 +35,7 @@ namespace Automation.Module.Tests
 
             // Create temp files used in tests
             File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
+            File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
         }
 
         [TestCleanup]
@@ -77,13 +78,31 @@ VERBOSE: Binaries compiled for parser 'SampleFull'
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        /*
         [TestMethod]
         public void Set_Grammar_accepts_short_text_grammar_without_errors()
         {
-            Assert.Inconclusive();
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3' -Verbose
+");
+
+            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleShort");
+            var expected =
+@"
+VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'SampleShort'
+VERBOSE: Grammar file set for parser 'SampleShort'
+VERBOSE: Sources generated for parser 'SampleShort'
+VERBOSE: Binaries compiled for parser 'SampleShort'
+"
+                .Replace("<PARSER FOLDER>", parserFolder)
+                .Trim();
+
+            Assert.AreEqual(expected, Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
+        /*
         [TestMethod]
         public void Parse_Item_parses_input_with_case_insensitive_grammar_name()
         {
