@@ -8,9 +8,13 @@ namespace Automation.Module.Tests
     [TestClass]
     public class ModuleTests
     {
+        private string oldCurrentDirectory;
+
         [TestInitialize]
         public void Initialize()
         {
+            oldCurrentDirectory = Environment.CurrentDirectory;
+
             // Current folder is Module root
             Environment.CurrentDirectory = Environment.CurrentDirectory + @"\..\..\..\..\Module\";
 
@@ -33,6 +37,12 @@ namespace Automation.Module.Tests
             File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            Environment.CurrentDirectory = oldCurrentDirectory;
+        }
+
         [TestMethod]
         public void Module_can_be_imported_without_errors()
         {
@@ -52,14 +62,18 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
-            /*
-out: VERBOSE: Parser folder 'C:\src\github\AntlrAutomation\Module\Parsers\SampleFull' is cleaned for parser 'SampleFull'
-out: VERBOSE: Parser grammar text set for parser 'SampleFull'
-out: VERBOSE: Parser sources generated for parser 'SampleFull'
-out: VERBOSE: Parser binaries compiled for parser 'SampleFull'
-            /**/
+            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleFull");
+            var expected =
+@"
+VERBOSE: Parser folder '<PARSER FOLDER>' is cleaned for parser 'SampleFull'
+VERBOSE: Parser grammar text set for parser 'SampleFull'
+VERBOSE: Parser sources generated for parser 'SampleFull'
+VERBOSE: Parser binaries compiled for parser 'SampleFull'
+"
+                .Replace("<PARSER FOLDER>", parserFolder)
+                .Trim();
 
-            Assert.AreEqual(string.Empty, Powershell.Out);
+            Assert.AreEqual(expected, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
