@@ -41,6 +41,19 @@ namespace Automation.Module.Tests
         [TestCleanup]
         public void Cleanup()
         {
+            // Delete all sample parsers
+            foreach (var parserFolder in Directory.GetDirectories("Parsers", "Sample*"))
+            {
+                Directory.Delete(parserFolder, recursive: true);
+            }
+
+            // Delete Temp folder is exists
+            if (Directory.Exists("Temp"))
+            {
+                Directory.Delete("Temp", recursive: true);
+            }
+
+            // Restore original current folder
             Environment.CurrentDirectory = oldCurrentDirectory;
         }
 
@@ -55,7 +68,7 @@ Import-Module .\AntlrAutomation.psd1
         }
 
         [TestMethod]
-        public void Set_Grammar_accepts_full_text_grammar_without_errors()
+        public void Set_Grammar_accepts_full_text_grammar_successfully()
         {
             Powershell.Script(
 @"
@@ -79,7 +92,7 @@ VERBOSE: Binaries compiled for parser 'SampleFull'
         }
 
         [TestMethod]
-        public void Set_Grammar_accepts_short_text_grammar_without_errors()
+        public void Set_Grammar_accepts_short_text_grammar_successfully()
         {
             Powershell.Script(
 @"
@@ -110,13 +123,13 @@ VERBOSE: Binaries compiled for parser 'SampleShort'
         }
 
         [TestMethod]
-        public void Parse_Item_parses_input_with_regex_matches_grammar_name()
+        public void Parse_Item_parses_input_with_regex_matched_grammar_name()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void Parse_Item_chooses_first_matching_grammar_and_print_warning_if_grammar_name_ambiguity()
+        public void Parse_Item_chooses_first_matching_grammar_and_prints_warning_about_grammar_name_ambiguity()
         {
             Assert.Inconclusive();
         }
