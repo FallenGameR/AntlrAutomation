@@ -146,25 +146,41 @@ FILE
             Assert.AreEqual(expected.Trim(), Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
-        
-        
-        
-        /*
-
-        [TestMethod]
-        public void Format_custom_is_used_by_default()
-        {
-            Assert.Inconclusive();
-        }
 
         [TestMethod]
         public void Format_custom_renders_output_as_tree()
         {
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item sample 'Temp\Sample.txt' | Format-Custom
+");
+            var expected =
+@"
+  FILE
+    SECTION
+      some
+      words
+      here
+    SECTION
+      another
+      section
+";
+
+            Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
+            Assert.AreEqual(string.Empty, Powershell.Err);
+        }
+
+        /*
+        [TestMethod]
+        public void Format_table_renders_output_as_table()
+        {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void Format_table_renders_output_as_table()
+        public void Format_custom_is_used_by_default()
         {
             Assert.Inconclusive();
         }
