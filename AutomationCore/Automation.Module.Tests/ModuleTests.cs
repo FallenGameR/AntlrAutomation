@@ -65,10 +65,10 @@ Set-Grammar 'Temp\SampleFull.g3' -Verbose
             var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleFull");
             var expected =
 @"
-VERBOSE: Parser folder '<PARSER FOLDER>' is cleaned for parser 'SampleFull'
-VERBOSE: Parser grammar text set for parser 'SampleFull'
-VERBOSE: Parser sources generated for parser 'SampleFull'
-VERBOSE: Parser binaries compiled for parser 'SampleFull'
+VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'SampleFull'
+VERBOSE: Grammar file set for parser 'SampleFull'
+VERBOSE: Sources generated for parser 'SampleFull'
+VERBOSE: Binaries compiled for parser 'SampleFull'
 "
                 .Replace("<PARSER FOLDER>", parserFolder)
                 .Trim();

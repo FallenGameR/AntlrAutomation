@@ -67,14 +67,14 @@ function Clean-ParserFolder( [string] $name )
     New-Item (Get-ParserSourceFolder $name) -ItemType Directory | Out-Null
     New-Item (Get-ParserBinaryFolder $name) -ItemType Directory | Out-Null
 
-    Write-Verbose "Parser folder '$parserFolder' is cleaned for parser '$name'"
+    Write-Verbose "Folder '$parserFolder' is cleaned for parser '$name'"
 }
 
 function Set-GrammarFile( [string] $name, [string] $fullText )
 {
     $fullText | Set-Content (Get-FullGrammarPath $name)
 
-    Write-Verbose "Parser grammar text set for parser '$name'"
+    Write-Verbose "Grammar file set for parser '$name'"
 }
 
 function Generate-Parser( [string] $name )
@@ -82,7 +82,7 @@ function Generate-Parser( [string] $name )
     Generate-ParserCore $name
     Generate-ParserExtensions $name
 
-    Write-Verbose "Parser sources generated for parser '$name'"
+    Write-Verbose "Sources generated for parser '$name'"
 }
 
 function Compile-Parser( [string] $name )
@@ -97,7 +97,7 @@ function Compile-Parser( [string] $name )
 
     & (Get-CompilerExe) $param
 
-    Write-Verbose "Parser binaries compiled for parser '$name'"
+    Write-Verbose "Binaries compiled for parser '$name'"
 }
 
 function Generate-ParserCore( [string] $name )
