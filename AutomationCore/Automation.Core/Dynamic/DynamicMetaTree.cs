@@ -14,7 +14,7 @@ namespace Automation.Core
             BindingRestrictions.GetExpressionRestriction(Expression.Constant(true));
 
         public DynamicMetaTree(Expression parameter, AutomationTree value)
-            : base(parameter, alwaysTrue, value)
+            : base(parameter, BindingRestrictions.Empty, value)
         {
         }
 
@@ -28,12 +28,7 @@ namespace Automation.Core
 
             var result = this.Node.Find(binder.Name);
             var expression = Expression.Constant(result);
-            return new DynamicMetaObject(expression, this.Restrictions);
-        }
-
-        public override IEnumerable<string> GetDynamicMemberNames()
-        {
-            return knownPropertyNames;
+            return new DynamicMetaObject(expression, alwaysTrue);
         }
 
         private AutomationTree Node { get { return (AutomationTree)this.Value; } }
