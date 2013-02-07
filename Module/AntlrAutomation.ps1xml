@@ -39,7 +39,7 @@ function render( $node, $indent )
     }
 }
 
-render $_ $indent | Out-String
+(render $_ $indent | Out-String).TrimEnd()
                                         </ScriptBlock>
                                     </ExpressionBinding>
                                 </CustomItem>
