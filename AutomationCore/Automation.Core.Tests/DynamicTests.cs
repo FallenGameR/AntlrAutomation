@@ -45,7 +45,7 @@ namespace Automation.Core.Tests
             Assert.IsNull(tree.Parent);
 
             // Case insensitive
-            Assert.AreEqual(anyType, tree.type);
+            Assert.AreEqual(anyType, (int)tree.type);
             Assert.AreSame(child, tree.CHILDREN[0]);
         }
 
