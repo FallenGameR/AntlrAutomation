@@ -219,6 +219,12 @@ $ast = Parse-Item sample 'Temp\Sample.txt'
             Assert.AreEqual(string.Empty, Powershell.Err); 
         }
 
+        //$ast.TexT
+        //$ast.Section | select -f 1 | % some
+        //($ast.Section | select -f 1).some
+
+
+
         /*
         [TestMethod]
         public void Dynamic_children_access_works()
