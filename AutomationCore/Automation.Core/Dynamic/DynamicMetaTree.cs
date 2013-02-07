@@ -1,4 +1,5 @@
-﻿using System.Dynamic;
+﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -28,7 +29,11 @@ namespace Automation.Core
             var result = this.Node.Find(binder.Name);
             var expression = Expression.Constant(result);
             return new DynamicMetaObject(expression, this.Restrictions);
-         
+        }
+
+        public override IEnumerable<string> GetDynamicMemberNames()
+        {
+            return knownPropertyNames;
         }
 
         private AutomationTree Node { get { return (AutomationTree)this.Value; } }

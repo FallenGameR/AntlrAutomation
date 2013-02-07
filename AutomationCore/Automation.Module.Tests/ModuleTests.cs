@@ -5,6 +5,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Module.Tests
 {
+    /// <summary>
+    /// Tests for the AntlrAutomation module
+    /// </summary>
+    /// <remarks>
+    /// Tests check console output. Powershell tries to be smart about console width
+    /// and thus your console window settings could affect the test outcome.
+    /// </remarks>
     [TestClass]
     public class ModuleTests
     {
@@ -198,6 +205,8 @@ FILE {SECTION, SECTION}
         [TestMethod]
         public void Format_custom_is_used_by_default()
         {
+            // NOTE: Also dynamic binding used to crash Powershell in a very strange way here
+
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
