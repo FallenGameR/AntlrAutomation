@@ -1,6 +1,11 @@
 ## Short grammars
 ## Set-Grammar
 
+Dynamic calls:
+- test if case-insensitivity works fine from Powershell if default DynamicMetaObject is used.
+- think if it would be sufficient to return DynamicObject instead of AutomationTree.
+- DynamicMetaObject in DynamicObject creates ExpressionTrees that call overrides in DynamicObject. Can look how Expression trees are created there.
+
 Allow syntax like: $file | % section | % sub
 
 Imaginary token autodetection
