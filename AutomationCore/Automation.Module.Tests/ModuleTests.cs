@@ -118,7 +118,6 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
 Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
 ");
-
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -132,7 +131,6 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
 Parse-Item short 'Temp\Sample.txt' | % Text
 ");
-
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -152,7 +150,6 @@ Parse-Item sample 'Temp\Sample.txt' | % Text
 WARNING: Grammar 'sample' can be resolved as: SampleFull, SampleShort. Grammar 'SampleFull' would be used.
 FILE
 ";
-
             Assert.AreEqual(expected.Trim(), Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -160,14 +157,7 @@ FILE
         [TestMethod]
         public void Format_custom_renders_output_as_tree()
         {
-            Powershell.Script(
-@"
-Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3'
-$ast = Parse-Item sample 'Temp\Sample.txt'
-
-$ast | Format-Custom
-");
+            this.UseAst("$ast | Format-Custom");
             var expected =
 @"
   FILE
@@ -179,7 +169,6 @@ $ast | Format-Custom
       another
       section
 ";
-
             Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -187,21 +176,13 @@ $ast | Format-Custom
         [TestMethod]
         public void Format_table_renders_output_as_table()
         {
-            Powershell.Script(
-@"
-Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3'
-$ast = Parse-Item sample 'Temp\Sample.txt'
-
-$ast | Format-Table
-");
+            this.UseAst("$ast | Format-Table");
             var expected =
 @"
 Text Children          
 ---- --------          
 FILE {SECTION, SECTION}
 ";
-
             Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
@@ -209,32 +190,13 @@ FILE {SECTION, SECTION}
         [TestMethod]
         public void Format_custom_is_used_by_default()
         {
-            Powershell.Script(
-@"
-Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3'
-$ast = Parse-Item sample 'Temp\Sample.txt'
-
-($ast | Out-String) -eq ($ast | fc | Out-String)
-");
-
-            Assert.AreEqual("True", Powershell.Out);
-            Assert.AreEqual(string.Empty, Powershell.Err);
+            this.TestAst("($ast | Out-String) -eq ($ast | fc | Out-String)");
         }
 
         [TestMethod]
         public void Static_properties_continue_to_work_with_case_insensitive_match_()
         {
-            Powershell.Script(
-@"
-Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3'
-$ast = Parse-Item sample 'Temp\Sample.txt'
-
-($ast.Text, $ast.text, $ast.TEXT -join ',') -eq 'FILE,FILE,FILE'
-");
-            Assert.AreEqual("True", Powershell.Out);
-            Assert.AreEqual(string.Empty, Powershell.Err);
+            this.TestAst("($ast.Text, $ast.text, $ast.TEXT -join ',') -eq 'FILE,FILE,FILE'");
         }
 
         [TestMethod]
@@ -256,5 +218,24 @@ $ast = Parse-Item sample 'Temp\Sample.txt'
             //$ast.Section | select -f 1 | % some
         }
 
+        private void UseAst(string testScript)
+        {
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+$ast = Parse-Item sample 'Temp\Sample.txt';
+"
++
+testScript
+);
+        }
+
+        private void TestAst(string testScript)
+        {
+            this.UseAst(testScript);
+            Assert.AreEqual("True", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
+        }
     }
 }
