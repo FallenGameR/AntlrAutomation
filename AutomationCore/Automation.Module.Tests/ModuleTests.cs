@@ -164,7 +164,9 @@ FILE
 @"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
-Parse-Item sample 'Temp\Sample.txt' | Format-Custom
+$ast = Parse-Item sample 'Temp\Sample.txt'
+
+$ast | Format-Custom
 ");
             var expected =
 @"
@@ -189,7 +191,9 @@ Parse-Item sample 'Temp\Sample.txt' | Format-Custom
 @"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
-Parse-Item sample 'Temp\Sample.txt' | Format-Table
+$ast = Parse-Item sample 'Temp\Sample.txt'
+
+$ast | Format-Table
 ");
             var expected =
 @"
@@ -205,13 +209,12 @@ FILE {SECTION, SECTION}
         [TestMethod]
         public void Format_custom_is_used_by_default()
         {
-            // NOTE: Also dynamic binding used to crash Powershell in a very strange way here
-
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
 $ast = Parse-Item sample 'Temp\Sample.txt'
+
 ($ast | Out-String) -eq ($ast | fc | Out-String)
 ");
 
@@ -222,8 +225,16 @@ $ast = Parse-Item sample 'Temp\Sample.txt'
         [TestMethod]
         public void Static_properties_continue_to_work_with_case_insensitive_match_()
         {
-            Assert.Inconclusive();
-            //$ast.TexT
+            Powershell.Script(
+@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\SampleShort.g3'
+$ast = Parse-Item sample 'Temp\Sample.txt'
+
+($ast.Text, $ast.text, $ast.TEXT -join ',') -eq 'FILE,FILE,FILE'
+");
+            Assert.AreEqual("True", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]
