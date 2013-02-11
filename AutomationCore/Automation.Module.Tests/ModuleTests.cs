@@ -220,10 +220,11 @@ $ast.TeXt -eq 'FILE'
         [TestMethod]
         public void Dynamic_children_properties_can_be_retrieved_via_foreach_syntax_case_insensitive()
         {
-            Assert.Inconclusive();
-            //$ast | % section
-            //$ast | % section | %some
-            //$ast.Section | select -f 1 | % some
+            this.TestAst(
+@"
+@($ast | % section | % here).count -eq 2
+@($ast | % SECTION | % HERE).count -eq 2
+");
         }
 
         private void UseAst(string testScript)
