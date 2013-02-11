@@ -82,7 +82,7 @@ VERBOSE: Binaries compiled for parser 'SampleFull'
 "
 .Replace("<PARSER FOLDER>", parserFolder);
 
-            Assert.AreEqual(expected.Trim(), Powershell.Out);
+            Assert.AreEqual(expected.Trim(), Powershell.Out, ignoreCase: true);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
@@ -105,7 +105,7 @@ VERBOSE: Binaries compiled for parser 'SampleShort'
 "
 .Replace("<PARSER FOLDER>", parserFolder);
 
-            Assert.AreEqual(expected.Trim(), Powershell.Out);
+            Assert.AreEqual(expected.Trim(), Powershell.Out, ignoreCase: true);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
@@ -122,7 +122,7 @@ Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
-        
+
         [TestMethod]
         public void Parse_Item_parses_input_with_regex_matched_grammar_name()
         {
@@ -199,9 +199,9 @@ FILE {SECTION, SECTION}
 ";
 
             Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
-            Assert.AreEqual(string.Empty, Powershell.Err); 
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
-        
+
         [TestMethod]
         public void Format_custom_is_used_by_default()
         {
@@ -214,23 +214,36 @@ Set-Grammar 'Temp\SampleShort.g3'
 $ast = Parse-Item sample 'Temp\Sample.txt'
 ($ast | Out-String) -eq ($ast | fc | Out-String)
 ");
-           
+
             Assert.AreEqual("True", Powershell.Out);
-            Assert.AreEqual(string.Empty, Powershell.Err); 
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        //$ast.TexT
-        //$ast.Section | select -f 1 | % some
-        //($ast.Section | select -f 1).some
-
-
-
-        /*
         [TestMethod]
-        public void Dynamic_children_access_works()
+        public void Static_properties_continue_to_work_with_case_insensitive_match_()
         {
             Assert.Inconclusive();
+            //$ast.TexT
         }
-        /**/
+
+        [TestMethod]
+        public void Dynamic_children_properties_can_be_retrieved_with_case_insensitive_match_()
+        {
+            Assert.Inconclusive();
+            //($ast.Section | select -f 1).some
+            //$ast.Section.some
+            //$ast | foreach{ $_.section }
+            //$ast | foreach{ $_.section } | foreach{ $_.Some }
+        }
+
+        [TestMethod]
+        public void Dynamic_children_properties_can_be_retrieved_via_foreach_syntax_case_insensitive()
+        {
+            Assert.Inconclusive();
+            //$ast | % section
+            //$ast | % section | %some
+            //$ast.Section | select -f 1 | % some
+        }
+
     }
 }

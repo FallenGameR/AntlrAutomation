@@ -15,7 +15,7 @@ namespace Automation.Core.Tests
         private const int anyTokenIndex = 4;
 
         [TestMethod]
-        public void Static_properties_can_be_accessed_with_case_insensitive_names()
+        public void Static_properties_can_be_accessed_with_case_sensitive_names_from_csharp()
         {
             var child = new AutomationTree(new CommonToken());
             var token = new CommonToken
@@ -43,10 +43,6 @@ namespace Automation.Core.Tests
             Assert.AreSame(token, tree.Token);
             Assert.IsFalse(tree.IsNil);
             Assert.IsNull(tree.Parent);
-
-            // Case insensitive
-            Assert.AreEqual(anyType, tree.type);
-            Assert.AreSame(child, tree.CHILDREN[0]);
         }
 
         [TestMethod]
