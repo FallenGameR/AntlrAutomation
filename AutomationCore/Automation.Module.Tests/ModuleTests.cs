@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Automation.Module.Tests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -168,6 +169,7 @@ FILE
     SECTION
       another
       section
+      here
 ";
             Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -194,19 +196,25 @@ FILE {SECTION, SECTION}
         }
 
         [TestMethod]
-        public void Static_properties_continue_to_work_with_case_insensitive_match_()
+        public void Static_properties_continue_to_work_with_case_insensitive_match()
         {
-            this.TestAst("($ast.Text, $ast.text, $ast.TEXT -join ',') -eq 'FILE,FILE,FILE'");
+            this.TestAst(
+@"
+$ast.Text -eq 'FILE'
+$ast.text -eq 'FILE'
+$ast.TEXT -eq 'FILE'
+$ast.TeXt -eq 'FILE'
+");
         }
 
         [TestMethod]
-        public void Dynamic_children_properties_can_be_retrieved_with_case_insensitive_match_()
+        public void Dynamic_children_properties_can_be_retrieved_with_case_insensitive_match()
         {
-            Assert.Inconclusive();
-            //($ast.Section | select -f 1).some
-            //$ast.Section.some
-            //$ast | foreach{ $_.section }
-            //$ast | foreach{ $_.section } | foreach{ $_.Some }
+            this.TestAst(
+@"
+@($ast.SECTION.some).count -eq 1
+@($ast.Section.HeRe).count -eq 2
+");
         }
 
         [TestMethod]
@@ -233,8 +241,18 @@ testScript
 
         private void TestAst(string testScript)
         {
+            var lineCount = testScript
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                .Where(line => !string.IsNullOrWhiteSpace(line))
+                .Count();
+
             this.UseAst(testScript);
-            Assert.AreEqual("True", Powershell.Out);
+
+            var expected = string.Join(
+                Environment.NewLine,
+                Enumerable.Repeat("True", lineCount).ToArray());
+
+            Assert.AreEqual(expected, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
     }

@@ -68,6 +68,7 @@ end
 start
     another
     section
+    here
 end
 ";
     }
