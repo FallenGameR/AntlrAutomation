@@ -1,5 +1,3 @@
-Allow syntax like: $file | % section | % sub
-
 Imaginary token autodetection
 
 Parse-Items -tokens
