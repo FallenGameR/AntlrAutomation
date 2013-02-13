@@ -44,7 +44,9 @@ namespace Automation.Module.Tests
             // Create temp files used in tests
             File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
             File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
+            File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryGrammar);
             File.WriteAllText("Temp/Sample.txt", Resources.SampleText);
+            File.WriteAllText("Temp/Imaginary.txt", Resources.ImaginaryText);
         }
 
         [TestCleanup]
@@ -217,6 +219,21 @@ $ast.TeXt -eq 'FILE'
 ");
         }
 
+        [TestMethod]
+        public void Imaginary_tokens_are_automatically_detected()
+        {
+            Powershell.Script(
+@"  
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\ImaginaryGrammar.g3'
+Parse-Item imaginary 'Temp\Imaginary.txt' | % Text
+");
+            Assert.AreEqual("ANY_TOKEN", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
+        }
+
+        // Predefined tokens work
+
         private void UseAst(string testScript)
         {
             Powershell.Script(
@@ -248,8 +265,7 @@ testScript
         }
 
         /*
-         * NOTE: Looks like that is a bug in Powershell
-         * 
+         * NOTE: Looks like that is a bug in Powershell 3.0
          * 
 $a = New-Object System.Dynamic.ExpandoObject
 $a.One = "1"

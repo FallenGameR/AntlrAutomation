@@ -71,5 +71,16 @@ start
     here
 end
 ";
+
+        public static string ImaginaryGrammar =
+@"
+file: VARIABLE ID EOF -> ^(ANY_TOKEN VARIABLE ID);
+VARIABLE
+    : 'a'..'z'+;
+ID  : '0'..'9'+;
+";
+
+        public static string ImaginaryText = "name 42";
+
     }
 }
