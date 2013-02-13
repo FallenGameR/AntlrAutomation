@@ -36,22 +36,36 @@ function Set-Grammar
     Compile-Parser $name
 }
 
-function Read-Grammar( [string] $GrammarPath )
+function Read-Grammar( [string] $path )
 {
-    $text = Get-Content $grammarPath | Out-String
+    $text = Get-Content $path | Out-String
     $nameFound = $text -match "grammar (\w+);"
 
     if( $nameFound )
     {
+        # Full text grammar
         $name = $matches[1]
     }
     else
     {
-        $name = (Get-Item $grammarPath).BaseName
-        $text = Get-Render grammar name text
+        # Short text gramar
+        $name = (Get-Item $path).BaseName
+        $tokens = (Get-ImaginaryTokens $text) -join " "
+        $text = Get-Render grammar name text tokens
     }
 
     $name, $text
+}
+
+function Get-ImaginaryTokens( [string] $text )
+{
+    $tokenNames = ([regex] "[A-Z_]+").Matches($text).Value
+    $exceptNames = ([regex] "(?m)^[A-Z_]+").Matches($text).Value + "EOF"
+
+    $tokenSet = New-Object Collections.Generic.HashSet[string] (, [string[]] $tokenNames)
+    $exceptSet = New-Object Collections.Generic.HashSet[string] (, [string[]] ($exceptNames))
+    $tokenSet.ExceptWith( $exceptSet )
+    $tokenSet | sort | foreach{ "$psitem; " }
 }
 
 function Clean-ParserFolder( [string] $name )

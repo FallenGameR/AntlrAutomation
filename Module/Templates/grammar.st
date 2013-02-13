@@ -1,4 +1,4 @@
-grammar (name, text) ::=
+grammar (name, text, tokens) ::=
 <<
 grammar <name>;
 
@@ -10,7 +10,7 @@ options
     ASTLabelType=AutomationTree;
 }
 
-tokens {FILE; SECTION;}
+tokens {<tokens>}
 
 @lexer::header{using Automation.Core;}
 @parser::header{using Automation.Core;}
