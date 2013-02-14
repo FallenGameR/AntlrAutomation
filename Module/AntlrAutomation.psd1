@@ -54,7 +54,7 @@ CLRVersion = '4.0'
 RequiredAssemblies = @('Libraries\Antlr\Antlr3.Runtime.dll', 'Libraries\Antlr\Antlr4.StringTemplate.dll', 'Libraries\AutomationCore\Automation.Core.dll')
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-ScriptsToProcess = @('GetGrammar.ps1', 'GetNode.ps1', 'ParseItem.ps1', 'Paths.ps1', 'SetGrammar.ps1')
+ScriptsToProcess = @('Get-Grammar.ps1', 'Get-Node.ps1', 'Parse-Item.ps1', 'Paths.ps1', 'Set-Grammar.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
@@ -83,11 +83,11 @@ AliasesToExport = '*'
 # List of all files packaged with this module
 # TODO: Add libraries and predefined grammars as well
 FileList = @(
-    'GetGrammar.ps1', 
-    'GetNode.ps1', 
-    'ParseItem.ps1', 
+    'Get-Grammar.ps1', 
+    'Get-Node.ps1', 
+    'Parse-Item.ps1', 
     'Paths.ps1', 
-    'SetGrammar.ps1', 
+    'Set-Grammar.ps1', 
     'AntlrAutomation.psd1',
     'AntlrAutomation.ps1xml', 
     'thoughts.txt')
