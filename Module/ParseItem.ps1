@@ -83,15 +83,15 @@ filter Colorize-Token
     {
         "^\s*<[A-Z_]+>\s*$"
         {
-            Write-Console -NoNewLine -F DarkGreen $psitem
+            Write-Console $psitem DarkGreen
         }
         "^\s*-+\s*$"
         {
-            Write-Console -NoNewLine -F DarkCyan $psitem
+            Write-Console $psitem DarkCyan
         }
         default
         {
-            Write-Console -NoNewLine $psitem
+            Write-Console $psitem
         }
     }
 }
