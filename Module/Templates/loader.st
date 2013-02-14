@@ -21,7 +21,7 @@ namespace <namespace(name=name)>
             return parser.file().Tree;
         }
 
-        public IEnumerable<<string>> Tokenize(string filePath)
+        public IEnumerable\<string\> Tokenize(string filePath)
         {
             var stream = new ANTLRFileStream(filePath);
             var lexer = new <lexerName(name=name)>(stream);

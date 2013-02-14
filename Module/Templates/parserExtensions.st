@@ -15,10 +15,10 @@ namespace <namespace(name=name)>
                     return " " + new string('-', token.Text.Length) + " ";
 
                 case <parserName(name=name)>.NEWLINE:
-                    return " " + "<NL>" + Environment.NewLine;
+                    return " " + "\<NL\>" + Environment.NewLine;
 
                 case <parserName(name=name)>.EOF:
-                    return "<EOF>";
+                    return "\<EOF\>";
 
                 default:
                     return this.TokenNames[token.Type].Trim('\'');
