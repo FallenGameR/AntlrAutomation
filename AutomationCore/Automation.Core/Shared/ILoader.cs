@@ -6,11 +6,9 @@
 
 namespace Automation.Core
 {
-    using System.Collections.Generic;
-
     public interface ILoader
     {
         AutomationTree Parse(string filePath);
-        IEnumerable<string> Tokenize(string filePath);
+        string[] Tokenize(string filePath);
     }
 }

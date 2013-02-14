@@ -1,7 +1,7 @@
 ﻿loader (name) ::=
 <<
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using Antlr.Runtime;
 using Automation.Core;
 
@@ -21,7 +21,7 @@ namespace <namespace(name=name)>
             return parser.file().Tree;
         }
 
-        public IEnumerable\<string\> Tokenize(string filePath)
+        public string[] Tokenize(string filePath)
         {
             var stream = new ANTLRFileStream(filePath);
             var lexer = new <lexerName(name=name)>(stream);
@@ -29,11 +29,10 @@ namespace <namespace(name=name)>
             var parser = new <parserName(name=name)>(tokens);
 
             tokens.Fill();
-        
-            foreach( var token in tokens.GetTokens() )
-            {
-                yield return parser.RenderToken(token);
-            }
+            return tokens
+                .GetTokens()
+                .Select( t =\> parser.RenderToken(t) )
+                .ToArray();
         }
     }
 }
