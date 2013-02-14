@@ -59,6 +59,26 @@ function Parse-Tree( $loader, $filePath )
 
 function Parse-Tokens( $loader, $filePath )
 {
-    -join [Automation.Core.ILoader].GetMethod("Tokenize").Invoke($loader, $filePath)
+    # Does not actually return something, all output is printed in color to console
+    $tokens = [Automation.Core.ILoader].GetMethod("Tokenize").Invoke($loader, $filePath)
+    $tokens | Colorize-Token
 }
 
+filter Colorize-Token
+{
+    switch -regex ( $psitem )
+    {
+        "^\s*<[A-Z_]+>\s*$"
+        {
+            Write-Console -NoNewLine -F DarkGreen $psitem
+        }
+        "^\s*-+\s*$"
+        {
+            Write-Console -NoNewLine -F DarkCyan $psitem
+        }
+        default
+        {
+            Write-Console -NoNewLine $psitem
+        }
+    }
+}

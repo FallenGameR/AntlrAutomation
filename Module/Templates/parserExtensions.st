@@ -12,16 +12,16 @@ namespace <namespace(name=name)>
             switch (token.Type)
             {
                 case <parserName(name=name)>.WS:
-                    return " " + new string('-', token.Text.Length) + " ";
+                    return new string('-', token.Text.Length) + " ";
 
                 case <parserName(name=name)>.NEWLINE:
-                    return " " + "\<NL\>" + Environment.NewLine;
+                    return "\<NL\>" + Environment.NewLine;
 
                 case <parserName(name=name)>.EOF:
-                    return "\<EOF\>";
+                    return "\<EOF\>" + Environment.NewLine;
 
                 default:
-                    return this.TokenNames[token.Type].Trim('\'');
+                    return this.TokenNames[token.Type].Trim('\'') + " ";
             }
         }
     }
