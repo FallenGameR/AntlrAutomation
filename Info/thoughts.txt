@@ -1,6 +1,3 @@
-Parse-Items -tokens
-Token syntax hightlighting.
-
 Indention
 
 Predefined samples:
