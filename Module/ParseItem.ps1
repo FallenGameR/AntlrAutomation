@@ -66,6 +66,19 @@ function Parse-Tokens( $loader, $filePath )
 
 filter Colorize-Token
 {
+    function Write-Console( [object] $Object, [string] $ForegroundColor)
+    {
+        $original = [Console]::ForegroundColor
+
+        if( $foregroundColor )
+        {
+            [Console]::ForegroundColor = [ConsoleColor]::$ForegroundColor
+        }
+
+        [Console]::Write( $object -join ' ' )
+        [Console]::ForegroundColor = $original
+    }
+
     switch -regex ( $psitem )
     {
         "^\s*<[A-Z_]+>\s*$"

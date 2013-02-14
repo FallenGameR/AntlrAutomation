@@ -232,7 +232,27 @@ Parse-Item imaginary 'Temp\Imaginary.txt' | % Text
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        // Predefined tokens work
+        [TestMethod]
+        public void Tokenization_works_fine()
+        {
+            Powershell.Script(
+@"  
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\ImaginaryGrammar.g3'
+
+$old = [Console]::Out
+$writer = New-Object Io.StringWriter
+[Console]::SetOut( $writer )
+
+Parse-Item imaginary 'Temp\Imaginary.txt' -Tokens
+
+$writer.Flush()
+[Console]::SetOut( $old )
+$writer.GetStringBuilder().ToString()
+");
+            Assert.AreEqual("ANY_TOKEN", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
+        }
 
         private void UseAst(string testScript)
         {
