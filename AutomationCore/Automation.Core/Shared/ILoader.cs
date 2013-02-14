@@ -6,10 +6,11 @@
 
 namespace Automation.Core
 {
-    using Antlr.Runtime.Tree;
+    using System.Collections.Generic;
 
     public interface ILoader
     {
         AutomationTree Parse(string filePath);
+        IEnumerable<string> Tokenize(string filePath);
     }
 }

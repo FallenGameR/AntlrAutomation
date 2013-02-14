@@ -14,8 +14,9 @@ function Parse-Item
 
     param
     (
-        [string] $name,
-        [string] $filePath
+        [string] $Name,
+        [string] $FilePath,
+        [switch] $Tokens
     )
 
     $filePath = (Get-Item $filePath).FullName
@@ -35,11 +36,29 @@ function Parse-Item
     $loaderFullName = "{0}.{1}" -f (Get-Render namespace name), (Get-Render loaderName name)
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $loaderFullName )
 
-    # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
-    $tree = [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
-    [AppDomain]::Unload($parserDomain)
+    # Get the tokens from the lexer or AST from the parser
+    $result = if( $Tokens )
+    {
+        Parse-Tokens $loader $filePath
+    }
+    else
+    {
+        Parse-Tree $loader $filePath
+    }
 
-    # Return parsed AST
-    $tree
+    # Cleanup and return the result
+    [AppDomain]::Unload($parserDomain)
+    $result
+}
+
+function Parse-Tree( $loader, $filePath )
+{
+    # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
+    [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
+}
+
+function Parse-Tokens( $loader, $filePath )
+{
+    -join [Automation.Core.ILoader].GetMethod("Tokenize").Invoke($loader, $filePath)
 }
 

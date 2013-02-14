@@ -42,9 +42,13 @@
     <Compile Include="Shared\AutomationAdaptor.cs" />
     <Compile Include="Shared\AutomationException.cs" />
     <Compile Include="Shared\AutomationTree.cs" />
+    <Compile Include="Shared\IEnumarable.cs" />
     <Compile Include="Shared\ILoader.cs" />
     <Compile Include="Utils\Constant.cs" />
     <Compile Include="Utils\TokenExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tokenization\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
