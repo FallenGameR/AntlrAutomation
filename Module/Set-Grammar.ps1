@@ -26,7 +26,10 @@ function Set-Grammar
     param
     (
         [Parameter(Mandatory = $true)]
-        [string] $GrammarPath
+        [string] $GrammarPath,
+        [switch] $EmitIndents,
+        [switch] $EmitNewline,
+        [switch] $EmitWhitespace
     )
 
     $name, $text = Read-Grammar $grammarPath

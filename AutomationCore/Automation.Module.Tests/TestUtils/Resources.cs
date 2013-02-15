@@ -39,10 +39,16 @@ section
 
 WORD: 'a'..'z'+;
 
+WS	: (' ' | '\t')+ { $channel = Hidden; };
+
 NEWLINE
     : '\r'? '\n' { $channel = Hidden; };
 
-WS	: (' ' | '\t')+ { $channel = Hidden; };
+INDENT
+    : '<%$! INDENT tokens are inserted via IndentionGenerator during lexing !$%>';
+
+DEDENT
+    : '<%$! DEDENT tokens are inserted via IndentionGenerator during lexing !$%>';
 ";
 
         public static string SampleShort =
