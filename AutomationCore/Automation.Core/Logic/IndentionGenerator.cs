@@ -11,14 +11,16 @@ namespace Automation.Core
         private readonly int indentType;
         private readonly int dedentType;
         private readonly int whitespaceType;
+        private readonly int channelNumber;
         private readonly IndentionDetector detector;
         private readonly Queue<IToken> queuedTokens;
 
-        private IndentionGenerator(int indentType, int dedentType, int whitespaceType)
+        private IndentionGenerator(int indentType, int dedentType, int whitespaceType, int channel)
         {
             this.indentType = indentType;
             this.dedentType = dedentType;
             this.whitespaceType = whitespaceType;
+            this.channelNumber = channel;
             this.detector = IndentionDetector.GetInstance();
             this.queuedTokens = new Queue<IToken>();
         }
@@ -28,9 +30,9 @@ namespace Automation.Core
             get { return this.queuedTokens.Any(); }
         }
 
-        public static IndentionGenerator GetInstance(int indentType, int dedentType, int whitespaceType)
+        public static IndentionGenerator GetInstance(int indentType, int dedentType, int whitespaceType, int channel)
         {
-            return new IndentionGenerator(indentType, dedentType, whitespaceType);
+            return new IndentionGenerator(indentType, dedentType, whitespaceType, channel);
         }
 
         public void Process(IToken token)
@@ -72,7 +74,7 @@ namespace Automation.Core
                     {
                         Type = this.indentType,
                         Text = "INDENT",
-                        Channel = Lexer.DefaultTokenChannel
+                        Channel = channelNumber,
                     };
 
                 case Indention.Dedent:
@@ -80,7 +82,7 @@ namespace Automation.Core
                     {
                         Type = this.dedentType,
                         Text = "DEDENT",
-                        Channel = Lexer.DefaultTokenChannel
+                        Channel = channelNumber,
                     };
 
                 default:

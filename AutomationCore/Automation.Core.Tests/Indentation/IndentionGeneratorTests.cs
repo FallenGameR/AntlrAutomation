@@ -15,6 +15,7 @@ namespace Automation.Core.Tests
         private const int indent = 20;
         private const int dedent = 30;
         private const int whitespace = 40;
+        private const int channel = 50;
 
         private const int leadingPosition = 0;
 
@@ -28,7 +29,7 @@ namespace Automation.Core.Tests
         [TestInitialize]
         public void Initialize()
         {
-            this.generator = IndentionGenerator.GetInstance(indent, dedent, whitespace);
+            this.generator = IndentionGenerator.GetInstance(indent, dedent, whitespace, channel);
         }
 
         [TestMethod]
@@ -92,7 +93,7 @@ namespace Automation.Core.Tests
 
             Assert.AreEqual(indent, token.Type);
             Assert.AreEqual("INDENT", token.Text);
-            Assert.AreEqual(Lexer.DefaultTokenChannel, token.Channel);
+            Assert.AreEqual(channel, token.Channel);
             Assert.AreEqual(leadingPosition, token.CharPositionInLine);
             Assert.AreEqual(anyLine, token.Line);
             Assert.AreEqual(anyIndex, token.StartIndex);
@@ -123,7 +124,7 @@ namespace Automation.Core.Tests
 
             Assert.AreEqual(dedent, token.Type);
             Assert.AreEqual("DEDENT", token.Text);
-            Assert.AreEqual(Lexer.DefaultTokenChannel, token.Channel);
+            Assert.AreEqual(channel, token.Channel);
             Assert.AreEqual(anyPosition, token.CharPositionInLine);
             Assert.AreEqual(anyLine, token.Line);
             Assert.AreEqual(anyIndex, token.StartIndex);
