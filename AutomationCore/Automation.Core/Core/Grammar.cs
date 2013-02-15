@@ -19,9 +19,13 @@ namespace Automation.Core
             return null;
         }
 
-        public IToken[] Tokenize(string text)
+        public string[] Tokenize(string text)
         {
             return null;
+        }
+
+        public void UnloadParserAppDomain()
+        {
         }
     }
 }

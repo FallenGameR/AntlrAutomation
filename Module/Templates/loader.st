@@ -7,11 +7,14 @@ using Automation.Core;
 
 namespace <namespace(name=name)>
 {
+    // NOTE: Dispose is not needed for the StreamReaders since we are dealing with MemoryStream
+
     public class <loaderName(name=name)> : MarshalByRefObject, ILoader
     {
-        public AutomationTree Parse(string filePath)
+        public AutomationTree Parse(string text)
         {
-            var stream = new ANTLRFileStream(filePath);
+            var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(text)));
+            var stream = new ANTLRReaderStream(reader);
             var lexer = new <lexerName(name=name)>(stream);
             var tokens = new CommonTokenStream(lexer);
             var parser = new <parserName(name=name)>(tokens) 
@@ -21,9 +24,10 @@ namespace <namespace(name=name)>
             return parser.file().Tree;
         }
 
-        public string[] Tokenize(string filePath)
+        public string[] Tokenize(string text)
         {
-            var stream = new ANTLRFileStream(filePath);
+            var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(text)));
+            var stream = new ANTLRReaderStream(reader);
             var lexer = new <lexerName(name=name)>(stream);
             var tokens = new CommonTokenStream(lexer);
             var parser = new <parserName(name=name)>(tokens);
