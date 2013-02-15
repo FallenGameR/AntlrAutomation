@@ -32,9 +32,9 @@ NEWLINE
     : '\r'? '\n' { $channel = Hidden; };
 
 INDENT
-    : '<%$! INDENT tokens are inserted via IndentionGenerator during lexing !$%>';
+    : '\<%\$! INDENT tokens are inserted via IndentionGenerator during lexing !\$%\>';
 
 DEDENT
-    : '<%$! DEDENT tokens are inserted via IndentionGenerator during lexing !$%>';
+    : '\<%\$! DEDENT tokens are inserted via IndentionGenerator during lexing !\$%\>';
 >>
 
