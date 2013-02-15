@@ -115,7 +115,7 @@ namespace Automation.Core.Tests
                 StopIndex = anyIndex,
                 Channel = anyChannel,
             };
-
+            
             this.generator.Process(this.GetToken(whitespace, " "));
             this.generator.NextToken();
             this.generator.NextToken();
