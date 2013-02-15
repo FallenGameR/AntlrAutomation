@@ -34,7 +34,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Grammar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\DynamicMetaTree.cs" />
     <Compile Include="Logic\IndentionDetector.cs" />
