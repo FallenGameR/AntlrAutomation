@@ -28,7 +28,7 @@ function Parse-Item
     $setup.ApplicationBase = Get-LibrariesRoot
     $setup.PrivateBinPath = (Get-ChildItem (Get-LibrariesRoot) | where PSIsContainer | foreach Name) -join ";"
     $evidence = [AppDomain]::CurrentDomain.Evidence
-    $domainName = Get-Render domainName name
+    $domainName = Render-Template names/domain
     $parserDomain = [AppDomain]::CreateDomain( $domainName, $evidence, $setup )
 
     # Preaparing the loader for the parsing

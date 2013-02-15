@@ -135,14 +135,14 @@ function Generate-ParserExtensions( [string] $name )
     Get-Render parserExtensions name | Set-ParserSourceFile $name "$($name)Parser.Patial.cs"
 }
 
-function Get-Render( [string] $templateName )
+function Render-Template( [string] $templateName )
 {
     $template = $templates.GetInstanceOf($templateName)
 
-    foreach( $arg in $args )
+    foreach( $attribute in $template.GetAttributes().Keys )
     {
-        $value = (Get-Variable $arg).Value
-        $template.Add($arg, $value) | Out-Null
+        $value = (Get-Variable $attribute).Value
+        $template.Add($attribute, $value) | Out-Null
     }
 
     $template.Render()
