@@ -14,7 +14,7 @@ namespace <namespace(name=name)>
                 <parserName(name=name)>.INDENT, 
                 <parserName(name=name)>.DEDENT, 
                 <parserName(name=name)>.WS,
-                <lexerName(name=name)>.DefaultTokenChannel);
+                <lexerName(name=name)>.Hidden);
 
         public override IToken NextToken()
         {
