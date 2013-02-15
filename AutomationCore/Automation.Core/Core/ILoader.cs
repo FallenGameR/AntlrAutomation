@@ -8,7 +8,7 @@ namespace Automation.Core
 {
     public interface ILoader
     {
-        AutomationTree Parse(string filePath);
-        string[] Tokenize(string filePath);
+        AutomationTree Parse(string text);
+        string[] Tokenize(string text);
     }
 }

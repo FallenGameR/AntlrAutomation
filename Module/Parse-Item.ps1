@@ -19,7 +19,7 @@ function Parse-Item
         [switch] $Tokens
     )
 
-    $filePath = (Get-Item $filePath).FullName
+    $text = Get-Content $filePath
     $name = Get-ParserName $name
 
     # App domain is needed to be able to change parser assemby without closing current Powershell session
@@ -39,11 +39,11 @@ function Parse-Item
     # Get the tokens from the lexer or AST from the parser
     $result = if( $Tokens )
     {
-        Parse-Tokens $loader $filePath
+        Parse-Tokens $loader $text
     }
     else
     {
-        Parse-Tree $loader $filePath
+        Parse-Tree $loader $text
     }
 
     # Cleanup and return the result

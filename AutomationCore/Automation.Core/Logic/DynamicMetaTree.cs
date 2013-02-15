@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using Microsoft.CSharp.RuntimeBinder;
 
 namespace Automation.Core
 {

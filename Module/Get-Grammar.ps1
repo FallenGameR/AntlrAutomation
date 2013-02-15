@@ -13,6 +13,6 @@ function Get-Grammar
         - ShortText
         + Parse() that can handle AppDomain reuse in filter scenario
         + Save() that dumps dll and all references to a folder
-        CloseDomain
+        UnloadDomain
     #>
 }

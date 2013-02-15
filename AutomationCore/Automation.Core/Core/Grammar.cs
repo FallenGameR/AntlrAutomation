@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Antlr.Runtime;
-
-namespace Automation.Core
+﻿namespace Automation.Core
 {
     public class Grammar
     {
