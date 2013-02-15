@@ -250,7 +250,7 @@ $writer.Flush()
 [Console]::SetOut( $old )
 $writer.GetStringBuilder().ToString()
 ");
-            Assert.AreEqual("VARIABLE - ID <EOF>" + Environment.NewLine, Powershell.Out);
+            Assert.AreEqual("VARIABLE - ID <NL>" + Environment.NewLine + "<EOF>" + Environment.NewLine, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 

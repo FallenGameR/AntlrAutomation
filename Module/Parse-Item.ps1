@@ -19,7 +19,7 @@ function Parse-Item
         [switch] $Tokens
     )
 
-    $text = Get-Content $filePath
+    $text = Get-Content $filePath | Out-String
     $name = Get-ParserName $name
 
     # App domain is needed to be able to change parser assemby without closing current Powershell session
@@ -51,16 +51,16 @@ function Parse-Item
     $result
 }
 
-function Parse-Tree( $loader, $filePath )
+function Parse-Tree( $loader, $text )
 {
     # Transparent proxy cast is not working in Powershell, explicitly call Parse method via reflection
-    [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $filePath)
+    [Automation.Core.ILoader].GetMethod("Parse").Invoke($loader, $text)
 }
 
 function Parse-Tokens( $loader, $filePath )
 {
     # Does not actually return something, all output is printed in color to console
-    $tokens = [Automation.Core.ILoader].GetMethod("Tokenize").Invoke($loader, $filePath)
+    $tokens = [Automation.Core.ILoader].GetMethod("Tokenize").Invoke($loader, $text)
     $tokens | Colorize-Token
 }
 
