@@ -54,7 +54,7 @@ function Read-Grammar( [string] $path )
         # Short text gramar
         $name = (Get-Item $path).BaseName
         $tokens = (Get-ImaginaryTokens $text) -join " "
-        $text = Get-Render grammar name text tokens
+        $text = Render-Template grammar
     }
 
     $name, $text
@@ -129,10 +129,10 @@ function Generate-ParserCore( [string] $name )
 
 function Generate-ParserExtensions( [string] $name )
 {
-    Get-Render assemblyInfo name     | Set-ParserSourceFile $name "$($name)AssemblyInfo.cs"
-    Get-Render loader name           | Set-ParserSourceFile $name "$($name)Loader.cs"
-    Get-Render lexerExtensions name  | Set-ParserSourceFile $name "$($name)Lexer.Partial.cs"
-    Get-Render parserExtensions name | Set-ParserSourceFile $name "$($name)Parser.Patial.cs"
+    Render-Template assemblyInfo| Set-ParserSourceFile $name "$($name)AssemblyInfo.cs"
+    Render-Template loader      | Set-ParserSourceFile $name "$($name)Loader.cs"
+    Render-Template lexer       | Set-ParserSourceFile $name "$($name)Lexer.Partial.cs"
+    Render-Template parser      | Set-ParserSourceFile $name "$($name)Parser.Patial.cs"
 }
 
 function Render-Template( [string] $templateName )

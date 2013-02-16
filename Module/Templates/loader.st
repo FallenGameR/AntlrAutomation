@@ -7,19 +7,19 @@ using System.Text;
 using Antlr.Runtime;
 using Automation.Core;
 
-namespace <namespace(name=name)>
+namespace <names/namespace(name=name)>
 {
     // NOTE: Dispose is not needed for the StreamReaders since we are dealing with MemoryStream
 
-    public class <loaderName(name=name)> : MarshalByRefObject, ILoader
+    public class <names/loader(name=name)> : MarshalByRefObject, ILoader
     {
         public AutomationTree Parse(string text)
         {
             var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(text)));
             var stream = new ANTLRReaderStream(reader);
-            var lexer = new <lexerName(name=name)>(stream);
+            var lexer = new <names/lexer(name=name)>(stream);
             var tokens = new CommonTokenStream(lexer);
-            var parser = new <parserName(name=name)>(tokens) 
+            var parser = new <names/parser(name=name)>(tokens) 
             { 
                 TreeAdaptor = new AutomationAdaptor(),
             };
@@ -30,9 +30,9 @@ namespace <namespace(name=name)>
         {
             var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(text)));
             var stream = new ANTLRReaderStream(reader);
-            var lexer = new <lexerName(name=name)>(stream);
+            var lexer = new <names/lexer(name=name)>(stream);
             var tokens = new CommonTokenStream(lexer);
-            var parser = new <parserName(name=name)>(tokens);
+            var parser = new <names/parser(name=name)>(tokens);
 
             tokens.Fill();
             return tokens

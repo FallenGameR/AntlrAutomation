@@ -1,1 +1,0 @@
-parserName (name) ::= "<name>Parser"

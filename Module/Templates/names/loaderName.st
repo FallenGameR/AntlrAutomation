@@ -1,1 +1,0 @@
-loaderName (name) ::= "<name>Loader"

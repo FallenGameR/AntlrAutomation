@@ -14,8 +14,8 @@ tokens {<tokens>}
 
 @lexer::header{using Automation.Core;}
 @parser::header{using Automation.Core;}
-@lexer::namespace{<namespace(name=name)>}
-@parser::namespace{<namespace(name=name)>}
+@lexer::namespace{<names/namespace(name=name)>}
+@parser::namespace{<names/namespace(name=name)>}
 
 /*
  * User Rules

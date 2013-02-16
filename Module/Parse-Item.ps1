@@ -31,9 +31,9 @@ function Parse-Item
     $domainName = Render-Template names/domain
     $parserDomain = [AppDomain]::CreateDomain( $domainName, $evidence, $setup )
 
-    # Preaparing the loader for the parsing
+    # Preparing the loader for the parsing
     $dllPath = Get-ParserAssemblyPath $name
-    $loaderFullName = "{0}.{1}" -f (Get-Render namespace name), (Get-Render loaderName name)
+    $loaderFullName = "{0}.{1}" -f (Render-Template names/namespace), (Render-Template names/loader)
     $loader = $parserDomain.CreateInstanceFromAndUnwrap( $dllPath, $loaderFullName )
 
     # Get the tokens from the lexer or AST from the parser

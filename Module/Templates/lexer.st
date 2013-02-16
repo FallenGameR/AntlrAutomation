@@ -1,20 +1,20 @@
-﻿lexerExtensions (name) ::=
+﻿lexer (name) ::=
 <<
 using Automation.Core;
 using Antlr.Runtime;
 
-namespace <namespace(name=name)>
+namespace <names/namespace(name=name)>
 {
-    partial class <lexerName(name=name)>
+    partial class <names/lexer(name=name)>
     {
         public const int HIDDEN = Hidden;
 
         private readonly IndentionGenerator generator = 
             IndentionGenerator.GetInstance(
-                <parserName(name=name)>.INDENT, 
-                <parserName(name=name)>.DEDENT, 
-                <parserName(name=name)>.WS,
-                <lexerName(name=name)>.Hidden);
+                <names/parser(name=name)>.INDENT, 
+                <names/parser(name=name)>.DEDENT, 
+                <names/parser(name=name)>.WS,
+                <names/lexer(name=name)>.Hidden);
 
         public override IToken NextToken()
         {

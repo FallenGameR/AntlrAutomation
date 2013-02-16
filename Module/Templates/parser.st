@@ -1,23 +1,23 @@
-﻿parserExtensions (name) ::=
+﻿parser (name) ::=
 <<
 using System;
 using Antlr.Runtime;
 
-namespace <namespace(name=name)>
+namespace <names/namespace(name=name)>
 {
-    partial class <parserName(name=name)>
+    partial class <names/parser(name=name)>
     {
         public string RenderToken( IToken token )
         {
             switch (token.Type)
             {
-                case <parserName(name=name)>.WS:
+                case <names/parser(name=name)>.WS:
                     return new string('-', token.Text.Length) + " ";
 
-                case <parserName(name=name)>.NEWLINE:
+                case <names/parser(name=name)>.NEWLINE:
                     return "\<NL\>" + Environment.NewLine;
 
-                case <parserName(name=name)>.EOF:
+                case <names/parser(name=name)>.EOF:
                     return "\<EOF\>" + Environment.NewLine;
 
                 default:
