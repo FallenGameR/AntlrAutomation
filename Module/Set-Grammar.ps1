@@ -27,12 +27,17 @@ function Set-Grammar
     (
         [Parameter(Mandatory = $true)]
         [string] $GrammarPath,
-#        [switch] $EmitIndents,
+        [switch] $EmitIndents,
         [switch] $EmitNewline,
         [switch] $EmitWhitespace
     )
 
-    $indents = $false
+    # Control flags
+    $SCRIPT:EmitIndents = [bool] $EmitIndents
+    $SCRIPT:EmitNewline = [bool] $EmitNewline
+    $SCRIPT:EmitWhitespace = [bool] $EmitWhitespace
+
+    # Generating grammar
     $name, $text = Read-Grammar $grammarPath
     Clean-ParserFolder $name
     Set-GrammarFile $name $text

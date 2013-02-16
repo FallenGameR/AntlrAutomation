@@ -1,4 +1,4 @@
-﻿lexer (name, indents) ::=
+﻿lexer (name, emitIndents) ::=
 <<
 using Automation.Core;
 using Antlr.Runtime;
@@ -14,7 +14,7 @@ namespace <names/namespace(name=name)>
                 <names/parser(name=name)>.INDENT, 
                 <names/parser(name=name)>.DEDENT, 
                 <names/parser(name=name)>.WS,
-<if(indents)>   
+<if(emitIndents)>   
                 Lexer.DefaultTokenChannel);
 <else>          
                 Lexer.Hidden);
