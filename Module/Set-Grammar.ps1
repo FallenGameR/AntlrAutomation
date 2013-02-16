@@ -27,11 +27,12 @@ function Set-Grammar
     (
         [Parameter(Mandatory = $true)]
         [string] $GrammarPath,
-        [switch] $EmitIndents,
+#        [switch] $EmitIndents,
         [switch] $EmitNewline,
         [switch] $EmitWhitespace
     )
 
+    $indents = $false
     $name, $text = Read-Grammar $grammarPath
     Clean-ParserFolder $name
     Set-GrammarFile $name $text
