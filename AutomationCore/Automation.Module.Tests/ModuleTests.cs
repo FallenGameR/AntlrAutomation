@@ -44,8 +44,11 @@ namespace Automation.Module.Tests
             File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
             File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
             File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryGrammar);
+            File.WriteAllText("Temp/IndentGrammar.g3", Resources.IndentGrammar);
+
             File.WriteAllText("Temp/Sample.txt", Resources.SampleText);
             File.WriteAllText("Temp/Imaginary.txt", Resources.ImaginaryText);
+            File.WriteAllText("Temp/Indent.txt", Resources.IndentText);
         }
 
         [TestCleanup]
@@ -256,6 +259,7 @@ $writer.GetStringBuilder().ToString()
         [TestMethod]
         public void By_default_no_indents_newlines_and_whitespaces_are_generated()
         {
+            // 
             Assert.Inconclusive();
         }
 
@@ -280,6 +284,11 @@ $writer.GetStringBuilder().ToString()
         [TestMethod]
         public void Indents_and_dedents_are_emitted_correctly()
         {
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
+Parse-Item 'Temp\Indent.txt'
+");
             Assert.Inconclusive();
         }
 

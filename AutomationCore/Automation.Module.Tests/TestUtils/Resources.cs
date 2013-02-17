@@ -88,5 +88,20 @@ ID  : '0'..'9'+;
 
         public static string ImaginaryText = "name 42";
 
+        public static string IndentGrammar = @"
+file: tree+;
+tree: ID (INDENT tree+ DEDENT)?
+ID  : ('a'..'z' | '_')+;
+";
+
+        public static string IndentText = @"
+root_a
+    child_b
+    child_c
+    subroot_d
+        child_e
+        child_f
+    child_g
+";
     }
 }

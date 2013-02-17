@@ -63,8 +63,8 @@ function Read-Grammar( [string] $path )
 
 function Get-ImaginaryTokens( [string] $text )
 {
-    $tokenNames = ([regex] "[A-Z_]+").Matches($text).Value
-    $exceptNames = ([regex] "(?m)^[A-Z_]+").Matches($text).Value + "EOF"
+    $tokenNames = @(([regex] "'?[A-Z][A-Z_]+'?").Matches($text).Value | where{ -not $psitem.Contains("'") })
+    $exceptNames = @(([regex] "(?m)^[A-Z][A-Z_]+").Matches($text).Value) + "WS" + "NEWLINE" + "INDENT" + "DEDENT" + "EOF"
 
     $tokenSet = New-Object Collections.Generic.HashSet[string] (, [string[]] $tokenNames)
     $exceptSet = New-Object Collections.Generic.HashSet[string] (, [string[]] ($exceptNames))
