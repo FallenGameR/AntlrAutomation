@@ -253,10 +253,40 @@ $writer.GetStringBuilder().ToString()
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
-        // Indents can be emitted
-        // Indents emited correctly
-        // Whitespaces can be emitted
-        // Newlines can be emitted
-        // No caching effect on using the same templates
+        [TestMethod]
+        public void By_default_no_indents_newlines_and_whitespaces_are_generated()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Indents_can_be_emitted()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Whitespaces_can_be_emitted()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Newlines_can_be_emitted()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Indents_and_dedents_are_emitted_correctly()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void No_caching_effect_after_using_the_same_string_templates()
+        {
+            Assert.Inconclusive();
+        }
     }
 }
