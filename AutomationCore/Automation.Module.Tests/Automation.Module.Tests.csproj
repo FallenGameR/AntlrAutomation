@@ -56,7 +56,9 @@
     <Compile Include="TestUtils\Powershell.cs" />
     <Compile Include="TestUtils\Resources.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="ModuleTests.Helpers.cs" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
