@@ -1,4 +1,4 @@
-grammar (name, text, tokens) ::=
+grammar (name, text, tokens, emitNewline, emitWhitespace) ::=
 <<
 grammar <name>;
 
@@ -26,10 +26,10 @@ public <text>
  * Pre-defined Lexer Rules
  */
 
-WS  : (' ' | '\t' )+ { $channel = Hidden; };
+WS  : (' ' | '\t' )+ <if(!emitWhitespace)>{ $channel = Hidden; }<endif>;
 
 NEWLINE
-    : '\r'? '\n' { $channel = Hidden; };
+    : '\r'? '\n' <if(!emitNewline)>{ $channel = Hidden; }<endif>;
 
 INDENT
     : '\<%\$! INDENT tokens are inserted via IndentionGenerator during lexing !\$%\>';

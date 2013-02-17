@@ -32,6 +32,7 @@ function Set-Grammar
         [switch] $EmitWhitespace
     )
 
+    $templates.Unload()
     $name, $text = Read-Grammar $grammarPath
     Clean-ParserFolder $name
     Set-GrammarFile $name $text
