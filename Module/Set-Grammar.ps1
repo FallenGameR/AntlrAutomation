@@ -32,12 +32,6 @@ function Set-Grammar
         [switch] $EmitWhitespace
     )
 
-    # Control flags
-    $SCRIPT:EmitIndents = [bool] $EmitIndents
-    $SCRIPT:EmitNewline = [bool] $EmitNewline
-    $SCRIPT:EmitWhitespace = [bool] $EmitWhitespace
-
-    # Generating grammar
     $name, $text = Read-Grammar $grammarPath
     Clean-ParserFolder $name
     Set-GrammarFile $name $text
@@ -148,6 +142,10 @@ function Render-Template( [string] $templateName )
     foreach( $attribute in $template.GetAttributes().Keys )
     {
         $value = (Get-Variable $attribute).Value
+        if( $value -is [Management.Automation.SwitchParameter] )
+        {
+            $value = [bool] $value
+        }
         $template.Add($attribute, $value) | Out-Null
     }
 
