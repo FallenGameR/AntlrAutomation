@@ -287,7 +287,9 @@ $writer.GetStringBuilder().ToString()
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
-Parse-Item 'Temp\Indent.txt'
+Parse-Item indent 'Temp\Indent.txt'
+
+# $a.root_a.subroot_d ?
 ");
             Assert.Inconclusive();
         }

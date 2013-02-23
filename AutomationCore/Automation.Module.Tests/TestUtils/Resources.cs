@@ -89,8 +89,8 @@ ID  : '0'..'9'+;
         public static string ImaginaryText = "name 42";
 
         public static string IndentGrammar = @"
-file: tree+;
-tree: ID (INDENT tree+ DEDENT)?
+file: node+ EOF -> ^(ROOT node+);
+node: ID (INDENT node+ DEDENT)? -> ^(ID node*);
 ID  : ('a'..'z' | '_')+;
 ";
 
