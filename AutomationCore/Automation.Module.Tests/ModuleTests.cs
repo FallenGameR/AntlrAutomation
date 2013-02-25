@@ -315,7 +315,7 @@ Parse-Item MultiTokenNewlineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
-Parse-Item indent 'Temp\Indent.txt' -Tokens
+Parse-Item IndentGrammar 'Temp\Indent.txt' -Tokens
 ");
             var expected = @"
 <NL>
