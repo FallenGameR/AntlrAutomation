@@ -17,6 +17,12 @@ namespace <names/namespace(name=name)>
                 case <names/parser(name=name)>.NEWLINE:
                     return "\<NL\>" + Environment.NewLine;
 
+                case <names/parser(name=name)>.INDENT:
+                    return "\<INDENT\>" + Environment.NewLine;
+
+                case <names/parser(name=name)>.DEDENT:
+                    return "\<DEDENT\>" + Environment.NewLine;
+
                 case <names/parser(name=name)>.EOF:
                     return "\<EOF\>" + Environment.NewLine;
 
