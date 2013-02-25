@@ -287,16 +287,30 @@ $writer.GetStringBuilder().ToString()
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
-Parse-Item indent 'Temp\Indent.txt'
-
-# $a.root_a.subroot_d ?
+Parse-Item indent 'Temp\Indent.txt' -Tokens
 ");
-            Assert.Inconclusive();
+            var expected = @"
+<NL>
+ID <NL>
+<INDENT>
+---- ID <NL>
+---- ID <NL>
+---- ID <NL>
+<INDENT>
+-------- ID <NL>
+-------- ID <NL>
+<DEDENT>
+---- ID <NL>
+<DEDENT>
+<EOF>";
+            Assert.AreEqual(expected.Trim(), Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]
         public void No_caching_effect_after_using_the_same_string_templates()
         {
+            // if statement is not cached
             Assert.Inconclusive();
         }
     }
