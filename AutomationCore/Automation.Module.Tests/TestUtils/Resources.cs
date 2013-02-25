@@ -103,5 +103,35 @@ root_a
         child_f
     child_g
 ";
+
+        public static string MultiTokenBaseGrammar = @"
+text: ID ID EOF -> ^(BASE_ROOT ID+);
+ID  : 'a'..'z'+;
+";
+
+        public static string MultiTokenNewlineGrammar = @"
+text: ID NEWLINE ID EOF -> ^(NEWLINE_ROOT ID+);
+ID  : 'a'..'z'+;
+";
+
+        public static string MultiTokenWhitespaceGrammar = @"
+text: ID WS WS ID EOF -> ^(WHITESPACE_ROOT ID+);
+ID  : 'a'..'z'+;
+";
+
+        public static string MultiTokenIndentGrammar = @"
+text -> ^(INDENT_ROOT ID+);
+    ID
+    INDENT
+        ID
+    DEDENT
+    EOF;
+
+ID  : 'a'..'z'+;
+";
+
+        public static string MultiTokenText = 
+@"line
+  indent";
     }
 }

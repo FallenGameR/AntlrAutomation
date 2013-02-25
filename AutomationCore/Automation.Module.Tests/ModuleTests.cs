@@ -45,10 +45,15 @@ namespace Automation.Module.Tests
             File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
             File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryGrammar);
             File.WriteAllText("Temp/IndentGrammar.g3", Resources.IndentGrammar);
+            File.WriteAllText("Temp/MultiTokenBaseGrammar.g3", Resources.MultiTokenBaseGrammar);
+            File.WriteAllText("Temp/MultiTokenNewlineGrammar.g3", Resources.MultiTokenNewlineGrammar);
+            File.WriteAllText("Temp/MultiTokenWhitespaceGrammar.g3", Resources.MultiTokenWhitespaceGrammar);
+            File.WriteAllText("Temp/MultiTokenIndentGrammar.g3", Resources.MultiTokenIndentGrammar);
 
             File.WriteAllText("Temp/Sample.txt", Resources.SampleText);
             File.WriteAllText("Temp/Imaginary.txt", Resources.ImaginaryText);
             File.WriteAllText("Temp/Indent.txt", Resources.IndentText);
+            File.WriteAllText("Temp/MultiTokenText.txt", Resources.MultiTokenText);
         }
 
         [TestCleanup]
@@ -259,6 +264,12 @@ $writer.GetStringBuilder().ToString()
         [TestMethod]
         public void By_default_no_indents_newlines_and_whitespaces_are_generated()
         {
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\MultiTokenBaseGrammar.g3'
+Parse-Item multi 'Temp\MultiTokenText.txt'
+");
+            //Assert.AreEqual("
             // 
             Assert.Inconclusive();
         }
