@@ -105,27 +105,28 @@ root_a
 ";
 
         public static string MultiTokenBaseGrammar = @"
-text: ID ID EOF -> ^(BASE_ROOT ID+);
+file: ID ID EOF -> ^(BASE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
         public static string MultiTokenNewlineGrammar = @"
-text: ID NEWLINE ID EOF -> ^(NEWLINE_ROOT ID+);
+file: ID NEWLINE ID EOF -> ^(NEWLINE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
         public static string MultiTokenWhitespaceGrammar = @"
-text: ID WS WS ID EOF -> ^(WHITESPACE_ROOT ID+);
+file: ID WS WS ID EOF -> ^(WHITESPACE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
         public static string MultiTokenIndentGrammar = @"
-text -> ^(INDENT_ROOT ID+);
+file:
     ID
     INDENT
         ID
     DEDENT
-    EOF;
+    EOF
+    -> ^(INDENT_ROOT ID+);
 
 ID  : 'a'..'z'+;
 ";
