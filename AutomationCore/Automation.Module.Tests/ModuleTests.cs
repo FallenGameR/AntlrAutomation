@@ -338,8 +338,25 @@ ID <NL>
         [TestMethod]
         public void No_caching_effect_after_using_the_same_string_templates()
         {
-            // if statement is not cached
-            Assert.Inconclusive();
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+
+Set-Grammar 'Temp\MultiTokenBaseGrammar.g3'
+Parse-Item MultiTokenBaseGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+
+Set-Grammar 'Temp\MultiTokenWhitespaceGrammar.g3' -EmitWhitespace
+Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+");
+
+            var expected = @"
+(BASE_ROOT line indent)
+(WHITESPACE_ROOT line indent)
+";
+            // Checking if 'if' statement in string template is 
+            // cached within one Powershell session
+
+            Assert.AreEqual(expected.Trim(), Powershell.Out.Trim());
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
     }
 }
