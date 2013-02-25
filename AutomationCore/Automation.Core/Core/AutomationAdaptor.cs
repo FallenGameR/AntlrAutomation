@@ -15,5 +15,10 @@ namespace Automation.Core
         {
             return new AutomationTree(token);
         }
+
+        public override object ErrorNode(ITokenStream input, IToken start, IToken stop, RecognitionException ex)
+        {
+            return new AutomationErrorNode(input, start, stop, ex);
+        }
     }
 }

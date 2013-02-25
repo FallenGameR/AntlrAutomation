@@ -267,17 +267,22 @@ $writer.GetStringBuilder().ToString()
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\MultiTokenBaseGrammar.g3'
-Parse-Item multi 'Temp\MultiTokenText.txt'
+Parse-Item MultiTokenBaseGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
 ");
-            //Assert.AreEqual("
-            // 
-            Assert.Inconclusive();
+            Assert.AreEqual("(BASE_ROOT line indent)", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]
         public void Indents_can_be_emitted()
         {
-            Assert.Inconclusive();
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\MultiTokenIndentGrammar.g3' -EmitIndents
+Parse-Item MultiTokenIndentGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+");
+            Assert.AreEqual("(INDENT_ROOT line indent)", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]

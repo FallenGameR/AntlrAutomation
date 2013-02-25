@@ -1,4 +1,5 @@
 Check for reserved words in the grammar - tree.
+Custom grammar enter rule (not just hard coded 'file' rule).
 Indention
 
 Get-Grammar
