@@ -288,13 +288,25 @@ Parse-Item MultiTokenIndentGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
         [TestMethod]
         public void Whitespaces_can_be_emitted()
         {
-            Assert.Inconclusive();
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\MultiTokenWhitespaceGrammar.g3' -EmitWhitespace
+Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+");
+            Assert.AreEqual("(WHITESPACE_ROOT line indent)", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]
         public void Newlines_can_be_emitted()
         {
-            Assert.Inconclusive();
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\MultiTokenNewlineGrammar.g3' -EmitNewline
+Parse-Item MultiTokenNewlineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+");
+            Assert.AreEqual("(NEWLINE_ROOT line indent)", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
         [TestMethod]
