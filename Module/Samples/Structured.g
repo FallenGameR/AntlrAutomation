@@ -1,13 +1,13 @@
-file: section*;
+file: section* -> ^(SECTIONS section*);
 
-section: '[' ID ']' NEWLINE property*;
+section: '[' ID ']' NEWLINE property* -> ^(ID property*);
 
-property: name '=' value NEWLINE;
+property: name '=' value NEWLINE -> ^(name value);
 
 name: ID;
 
 value: .*;
 
-COMMENTS: '!' (~NEWLINE) NEWLINE;
+COMMENTS: ';' .* '\n' { $channel = Hidden; };
 
-ID: 'a'..'z' | 'A'..'Z' | '0'..'9' | '_' | '-' | '$' | '.' | '*';
+ID: ('a'..'z' | 'A'..'Z' | '0'..'9' | '_' | '-' | '$' | '.' | '*')+;
