@@ -13,7 +13,6 @@ namespace Automation.Core
         private readonly int whitespaceType;
         private readonly int channelNumber;
         private readonly IndentionDetector detector;
-        private readonly Queue<IToken> queuedTokens;
 
         private IndentionGenerator(int indentType, int dedentType, int whitespaceType, int channel)
         {
@@ -22,12 +21,6 @@ namespace Automation.Core
             this.whitespaceType = whitespaceType;
             this.channelNumber = channel;
             this.detector = IndentionDetector.GetInstance();
-            this.queuedTokens = new Queue<IToken>();
-        }
-
-        public bool HasTokens
-        {
-            get { return this.queuedTokens.Any(); }
         }
 
         public static IndentionGenerator GetInstance(int indentType, int dedentType, int whitespaceType, int channel)
@@ -35,35 +28,11 @@ namespace Automation.Core
             return new IndentionGenerator(indentType, dedentType, whitespaceType, channel);
         }
 
-        public void Process(IToken token)
-        {
-            // Queue indentation tokens if needed
-            if (this.IsTrigger(token))
-            {
-                var toEnqueue = this.detector
-                    .Detect(this.GetPosition(token))
-                    .Select(ind => this.GenerateImaginaryToken(ind, token));
-
-                foreach (var generatedToken in toEnqueue)
-                {
-                    this.queuedTokens.Enqueue(generatedToken);
-                }
-            }
-
-            // Preserve original token
-            this.queuedTokens.Enqueue(token);
-        }
-
         public IEnumerable<IToken> Generate(IToken token)
         {
             return this.detector
                 .Detect(this.GetPosition(token))
                 .Select(ind => this.GenerateImaginaryToken(ind, token));
-        }
-
-        public IToken NextToken()
-        {
-            return this.queuedTokens.Dequeue();
         }
 
         public bool IsTrigger(IToken token)
@@ -79,17 +48,17 @@ namespace Automation.Core
                 case Indention.Indent:
                     return new CommonToken(original)
                     {
-                        Type = this.indentType,
                         Text = "INDENT",
-                        Channel = channelNumber,
+                        Type = this.indentType,
+                        Channel = this.channelNumber,
                     };
 
                 case Indention.Dedent:
                     return new CommonToken(original)
                     {
-                        Type = this.dedentType,
                         Text = "DEDENT",
-                        Channel = channelNumber,
+                        Type = this.dedentType,
+                        Channel = this.channelNumber,
                     };
 
                 default:
