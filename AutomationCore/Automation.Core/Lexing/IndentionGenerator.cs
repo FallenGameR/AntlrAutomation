@@ -28,17 +28,17 @@ namespace Automation.Core
             return new IndentionGenerator(indentType, dedentType, whitespaceType, channel);
         }
 
+        public bool IsTrigger(IToken token)
+        {
+            var isLeadingWhitespace = (token.Type == this.whitespaceType) && (token.CharPositionInLine == 0);
+            return isLeadingWhitespace || token.IsEof();
+        }
+
         public IEnumerable<IToken> Generate(IToken token)
         {
             return this.detector
                 .Detect(this.GetPosition(token))
                 .Select(ind => this.GenerateImaginaryToken(ind, token));
-        }
-
-        public bool IsTrigger(IToken token)
-        {
-            var isLeadingWhitespace = (token.Type == this.whitespaceType) && (token.CharPositionInLine == 0);
-            return isLeadingWhitespace || token.IsEof();
         }
 
         private IToken GenerateImaginaryToken(Indention indention, IToken original)

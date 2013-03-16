@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Indentation\IndentionGeneratorTests.cs" />
     <Compile Include="Shared\AutomationTreeTests.cs" />
     <Compile Include="Utils\ConstantTests.cs" />
     <Compile Include="DynamicTests.cs" />
