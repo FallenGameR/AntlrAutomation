@@ -31,7 +31,6 @@ namespace Automation.Core
         {
 
 
-
             return new Emitter(null);
         }
 

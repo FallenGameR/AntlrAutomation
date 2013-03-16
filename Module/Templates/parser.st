@@ -10,15 +10,16 @@ namespace <names/namespace(name=name)>
         public string RenderToken( IToken token )
         {
             var text = RenderTokenText(token);
+            var isTerminator = text.StartsWith( "\<" );
         
-            // Hidden tokens are in square braces
+            // Put hidden tokens in square braces
             if( token.Channel == <names/lexer(name=name)>.Hidden )
             {
                 text = "[" + text + "]";
             }
 
-            // Terminator tokens are in angle braces
-            if( text.StartsWith( "\<" ) )
+            // Put new lines after terminator tokens
+            if( isTerminator )
             {
                 text += Environment.NewLine;
             }

@@ -318,17 +318,17 @@ Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
 Parse-Item IndentGrammar 'Temp\Indent.txt' -Tokens
 ");
             var expected = @"
-<NL>
-ID <NL>
+[<NL>]
+ID [<NL>]
 <INDENT>
----- ID <NL>
----- ID <NL>
----- ID <NL>
+[----] ID [<NL>]
+[----] ID [<NL>]
+[----] ID [<NL>]
 <INDENT>
--------- ID <NL>
--------- ID <NL>
+[--------] ID [<NL>]
+[--------] ID [<NL>]
 <DEDENT>
----- ID <NL>
+[----] ID [<NL>]
 <DEDENT>
 <EOF>";
             Assert.AreEqual(expected.Trim(), Powershell.Out);
