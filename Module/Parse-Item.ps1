@@ -79,23 +79,24 @@ filter Colorize-Token
         [Console]::ForegroundColor = $original
     }
 
-    switch -regex ( $psitem )
+    $token = $psitem
+    switch -regex ( $psitem.Trim() )
     {
-        "^\s*\[[A-Z_]+\]\s*$"
+        "(?x) ^\[ [^\]]+ \]$"
         {
-            Write-Console $psitem DarkYellow
+            Write-Console $token DarkYellow
         }
-        "^\s*<[A-Z_]+>\s*$"
+        "(?x) ^< [^>]+ >$"
         {
-            Write-Console $psitem DarkGreen
+            Write-Console $token DarkGreen
         }
-        "^\s*-+\s*$"
+        "^-+$"
         {
-            Write-Console $psitem DarkCyan
+            Write-Console $token DarkCyan
         }
         default
         {
-            Write-Console $psitem
+            Write-Console $token
         }
     }
 }
