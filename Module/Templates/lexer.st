@@ -16,7 +16,7 @@ namespace <names/namespace(name=name)>
                     <names/parser(name=name)>.DEDENT, 
                     <names/parser(name=name)>.WS,
 <if(emitIndents)>   
-                    Lexer.DefaultTokenChannel);
+                    Lexer.DefaultTokenChannel)
 <else>          
                     Lexer.Hidden)
 <endif> 
