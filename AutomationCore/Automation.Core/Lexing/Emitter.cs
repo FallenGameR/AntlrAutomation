@@ -4,14 +4,21 @@ using System.Linq;
 using System.Text;
 using Antlr.Runtime;
 
-namespace Automation.Core.Logic
+namespace Automation.Core
 {
-    public abstract class Emitter
+    public class Emitter
     {
+        private readonly IEnumerable<IGenerator> generators;
         private readonly Queue<IToken> queuedTokens;
 
-        private Emitter()
+        private Emitter(IEnumerable<IGenerator> generators)
         {
+            if (generators == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.generators = generators;
             this.queuedTokens = new Queue<IToken>();
         }
 
@@ -22,17 +29,23 @@ namespace Automation.Core.Logic
 
         public static Emitter GetInstance()
         {
-            return new Emitter();
+
+
+
+            return new Emitter(null);
         }
 
         public void Process(IToken token)
         {
-            // Emit tokens if needed
-            if (this.IsTrigger(token))
+            // Generate tokens if needed
+            foreach (var generator in this.generators)
             {
-                foreach (var generated in this.Generate(token))
+                if (generator.IsTrigger(token))
                 {
-                    this.queuedTokens.Enqueue(generated);
+                    foreach (var generated in generator.Generate(token))
+                    {
+                        this.queuedTokens.Enqueue(generated);
+                    }
                 }
             }
 
@@ -44,9 +57,5 @@ namespace Automation.Core.Logic
         {
             return this.queuedTokens.Dequeue();
         }
-
-        protected abstract bool IsTrigger(IToken token);
-
-        protected abstract IEnumerable<IToken> Generate(IToken token);
     }
 }
