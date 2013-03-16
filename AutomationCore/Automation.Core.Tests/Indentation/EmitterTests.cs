@@ -24,53 +24,53 @@ namespace Automation.Core.Tests
         private const int anyIndex = 3;
         private const int anyChannel = 4;
 
-        private IndentionGenerator generator;
+        private Emitter emitter;
 
         [TestInitialize]
         public void Initialize()
         {
-            this.generator = IndentionGenerator.GetInstance(indent, dedent, whitespace, channel);
+            this.emitter = Emitter.GetInstance(IndentionGenerator.GetInstance(indent, dedent, whitespace, channel));
         }
 
         [TestMethod]
         public void Token_generation_workflow_works_correctly()
         {
             // HasTokens shows if there are tokens left in the queue
-            Assert.IsFalse(generator.HasTokens);
+            Assert.IsFalse(emitter.HasTokens);
 
             // Process preserves original token in the queue
-            generator.Process(this.GetToken(any));
-            Assert.IsTrue(generator.HasTokens);
+            emitter.Process(this.GetToken(any));
+            Assert.IsTrue(emitter.HasTokens);
 
             // NextToken drains the queue
-            Assert.AreEqual(any, generator.NextToken().Type);
-            Assert.IsFalse(generator.HasTokens);
+            Assert.AreEqual(any, emitter.NextToken().Type);
+            Assert.IsFalse(emitter.HasTokens);
 
             // Process puts indention tokens on whitespaces 
-            generator.Process(this.GetToken(whitespace, " "));
-            Assert.AreEqual(indent, generator.NextToken().Type);
-            Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual(whitespace, generator.NextToken().Type);
-            Assert.IsFalse(generator.HasTokens);
+            emitter.Process(this.GetToken(whitespace, " "));
+            Assert.AreEqual(indent, emitter.NextToken().Type);
+            Assert.IsTrue(emitter.HasTokens);
+            Assert.AreEqual(whitespace, emitter.NextToken().Type);
+            Assert.IsFalse(emitter.HasTokens);
 
             // Process puts dedention tokens on whitespaces
-            generator.Process(this.GetToken(whitespace, "    "));
-            generator.Process(this.GetToken(whitespace, " "));
-            Assert.AreEqual(indent, generator.NextToken().Type);
-            Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual(whitespace, generator.NextToken().Type);
-            Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual(dedent, generator.NextToken().Type);
-            Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual(whitespace, generator.NextToken().Type);
-            Assert.IsFalse(generator.HasTokens);
+            emitter.Process(this.GetToken(whitespace, "    "));
+            emitter.Process(this.GetToken(whitespace, " "));
+            Assert.AreEqual(indent, emitter.NextToken().Type);
+            Assert.IsTrue(emitter.HasTokens);
+            Assert.AreEqual(whitespace, emitter.NextToken().Type);
+            Assert.IsTrue(emitter.HasTokens);
+            Assert.AreEqual(dedent, emitter.NextToken().Type);
+            Assert.IsTrue(emitter.HasTokens);
+            Assert.AreEqual(whitespace, emitter.NextToken().Type);
+            Assert.IsFalse(emitter.HasTokens);
 
             // Process puts dedention tokens on EOF
-            generator.Process(this.GetToken(Constant.Eof));
-            Assert.AreEqual(dedent, generator.NextToken().Type);
-            Assert.IsTrue(generator.HasTokens);
-            Assert.AreEqual(Constant.Eof, generator.NextToken().Type);
-            Assert.IsFalse(generator.HasTokens);
+            emitter.Process(this.GetToken(Constant.Eof));
+            Assert.AreEqual(dedent, emitter.NextToken().Type);
+            Assert.IsTrue(emitter.HasTokens);
+            Assert.AreEqual(Constant.Eof, emitter.NextToken().Type);
+            Assert.IsFalse(emitter.HasTokens);
         }
 
         [TestMethod]
@@ -88,8 +88,8 @@ namespace Automation.Core.Tests
                 Channel = anyChannel,
             };
 
-            this.generator.Process(leadingWhitespaceToken);
-            var token = this.generator.NextToken();
+            this.emitter.Process(leadingWhitespaceToken);
+            var token = this.emitter.NextToken();
 
             Assert.AreEqual(indent, token.Type);
             Assert.AreEqual("INDENT", token.Text);
@@ -115,12 +115,12 @@ namespace Automation.Core.Tests
                 StopIndex = anyIndex,
                 Channel = anyChannel,
             };
-            
-            this.generator.Process(this.GetToken(whitespace, " "));
-            this.generator.NextToken();
-            this.generator.NextToken();
-            this.generator.Process(eofToken);
-            var token = this.generator.NextToken();
+
+            this.emitter.Process(this.GetToken(whitespace, " "));
+            this.emitter.NextToken();
+            this.emitter.NextToken();
+            this.emitter.Process(eofToken);
+            var token = this.emitter.NextToken();
 
             Assert.AreEqual(dedent, token.Type);
             Assert.AreEqual("DEDENT", token.Text);
@@ -137,18 +137,18 @@ namespace Automation.Core.Tests
         {
             var spaceLength = 1;
             var tabLength = 4;
-            
-            this.generator.Process(this.GetToken(whitespace, new string(' ', tabLength - spaceLength)));
-            Assert.AreEqual(indent, generator.NextToken().Type);
-            Assert.AreEqual(whitespace, generator.NextToken().Type);
 
-            this.generator.Process(this.GetToken(whitespace, "\t"));
-            Assert.AreEqual(indent, generator.NextToken().Type);
-            Assert.AreEqual(whitespace, generator.NextToken().Type);
+            this.emitter.Process(this.GetToken(whitespace, new string(' ', tabLength - spaceLength)));
+            Assert.AreEqual(indent, emitter.NextToken().Type);
+            Assert.AreEqual(whitespace, emitter.NextToken().Type);
 
-            this.generator.Process(this.GetToken(whitespace, new string(' ', tabLength + spaceLength)));
-            Assert.AreEqual(indent, generator.NextToken().Type);
-            Assert.AreEqual(whitespace, generator.NextToken().Type);
+            this.emitter.Process(this.GetToken(whitespace, "\t"));
+            Assert.AreEqual(indent, emitter.NextToken().Type);
+            Assert.AreEqual(whitespace, emitter.NextToken().Type);
+
+            this.emitter.Process(this.GetToken(whitespace, new string(' ', tabLength + spaceLength)));
+            Assert.AreEqual(indent, emitter.NextToken().Type);
+            Assert.AreEqual(whitespace, emitter.NextToken().Type);
         }
 
         private IToken GetToken(int type, string text = "")

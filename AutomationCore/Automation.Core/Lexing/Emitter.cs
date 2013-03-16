@@ -11,7 +11,7 @@ namespace Automation.Core
         private readonly IEnumerable<IGenerator> generators;
         private readonly Queue<IToken> queuedTokens;
 
-        private Emitter(IEnumerable<IGenerator> generators)
+        private Emitter(params IGenerator[] generators)
         {
             if (generators == null)
             {
@@ -27,11 +27,9 @@ namespace Automation.Core
             get { return this.queuedTokens.Any(); }
         }
 
-        public static Emitter GetInstance()
+        public static Emitter GetInstance(params IGenerator[] generators)
         {
-
-
-            return new Emitter(null);
+            return new Emitter(generators);
         }
 
         public void Process(IToken token)

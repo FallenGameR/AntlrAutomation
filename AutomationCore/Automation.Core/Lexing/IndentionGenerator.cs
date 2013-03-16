@@ -6,7 +6,7 @@ using Antlr.Runtime;
 
 namespace Automation.Core
 {
-    public class IndentionGenerator
+    public class IndentionGenerator: IGenerator
     {
         private readonly int indentType;
         private readonly int dedentType;
@@ -54,12 +54,19 @@ namespace Automation.Core
             this.queuedTokens.Enqueue(token);
         }
 
+        public IEnumerable<IToken> Generate(IToken token)
+        {
+            return this.detector
+                .Detect(this.GetPosition(token))
+                .Select(ind => this.GenerateImaginaryToken(ind, token));
+        }
+
         public IToken NextToken()
         {
             return this.queuedTokens.Dequeue();
         }
 
-        private bool IsTrigger(IToken token)
+        public bool IsTrigger(IToken token)
         {
             var isLeadingWhitespace = (token.Type == this.whitespaceType) && (token.CharPositionInLine == 0);
             return isLeadingWhitespace || token.IsEof();

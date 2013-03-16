@@ -59,7 +59,7 @@
     <Compile Include="Utils\ConstantTests.cs" />
     <Compile Include="DynamicTests.cs" />
     <Compile Include="Indentation\IndentionDetectorTests.cs" />
-    <Compile Include="Indentation\IndentionGeneratorTests.cs" />
+    <Compile Include="Indentation\EmitterTests.cs" />
     <Compile Include="Indentation\IndentionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
