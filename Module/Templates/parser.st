@@ -9,25 +9,48 @@ namespace <names/namespace(name=name)>
     {
         public string RenderToken( IToken token )
         {
+            var text = RenderTokenText(token);
+        
+            // Hidden tokens are in square braces
+            if( token.Channel == <names/lexer(name=name)>.Hidden )
+            {
+                text = "[" + text + "]";
+            }
+
+            // Terminator tokens are in angle braces
+            if( text.StartsWith( "\<" ) )
+            {
+                text += Environment.NewLine;
+            }
+            else
+            {
+                text += " ";
+            }
+
+            return text;
+        }
+
+        public string RenderTokenText( IToken token )
+        {
             switch (token.Type)
             {
                 case <names/parser(name=name)>.WS:
-                    return new string('-', token.Text.Length) + " ";
+                    return new string('-', token.Text.Length);
 
                 case <names/parser(name=name)>.NEWLINE:
-                    return "\<NL\>" + Environment.NewLine;
+                    return "\<NL\>";
 
                 case <names/parser(name=name)>.INDENT:
-                    return "\<INDENT\>" + Environment.NewLine;
+                    return "\<INDENT\>";
 
                 case <names/parser(name=name)>.DEDENT:
-                    return "\<DEDENT\>" + Environment.NewLine;
+                    return "\<DEDENT\>";
 
                 case <names/parser(name=name)>.EOF:
-                    return "\<EOF\>" + Environment.NewLine;
+                    return "\<EOF\>";
 
                 default:
-                    return this.TokenNames[token.Type].Trim('\'') + " ";
+                    return this.TokenNames[token.Type].Trim('\'');
             }
         }
     }
