@@ -9,27 +9,29 @@ namespace <names/namespace(name=name)>
     {
         public const int HIDDEN = Hidden;
 
-        private readonly IndentionGenerator generator = 
-            IndentionGenerator.GetInstance(
-                <names/parser(name=name)>.INDENT, 
-                <names/parser(name=name)>.DEDENT, 
-                <names/parser(name=name)>.WS,
+        private readonly Emitter emitter = 
+            Emitter.GetInstance(
+                IndentionGenerator.GetInstance(
+                    <names/parser(name=name)>.INDENT, 
+                    <names/parser(name=name)>.DEDENT, 
+                    <names/parser(name=name)>.WS,
 <if(emitIndents)>   
-                Lexer.DefaultTokenChannel);
+                    Lexer.DefaultTokenChannel);
 <else>          
-                Lexer.Hidden);
+                    Lexer.Hidden)
 <endif> 
+            );
 
         public override IToken NextToken()
         {
-            if (this.generator.HasTokens)
+            if (this.emitter.HasTokens)
             {
-                return this.generator.NextToken();
+                return this.emitter.NextToken();
             }
 
             var token = base.NextToken();
-            this.generator.Process(token);
-            return this.generator.NextToken();
+            this.emitter.Process(token);
+            return this.emitter.NextToken();
         }
     }
 }
