@@ -1,13 +1,10 @@
 file: section* -> ^(SECTIONS section*);
 
-section: '[' ID ']' NEWLINE property* -> ^(ID property*);
-
-property: name '=' value NEWLINE -> ^(name value);
-
+section: BOL '[' ID ']' property* -> ^(ID property*);
+property: BOL name '=' value -> ^(name value);
 name: ID;
-
-value: .*;
-
-COMMENTS: ';' .* '\n' { $channel = Hidden; };
+value: ~BOL;
 
 ID: ('a'..'z' | 'A'..'Z' | '0'..'9' | '_' | '-' | '$' | '.' | '*')+;
+COMMENTS: ';' .* '\n' { $channel = Hidden; };
+
