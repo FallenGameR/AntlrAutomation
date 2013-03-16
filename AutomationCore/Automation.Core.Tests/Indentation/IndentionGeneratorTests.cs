@@ -10,9 +10,33 @@ namespace Automation.Core.Tests.Indentation
     [TestClass]
     public class IndentionGeneratorTests
     {
+        private const int any = 10;
+        private const int indent = 20;
+        private const int dedent = 30;
+        private const int whitespace = 40;
+        private const int channel = 50;
+
+        private const int leadingPosition = 0;
+
+        private const int anyPosition = 1;
+        private const int anyLine = 2;
+        private const int anyIndex = 3;
+        private const int anyChannel = 4;
+
+        private IGenerator generator;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            this.generator = IndentionGenerator.GetInstance(indent, dedent, whitespace, channel);
+        }
+
         [TestMethod]
         public void Indention_is_triggered_for_any_token_that_is_first_in_line()
         {
+
+
+
             Assert.Inconclusive();
         }
 
@@ -33,5 +57,8 @@ namespace Automation.Core.Tests.Indentation
         {
             Assert.Inconclusive();
         }
+
+        // Indention uses correct channel
+        // Indention uses correct text
     }
 }

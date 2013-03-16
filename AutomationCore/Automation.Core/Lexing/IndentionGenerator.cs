@@ -23,7 +23,7 @@ namespace Automation.Core
             this.detector = IndentionDetector.GetInstance();
         }
 
-        public static IndentionGenerator GetInstance(int indentType, int dedentType, int whitespaceType, int channel)
+        public static IGenerator GetInstance(int indentType, int dedentType, int whitespaceType, int channel)
         {
             return new IndentionGenerator(indentType, dedentType, whitespaceType, channel);
         }
