@@ -2,7 +2,9 @@
 {
     public static class Resources
     {
-        public static string SampleFull =
+        #region Full and Short
+
+        public static string Full =
 @"
 grammar SampleFull;
 
@@ -51,19 +53,17 @@ DEDENT
     : '<%$! DEDENT tokens are inserted via IndentionGenerator during lexing !$%>';
 ";
 
-        public static string SampleShort =
+        public static string Short =
 @"
 // Simple parser grammar
 
-file: section+ EOF -> ^(FILE section+);
-
-section
-    : 'start' WORD* 'end' -> ^(SECTION WORD*);
+file   : section+ EOF -> ^(FILE section+);
+section: 'start' WORD* 'end' -> ^(SECTION WORD*);
 
 WORD: 'a'..'z'+;
 ";
 
-        public static string SampleText =
+        public static string FullShortTest =
 @"
 start
     some
@@ -76,9 +76,12 @@ start
     section
     here
 end
-";
+"; 
+        #endregion
 
-        public static string ImaginaryGrammar =
+        #region Imaginary tokens
+
+        public static string ImaginaryTokens =
 @"
 file: VARIABLE ID EOF -> ^(ANY_TOKEN VARIABLE ID);
 VARIABLE
@@ -86,15 +89,19 @@ VARIABLE
 ID  : '0'..'9'+;
 ";
 
-        public static string ImaginaryText = "name 42";
+        public static string ImaginaryTokensText = "name 42";
 
-        public static string IndentGrammar = @"
+        #endregion
+
+        #region Indents
+
+        public static string Indents = @"
 file: node+ EOF -> ^(ROOT node+);
 node: ID (INDENT node+ DEDENT)? -> ^(ID node*);
 ID  : ('a'..'z' | '_')+;
 ";
 
-        public static string IndentText = @"
+        public static string IndentsText = @"
 root_a
     child_b
     child_c
@@ -104,22 +111,26 @@ root_a
     child_g
 ";
 
-        public static string MultiTokenBaseGrammar = @"
+        #endregion
+
+        #region Emit
+
+        public static string EmitBase = @"
 file: ID ID EOF -> ^(BASE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
-        public static string MultiTokenEndOfLineGrammar = @"
+        public static string EmitEol = @"
 file: ID EOL ID EOF -> ^(EOL_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
-        public static string MultiTokenWhitespaceGrammar = @"
+        public static string EmitWs = @"
 file: ID WS WS ID EOF -> ^(WHITESPACE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
-        public static string MultiTokenIndentGrammar = @"
+        public static string EmitIndent = @"
 file:
     ID
     INDENT
@@ -131,8 +142,10 @@ file:
 ID  : 'a'..'z'+;
 ";
 
-        public static string MultiTokenText = 
+        public static string EmitText =
 @"line
   indent";
+
+        #endregion
     }
 }

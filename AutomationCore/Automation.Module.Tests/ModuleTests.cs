@@ -41,19 +41,19 @@ namespace Automation.Module.Tests
             }
 
             // Create temp files used in tests
-            File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
-            File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
-            File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryGrammar);
-            File.WriteAllText("Temp/IndentGrammar.g3", Resources.IndentGrammar);
-            File.WriteAllText("Temp/MultiTokenBaseGrammar.g3", Resources.MultiTokenBaseGrammar);
-            File.WriteAllText("Temp/MultiTokenEndOfLineGrammar.g3", Resources.MultiTokenEndOfLineGrammar);
-            File.WriteAllText("Temp/MultiTokenWhitespaceGrammar.g3", Resources.MultiTokenWhitespaceGrammar);
-            File.WriteAllText("Temp/MultiTokenIndentGrammar.g3", Resources.MultiTokenIndentGrammar);
+            File.WriteAllText("Temp/SampleFull.g3", Resources.Full);
+            File.WriteAllText("Temp/SampleShort.g3", Resources.Short);
+            File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryTokens);
+            File.WriteAllText("Temp/IndentGrammar.g3", Resources.Indents);
+            File.WriteAllText("Temp/MultiTokenBaseGrammar.g3", Resources.EmitBase);
+            File.WriteAllText("Temp/MultiTokenEndOfLineGrammar.g3", Resources.EmitEol);
+            File.WriteAllText("Temp/MultiTokenWhitespaceGrammar.g3", Resources.EmitWs);
+            File.WriteAllText("Temp/MultiTokenIndentGrammar.g3", Resources.EmitIndent);
 
-            File.WriteAllText("Temp/Sample.txt", Resources.SampleText);
-            File.WriteAllText("Temp/Imaginary.txt", Resources.ImaginaryText);
-            File.WriteAllText("Temp/Indent.txt", Resources.IndentText);
-            File.WriteAllText("Temp/MultiTokenText.txt", Resources.MultiTokenText);
+            File.WriteAllText("Temp/Sample.txt", Resources.FullShortTest);
+            File.WriteAllText("Temp/Imaginary.txt", Resources.ImaginaryTokensText);
+            File.WriteAllText("Temp/Indent.txt", Resources.IndentsText);
+            File.WriteAllText("Temp/MultiTokenText.txt", Resources.EmitText);
         }
 
         [TestCleanup]
