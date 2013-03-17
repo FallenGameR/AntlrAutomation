@@ -28,7 +28,7 @@ public <text>
 
 WS  : (' ' | '\t' )+ <if(!emitWhitespace)>{ $channel = Hidden; }<endif>;
 
-NEWLINE
+EOL
     : '\r'? '\n' <if(!emitNewline)>{ $channel = Hidden; }<endif>;
 
 INDENT

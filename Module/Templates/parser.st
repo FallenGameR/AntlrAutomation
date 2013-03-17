@@ -38,8 +38,8 @@ namespace <names/namespace(name=name)>
                 case <names/parser(name=name)>.WS:
                     return new string('-', token.Text.Length);
 
-                case <names/parser(name=name)>.NEWLINE:
-                    return "\<NL\>";
+                case <names/parser(name=name)>.EOL:
+                    return "\<EOL\>";
 
                 case <names/parser(name=name)>.INDENT:
                     return "\<INDENT\>";
