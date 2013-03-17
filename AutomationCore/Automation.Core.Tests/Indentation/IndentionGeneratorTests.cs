@@ -14,23 +14,17 @@ namespace Automation.Core.Tests.Indentation
         private const int any = 10;
         private const int indent = 20;
         private const int dedent = 30;
-        private const int whitespace = 40;
         private const int channel = 50;
 
         private const int firstInLine = 0;
         private const int notFirstInLine = 1;
-
-        private const int anyPosition = 1;
-        private const int anyLine = 2;
-        private const int anyIndex = 3;
-        private const int anyChannel = 4;
 
         private IGenerator generator;
 
         [TestInitialize]
         public void Initialize()
         {
-            this.generator = IndentionGenerator.GetInstance(indent, dedent, whitespace, channel);
+            this.generator = IndentionGenerator.GetInstance(indent, dedent, channel);
         }
 
         [TestMethod]
@@ -79,7 +73,7 @@ namespace Automation.Core.Tests.Indentation
         [TestMethod]
         public void Not_leading_whitespaces_are_not_counted_for_indention()
         {
-            var anyFirstInLineTokenWithNoLeadingWhitespaces = this.GetToken(any, "line with not leading\tspaces");
+            var anyFirstInLineTokenWithNoLeadingWhitespaces = this.GetToken(any, "line with not leading\t spaces");
             Assert.AreEqual(0, this.generator.Generate(anyFirstInLineTokenWithNoLeadingWhitespaces).Count());
         }
 

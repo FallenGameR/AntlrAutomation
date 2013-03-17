@@ -10,22 +10,20 @@ namespace Automation.Core
     {
         private readonly int indentType;
         private readonly int dedentType;
-        private readonly int whitespaceType;
         private readonly int channelNumber;
         private readonly IndentionDetector detector;
 
-        private IndentionGenerator(int indentType, int dedentType, int whitespaceType, int channel)
+        private IndentionGenerator(int indentType, int dedentType, int channel)
         {
             this.indentType = indentType;
             this.dedentType = dedentType;
-            this.whitespaceType = whitespaceType;
             this.channelNumber = channel;
             this.detector = IndentionDetector.GetInstance();
         }
 
-        public static IGenerator GetInstance(int indentType, int dedentType, int whitespaceType, int channel)
+        public static IGenerator GetInstance(int indentType, int dedentType, int channel)
         {
-            return new IndentionGenerator(indentType, dedentType, whitespaceType, channel);
+            return new IndentionGenerator(indentType, dedentType, channel);
         }
 
         public bool IsTrigger(IToken token)

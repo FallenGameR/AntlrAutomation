@@ -8,8 +8,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Core.Tests
 {
-    // TODO: Rename NEWLINE to EOL
-    // TODO: Update API
     // TODO: Add BOL generator
     // TODO: Add trailing generator
     // TODO: Update emitter tests
@@ -35,7 +33,7 @@ namespace Automation.Core.Tests
         [TestInitialize]
         public void Initialize()
         {
-            this.emitter = Emitter.GetInstance(IndentionGenerator.GetInstance(indent, dedent, whitespace, channel));
+            this.emitter = Emitter.GetInstance(IndentionGenerator.GetInstance(indent, dedent, channel));
         }
 
         [TestMethod]

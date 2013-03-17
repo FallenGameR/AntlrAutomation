@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AutomationErrorNode.cs" />
+    <Compile Include="Lexing\BeginningOfLineGenerator.cs" />
     <Compile Include="Lexing\Emitter.cs" />
     <Compile Include="Lexing\IGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

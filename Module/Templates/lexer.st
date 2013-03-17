@@ -14,7 +14,6 @@ namespace <names/namespace(name=name)>
                 IndentionGenerator.GetInstance(
                     <names/parser(name=name)>.INDENT, 
                     <names/parser(name=name)>.DEDENT, 
-                    <names/parser(name=name)>.WS,
 <if(emitIndents)>   
                     Lexer.DefaultTokenChannel)
 <else>          
