@@ -35,14 +35,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AutomationErrorNode.cs" />
-    <Compile Include="Lexing\BeginningOfLineGenerator.cs" />
+    <Compile Include="Lexing\Generators\BeginningOfLineGenerator.cs" />
     <Compile Include="Lexing\Emitter.cs" />
-    <Compile Include="Lexing\IGenerator.cs" />
+    <Compile Include="Lexing\Generators\IGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\DynamicMetaTree.cs" />
     <Compile Include="Lexing\IndentionDetector.cs" />
     <Compile Include="Lexing\Indention.cs" />
-    <Compile Include="Lexing\IndentionGenerator.cs" />
+    <Compile Include="Lexing\Generators\IndentionGenerator.cs" />
     <Compile Include="Core\AutomationAdaptor.cs" />
     <Compile Include="Core\AutomationException.cs" />
     <Compile Include="Core\AutomationTree.cs" />
@@ -50,6 +50,7 @@
     <Compile Include="Utils\Constant.cs" />
     <Compile Include="Utils\TokenExtensions.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
