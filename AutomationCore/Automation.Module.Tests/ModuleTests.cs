@@ -257,7 +257,7 @@ $writer.Flush()
 [Console]::SetOut( $old )
 $writer.GetStringBuilder().ToString()
 ");
-            Assert.AreEqual("VARIABLE [-] ID [<NL>]" + Environment.NewLine + "<EOF>" + Environment.NewLine, Powershell.Out);
+            Assert.AreEqual("VARIABLE [-] ID [<EOL>]" + Environment.NewLine + "<EOF>" + Environment.NewLine, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
@@ -302,7 +302,7 @@ Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTre
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\MultiTokenNewlineGrammar.g3' -EmitNewline
+Set-Grammar 'Temp\MultiTokenNewlineGrammar.g3' -EmitEndOfLine
 Parse-Item MultiTokenNewlineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
 ");
             Assert.AreEqual("(NEWLINE_ROOT line indent)", Powershell.Out);
@@ -318,17 +318,17 @@ Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
 Parse-Item IndentGrammar 'Temp\Indent.txt' -Tokens
 ");
             var expected = @"
-[<NL>]
-ID [<NL>]
+[<EOL>]
+ID [<EOL>]
 <INDENT>
-[----] ID [<NL>]
-[----] ID [<NL>]
-[----] ID [<NL>]
+[----] ID [<EOL>]
+[----] ID [<EOL>]
+[----] ID [<EOL>]
 <INDENT>
-[--------] ID [<NL>]
-[--------] ID [<NL>]
+[--------] ID [<EOL>]
+[--------] ID [<EOL>]
 <DEDENT>
-[----] ID [<NL>]
+[----] ID [<EOL>]
 <DEDENT>
 <EOF>";
             Assert.AreEqual(expected.Trim(), Powershell.Out);
