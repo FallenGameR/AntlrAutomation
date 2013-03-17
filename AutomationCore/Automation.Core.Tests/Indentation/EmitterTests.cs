@@ -8,8 +8,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Core.Tests
 {
+    // TODO: Rename NEWLINE to EOL
+    // TODO: Update API
+    // TODO: Add BOL generator
+    // TODO: Add trailing generator
+    // TODO: Update emitter tests
+
     [TestClass]
-    public class IndentionGeneratorTests
+    public class EmitterTests
     {
         private const int any = 10;
         private const int indent = 20;

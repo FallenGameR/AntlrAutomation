@@ -41,7 +41,7 @@ WORD: 'a'..'z'+;
 
 WS	: (' ' | '\t')+ { $channel = Hidden; };
 
-NEWLINE
+EOL
     : '\r'? '\n' { $channel = Hidden; };
 
 INDENT
@@ -110,7 +110,7 @@ ID  : 'a'..'z'+;
 ";
 
         public static string MultiTokenNewlineGrammar = @"
-file: ID NEWLINE ID EOF -> ^(NEWLINE_ROOT ID+);
+file: ID EOL ID EOF -> ^(NEWLINE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
