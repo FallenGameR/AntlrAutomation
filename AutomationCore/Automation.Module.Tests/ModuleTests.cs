@@ -41,19 +41,19 @@ namespace Automation.Module.Tests
             }
 
             // Create temp files used in tests
-            File.WriteAllText("Temp/SampleFull.g3", Resources.Full);
-            File.WriteAllText("Temp/SampleShort.g3", Resources.Short);
-            File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryTokens);
-            File.WriteAllText("Temp/IndentGrammar.g3", Resources.Indents);
-            File.WriteAllText("Temp/MultiTokenBaseGrammar.g3", Resources.EmitBase);
-            File.WriteAllText("Temp/MultiTokenEndOfLineGrammar.g3", Resources.EmitEol);
-            File.WriteAllText("Temp/MultiTokenWhitespaceGrammar.g3", Resources.EmitWs);
-            File.WriteAllText("Temp/MultiTokenIndentGrammar.g3", Resources.EmitIndent);
+            File.WriteAllText("Temp/Full.g3", Resources.Full);
+            File.WriteAllText("Temp/Short.g3", Resources.Short);
+            File.WriteAllText("Temp/ImaginaryTokens.g3", Resources.ImaginaryTokens);
+            File.WriteAllText("Temp/Indents.g3", Resources.Indents);
+            File.WriteAllText("Temp/EmitBase.g3", Resources.EmitBase);
+            File.WriteAllText("Temp/EmitEol.g3", Resources.EmitEol);
+            File.WriteAllText("Temp/EmitWs.g3", Resources.EmitWs);
+            File.WriteAllText("Temp/EmitIndentsText.g3", Resources.EmitIndent);
 
-            File.WriteAllText("Temp/Sample.txt", Resources.FullShortTest);
-            File.WriteAllText("Temp/Imaginary.txt", Resources.ImaginaryTokensText);
-            File.WriteAllText("Temp/Indent.txt", Resources.IndentsText);
-            File.WriteAllText("Temp/MultiTokenText.txt", Resources.EmitText);
+            File.WriteAllText("Temp/FullShortText.txt", Resources.FullShortText);
+            File.WriteAllText("Temp/ImaginaryTokensText.txt", Resources.ImaginaryTokensText);
+            File.WriteAllText("Temp/IndentsText.txt", Resources.IndentsText);
+            File.WriteAllText("Temp/EmitText.txt", Resources.EmitText);
         }
 
         [TestCleanup]
@@ -79,16 +79,16 @@ Import-Module .\AntlrAutomation.psd1
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleFull.g3' -Verbose
+Set-Grammar 'Temp\Full.g3' -Verbose
 ");
 
-            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleFull");
+            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\Full");
             var expected =
 @"
-VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'SampleFull'
-VERBOSE: Grammar file set for parser 'SampleFull'
-VERBOSE: Sources generated for parser 'SampleFull'
-VERBOSE: Binaries compiled for parser 'SampleFull'
+VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'Full'
+VERBOSE: Grammar file set for parser 'Full'
+VERBOSE: Sources generated for parser 'Full'
+VERBOSE: Binaries compiled for parser 'Full'
 "
 .Replace("<PARSER FOLDER>", parserFolder);
 
@@ -102,16 +102,16 @@ VERBOSE: Binaries compiled for parser 'SampleFull'
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3' -Verbose
+Set-Grammar 'Temp\Short.g3' -Verbose
 ");
 
-            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleShort");
+            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\Short");
             var expected =
 @"
-VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'SampleShort'
-VERBOSE: Grammar file set for parser 'SampleShort'
-VERBOSE: Sources generated for parser 'SampleShort'
-VERBOSE: Binaries compiled for parser 'SampleShort'
+VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'Short'
+VERBOSE: Grammar file set for parser 'Short'
+VERBOSE: Sources generated for parser 'Short'
+VERBOSE: Binaries compiled for parser 'Short'
 "
 .Replace("<PARSER FOLDER>", parserFolder);
 
@@ -125,8 +125,8 @@ VERBOSE: Binaries compiled for parser 'SampleShort'
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3'
-Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
+Set-Grammar 'Temp\Short.g3'
+Parse-Item Short 'Temp\FullShortText.txt' | % Text
 ");
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -138,8 +138,8 @@ Parse-Item sampleSHORT 'Temp\Sample.txt' | % Text
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleShort.g3'
-Parse-Item short 'Temp\Sample.txt' | % Text
+Set-Grammar 'Temp\Short.g3'
+Parse-Item short 'Temp\FullShortText.txt' | % Text
 ");
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -151,13 +151,13 @@ Parse-Item short 'Temp\Sample.txt' | % Text
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\SampleFull.g3'
-Set-Grammar 'Temp\SampleShort.g3'
-Parse-Item sample 'Temp\Sample.txt' | % Text
+Set-Grammar 'Temp\Full.g3'
+Set-Grammar 'Temp\Short.g3'
+Parse-Item sample 'Temp\FullShortText.txt' | % Text
 ");
             var expected =
 @"
-WARNING: Grammar 'sample' can be resolved as: SampleFull, SampleShort. Grammar 'SampleFull' would be used.
+WARNING: Grammar 'sample' can be resolved as: Full, Short. Grammar 'Full' would be used.
 FILE
 ";
             Assert.AreEqual(expected.Trim(), Powershell.Out);
@@ -232,8 +232,8 @@ $ast.TeXt -eq 'FILE'
             Powershell.Script(
 @"  
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\ImaginaryGrammar.g3'
-Parse-Item imaginary 'Temp\Imaginary.txt' | % Text
+Set-Grammar 'Temp\ImaginaryTokens.g3'
+Parse-Item imaginary 'Temp\ImaginaryTokensText.txt' | % Text
 ");
             Assert.AreEqual("ANY_TOKEN", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -245,13 +245,13 @@ Parse-Item imaginary 'Temp\Imaginary.txt' | % Text
             Powershell.Script(
 @"  
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\ImaginaryGrammar.g3'
+Set-Grammar 'Temp\ImaginaryTokens.g3'
 
 $old = [Console]::Out
 $writer = New-Object Io.StringWriter
 [Console]::SetOut( $writer )
 
-Parse-Item imaginary 'Temp\Imaginary.txt' -Tokens
+Parse-Item imaginary 'Temp\ImaginaryTokensText.txt' -Tokens
 
 $writer.Flush()
 [Console]::SetOut( $old )
@@ -266,8 +266,8 @@ $writer.GetStringBuilder().ToString()
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\MultiTokenBaseGrammar.g3'
-Parse-Item MultiTokenBaseGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\EmitBase.g3'
+Parse-Item EmitBase 'Temp\EmitText.txt' | % ToStringTree
 ");
             Assert.AreEqual("(BASE_ROOT line indent)", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -278,8 +278,8 @@ Parse-Item MultiTokenBaseGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\MultiTokenIndentGrammar.g3' -EmitIndents
-Parse-Item MultiTokenIndentGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\EmitIndentsText.g3' -EmitIndents
+Parse-Item EmitIndent 'Temp\EmitText.txt' | % ToStringTree
 ");
             Assert.AreEqual("(INDENT_ROOT line indent)", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -290,8 +290,8 @@ Parse-Item MultiTokenIndentGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\MultiTokenWhitespaceGrammar.g3' -EmitWhitespace
-Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\EmitWs.g3' -EmitWhitespace
+Parse-Item EmitWs 'Temp\EmitText.txt' | % ToStringTree
 ");
             Assert.AreEqual("(WHITESPACE_ROOT line indent)", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -302,8 +302,8 @@ Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTre
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\MultiTokenEndOfLineGrammar.g3' -EmitEndOfLine
-Parse-Item MultiTokenEndOfLineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\EmitEol.g3' -EmitEndOfLine
+Parse-Item EmitEol 'Temp\EmitText.txt' | % ToStringTree
 ");
             Assert.AreEqual("(EOL_ROOT line indent)", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -314,8 +314,8 @@ Parse-Item MultiTokenEndOfLineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\IndentGrammar.g3' -EmitIndents
-Parse-Item IndentGrammar 'Temp\Indent.txt' -Tokens
+Set-Grammar 'Temp\Indents.g3' -EmitIndents
+Parse-Item Indents 'Temp\IndentsText.txt' -Tokens
 ");
             var expected = @"
 [<EOL>]
@@ -341,11 +341,11 @@ ID [<EOL>]
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
 
-Set-Grammar 'Temp\MultiTokenBaseGrammar.g3'
-Parse-Item MultiTokenBaseGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\EmitBase.g3'
+Parse-Item EmitBase 'Temp\EmitText.txt' | % ToStringTree
 
-Set-Grammar 'Temp\MultiTokenWhitespaceGrammar.g3' -EmitWhitespace
-Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\EmitWs.g3' -EmitWhitespace
+Parse-Item EmitWs 'Temp\EmitText.txt' | % ToStringTree
 ");
 
             var expected = @"

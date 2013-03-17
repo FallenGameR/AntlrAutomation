@@ -63,7 +63,7 @@ section: 'start' WORD* 'end' -> ^(SECTION WORD*);
 WORD: 'a'..'z'+;
 ";
 
-        public static string FullShortTest =
+        public static string FullShortText =
 @"
 start
     some
