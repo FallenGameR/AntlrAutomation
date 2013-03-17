@@ -77,6 +77,13 @@ namespace Automation.Core.Tests.Indentation
         }
 
         [TestMethod]
+        public void Not_leading_whitespaces_are_not_counted_for_indention()
+        {
+            var anyFirstInLineTokenWithNoLeadingWhitespaces = this.GetToken(any, "line with not leading\tspaces");
+            Assert.AreEqual(0, this.generator.Generate(anyFirstInLineTokenWithNoLeadingWhitespaces).Count());
+        }
+
+        [TestMethod]
         public void Indention_generator_uses_correct_channel_and_text_for_generated_tokens()
         {
             var indentEmitter = this.GetToken(any, " ");

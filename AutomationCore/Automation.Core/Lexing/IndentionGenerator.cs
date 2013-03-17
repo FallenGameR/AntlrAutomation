@@ -30,8 +30,8 @@ namespace Automation.Core
 
         public bool IsTrigger(IToken token)
         {
-            var isLeadingWhitespace = (token.Type == this.whitespaceType) && (token.CharPositionInLine == 0);
-            return isLeadingWhitespace || token.IsEof();
+            var isFirstInLine = token.CharPositionInLine == 0;
+            return isFirstInLine || token.IsEof();
         }
 
         public IEnumerable<IToken> Generate(IToken token)
@@ -76,7 +76,10 @@ namespace Automation.Core
             else
             {
                 // Indention for whitespace tokens must be calculated
-                return indentationToken.CharPositionInLine + indentationToken.Text.AsEnumerable().Sum(c => this.GetWhitespaceLength(c));
+                return indentationToken
+                    .Text
+                    .AsEnumerable()
+                    .Sum(c => this.GetWhitespaceLength(c));
             }
         }
 
@@ -86,7 +89,7 @@ namespace Automation.Core
             {
                 case ' ': return 1;
                 case '\t': return 4;
-                default: throw new InvalidOperationException("Can't get whitespace length for char: " + ((int)character).ToString());
+                default: return 0;
             }
         }
     }
