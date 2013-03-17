@@ -51,28 +51,42 @@ namespace Automation.Core.Tests.Indentation
 
             var eofNotFirstInLine = this.GetToken(Constant.Eof, notFirstInLine);
             Assert.IsTrue(this.generator.IsTrigger(eofNotFirstInLine));
-            Assert.Inconclusive();
         }
 
         [TestMethod]
         public void Indention_is_generated_based_on_position_of_leading_whitespaces()
         {
-            Assert.Inconclusive();
+            var noLeadingWhitespaces = this.GetToken(any, "string");
+            Assert.AreEqual(0, this.generator.Generate(noLeadingWhitespaces).Count());
+
+            var threeLeadingSpaces = this.GetToken(any, "   this is one space less then a tab");
+            Assert.AreEqual(indent, this.generator.Generate(threeLeadingSpaces).Single().Type);
+
+            var leadingTab = this.GetToken(any, "\t. Tab is like four spaces");
+            Assert.AreEqual(indent, this.generator.Generate(leadingTab).Single().Type);
         }
 
         [TestMethod]
         public void Indention_is_generated_for_EOF_as_if_it_first_in_line_disregarding_of_its_actual_position()
         {
-            Assert.Inconclusive();
+            var anyTokenThatGeneratesIndent = this.GetToken(any, " ");
+            Assert.AreEqual(indent, this.generator.Generate(anyTokenThatGeneratesIndent).Single().Type);
+
+            var eofThatIsNotFirstInLin = this.GetToken(Constant.Eof, notFirstInLine);
+            Assert.AreEqual(dedent, this.generator.Generate(eofThatIsNotFirstInLin).Single().Type);
         }
 
         // Indention uses correct channel
         // Indention uses correct text
 
-
         private IToken GetToken(int type, int position)
         {
             return new CommonToken(type) { CharPositionInLine = position };
+        }
+
+        private IToken GetToken(int type, string text)
+        {
+            return new CommonToken(type, text) { CharPositionInLine = firstInLine };
         }
     }
 }
