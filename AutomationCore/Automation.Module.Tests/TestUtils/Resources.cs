@@ -4,7 +4,7 @@
     {
         #region Full and Short
 
-        public static string Full =
+        public static string SampleFull =
 @"
 grammar SampleFull;
 
@@ -53,7 +53,7 @@ DEDENT
     : '<%$! DEDENT tokens are inserted via IndentionGenerator during lexing !$%>';
 ";
 
-        public static string Short =
+        public static string SampleShort =
 @"
 // Simple parser grammar
 
@@ -63,7 +63,7 @@ section: 'start' WORD* 'end' -> ^(SECTION WORD*);
 WORD: 'a'..'z'+;
 ";
 
-        public static string FullShortText =
+        public static string SampleText =
 @"
 start
     some

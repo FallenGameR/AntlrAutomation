@@ -41,8 +41,8 @@ namespace Automation.Module.Tests
             }
 
             // Create temp files used in tests
-            File.WriteAllText("Temp/Full.g3", Resources.Full);
-            File.WriteAllText("Temp/Short.g3", Resources.Short);
+            File.WriteAllText("Temp/SampleFull.g3", Resources.SampleFull);
+            File.WriteAllText("Temp/SampleShort.g3", Resources.SampleShort);
             File.WriteAllText("Temp/ImaginaryTokens.g3", Resources.ImaginaryTokens);
             File.WriteAllText("Temp/Indents.g3", Resources.Indents);
             File.WriteAllText("Temp/EmitBase.g3", Resources.EmitBase);
@@ -50,7 +50,7 @@ namespace Automation.Module.Tests
             File.WriteAllText("Temp/EmitWs.g3", Resources.EmitWs);
             File.WriteAllText("Temp/EmitIndentsText.g3", Resources.EmitIndent);
 
-            File.WriteAllText("Temp/FullShortText.txt", Resources.FullShortText);
+            File.WriteAllText("Temp/SampleText.txt", Resources.SampleText);
             File.WriteAllText("Temp/ImaginaryTokensText.txt", Resources.ImaginaryTokensText);
             File.WriteAllText("Temp/IndentsText.txt", Resources.IndentsText);
             File.WriteAllText("Temp/EmitText.txt", Resources.EmitText);
@@ -79,7 +79,7 @@ Import-Module .\AntlrAutomation.psd1
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\Full.g3' -Verbose
+Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
             var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\Full");
@@ -102,7 +102,7 @@ VERBOSE: Binaries compiled for parser 'Full'
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\Short.g3' -Verbose
+Set-Grammar 'Temp\SampleShort.g3' -Verbose
 ");
 
             var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\Short");
@@ -125,8 +125,8 @@ VERBOSE: Binaries compiled for parser 'Short'
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\Short.g3'
-Parse-Item Short 'Temp\FullShortText.txt' | % Text
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item Short 'Temp\SampleText.txt' | % Text
 ");
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -138,8 +138,8 @@ Parse-Item Short 'Temp\FullShortText.txt' | % Text
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\Short.g3'
-Parse-Item short 'Temp\FullShortText.txt' | % Text
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item short 'Temp\SampleText.txt' | % Text
 ");
             Assert.AreEqual("FILE", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
@@ -151,9 +151,9 @@ Parse-Item short 'Temp\FullShortText.txt' | % Text
             Powershell.Script(
 @"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\Full.g3'
-Set-Grammar 'Temp\Short.g3'
-Parse-Item sample 'Temp\FullShortText.txt' | % Text
+Set-Grammar 'Temp\SampleFull.g3'
+Set-Grammar 'Temp\SampleShort.g3'
+Parse-Item sample 'Temp\SampleText.txt' | % Text
 ");
             var expected =
 @"
