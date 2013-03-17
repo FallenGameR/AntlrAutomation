@@ -109,8 +109,8 @@ file: ID ID EOF -> ^(BASE_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 
-        public static string MultiTokenNewlineGrammar = @"
-file: ID EOL ID EOF -> ^(NEWLINE_ROOT ID+);
+        public static string MultiTokenEndOfLineGrammar = @"
+file: ID EOL ID EOF -> ^(EOL_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
 

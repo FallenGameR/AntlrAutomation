@@ -46,7 +46,7 @@ namespace Automation.Module.Tests
             File.WriteAllText("Temp/ImaginaryGrammar.g3", Resources.ImaginaryGrammar);
             File.WriteAllText("Temp/IndentGrammar.g3", Resources.IndentGrammar);
             File.WriteAllText("Temp/MultiTokenBaseGrammar.g3", Resources.MultiTokenBaseGrammar);
-            File.WriteAllText("Temp/MultiTokenNewlineGrammar.g3", Resources.MultiTokenNewlineGrammar);
+            File.WriteAllText("Temp/MultiTokenEndOfLineGrammar.g3", Resources.MultiTokenEndOfLineGrammar);
             File.WriteAllText("Temp/MultiTokenWhitespaceGrammar.g3", Resources.MultiTokenWhitespaceGrammar);
             File.WriteAllText("Temp/MultiTokenIndentGrammar.g3", Resources.MultiTokenIndentGrammar);
 
@@ -302,10 +302,10 @@ Parse-Item MultiTokenWhitespaceGrammar 'Temp\MultiTokenText.txt' | % ToStringTre
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
-Set-Grammar 'Temp\MultiTokenNewlineGrammar.g3' -EmitEndOfLine
-Parse-Item MultiTokenNewlineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
+Set-Grammar 'Temp\MultiTokenEndOfLineGrammar.g3' -EmitEndOfLine
+Parse-Item MultiTokenEndOfLineGrammar 'Temp\MultiTokenText.txt' | % ToStringTree
 ");
-            Assert.AreEqual("(NEWLINE_ROOT line indent)", Powershell.Out);
+            Assert.AreEqual("(EOL_ROOT line indent)", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
