@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Lexing\Generators\BeginningOfLineGeneratorTests.cs" />
     <Compile Include="Lexing\Generators\IndentionGeneratorTests.cs" />
     <Compile Include="Core\AutomationTreeTests.cs" />
     <Compile Include="Utils\ConstantTests.cs" />

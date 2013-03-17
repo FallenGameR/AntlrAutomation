@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Antlr.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Automation.Core.Tests.Indentation
+namespace Automation.Core.Tests
 {
     [TestClass]
     public class IndentionGeneratorTests

@@ -17,5 +17,10 @@ namespace Automation.Core
         {
             throw new NotImplementedException();
         }
+
+        public static BeginningOfLineGenerator GetInstance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
