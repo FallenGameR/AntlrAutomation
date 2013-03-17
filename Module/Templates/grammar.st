@@ -1,4 +1,4 @@
-grammar (name, text, tokens, emitNewline, emitWhitespace) ::=
+grammar (name, text, tokens, emitEndOfLine, emitWhitespace) ::=
 <<
 grammar <name>;
 
@@ -29,7 +29,7 @@ public <text>
 WS  : (' ' | '\t' )+ <if(!emitWhitespace)>{ $channel = Hidden; }<endif>;
 
 EOL
-    : '\r'? '\n' <if(!emitNewline)>{ $channel = Hidden; }<endif>;
+    : '\r'? '\n' <if(!emitEndOfLine)>{ $channel = Hidden; }<endif>;
 
 INDENT
     : '\<%\$! INDENT tokens are inserted via IndentionGenerator during lexing !\$%\>';

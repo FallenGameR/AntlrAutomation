@@ -28,7 +28,8 @@ function Set-Grammar
         [Parameter(Mandatory = $true)]
         [string] $GrammarPath,
         [switch] $EmitIndents,
-        [switch] $EmitNewline,
+        [switch] $EmitEndOfLine,
+        [switch] $EmitBeginningOfLine,
         [switch] $EmitWhitespace
     )
 
