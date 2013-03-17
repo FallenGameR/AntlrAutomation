@@ -6,7 +6,7 @@ using Antlr.Runtime;
 
 namespace Automation.Core
 {
-    public class IndentionGenerator: IGenerator
+    public class IndentionGenerator : IGenerator
     {
         private readonly int indentType;
         private readonly int dedentType;
@@ -79,7 +79,9 @@ namespace Automation.Core
                 return indentationToken
                     .Text
                     .AsEnumerable()
-                    .Sum(c => this.GetWhitespaceLength(c));
+                    .Select(ch => this.GetWhitespaceLength(ch))
+                    .TakeWhile(length => length > 0)
+                    .Sum();
             }
         }
 
