@@ -27,9 +27,13 @@ function Set-Grammar
     (
         [Parameter(Mandatory = $true)]
         [string] $GrammarPath,
+        [Alias("Indent")]
         [switch] $EmitIndents,
+        [Alias("EOL")]
         [switch] $EmitEndOfLine,
+        [Alias("BOL")]
         [switch] $EmitBeginningOfLine,
+        [Alias("WS")]
         [switch] $EmitWhitespace
     )
 
