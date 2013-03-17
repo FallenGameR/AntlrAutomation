@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Antlr.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,12 +13,12 @@ namespace Automation.Core.Tests
         private const int notFirst = 1;
         private const int someLine = 4;
 
-        private BeginningOfLineGenerator generator;
+        private IGenerator generator;
 
         [TestInitialize]
         public void Initialize()
         {
-            this.generator = BeginningOfLineGenerator.GetInstance();
+            this.generator = BeginningOfLineGenerator.GetInstance(bol);
         }
 
         [TestMethod]

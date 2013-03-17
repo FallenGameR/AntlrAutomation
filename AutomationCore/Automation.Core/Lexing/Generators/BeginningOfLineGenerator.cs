@@ -8,19 +8,33 @@ namespace Automation.Core
 {
     public class BeginningOfLineGenerator : IGenerator
     {
+        private readonly int beginningOfLineType;
+
+        private BeginningOfLineGenerator(int beginningOfLineType)
+        {
+            this.beginningOfLineType = beginningOfLineType;
+        }
+
+        public static IGenerator GetInstance(int beginningOfLineType)
+        {
+            return new BeginningOfLineGenerator(beginningOfLineType);
+        }
+
         public bool IsTrigger(IToken token)
         {
-            throw new NotImplementedException();
+            return token.CharPositionInLine == 0
+                && !token.IsEof();
         }
 
         public IEnumerable<IToken> Generate(IToken token)
         {
-            throw new NotImplementedException();
-        }
-
-        public static BeginningOfLineGenerator GetInstance()
-        {
-            throw new NotImplementedException();
+            return new [] { new CommonToken(token)
+            {
+                Text = string.Empty,
+                Type = this.beginningOfLineType,
+                Channel = Lexer.DefaultTokenChannel,
+                CharPositionInLine = 0,
+            }};
         }
     }
 }
