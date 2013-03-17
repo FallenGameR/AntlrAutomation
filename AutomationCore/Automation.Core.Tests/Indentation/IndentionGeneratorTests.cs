@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Antlr.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automation.Core.Tests.Indentation
@@ -16,7 +17,8 @@ namespace Automation.Core.Tests.Indentation
         private const int whitespace = 40;
         private const int channel = 50;
 
-        private const int leadingPosition = 0;
+        private const int firstInLine = 0;
+        private const int notFirstInLine = 1;
 
         private const int anyPosition = 1;
         private const int anyLine = 2;
@@ -34,15 +36,21 @@ namespace Automation.Core.Tests.Indentation
         [TestMethod]
         public void Indention_is_triggered_for_any_token_that_is_first_in_line()
         {
+            var firstTokenInLine = this.GetToken(any, firstInLine);
+            Assert.IsTrue(this.generator.IsTrigger(firstTokenInLine));
 
-
-
-            Assert.Inconclusive();
+            var notFirstTokenInLine = this.GetToken(any, notFirstInLine);
+            Assert.IsFalse(this.generator.IsTrigger(notFirstTokenInLine));
         }
 
         [TestMethod]
         public void Indention_is_triggered_for_EOF_token_disregarding_of_its_position()
         {
+            var eofFirstInLine = this.GetToken(Constant.Eof, firstInLine);
+            Assert.IsTrue(this.generator.IsTrigger(eofFirstInLine));
+
+            var eofNotFirstInLine = this.GetToken(Constant.Eof, notFirstInLine);
+            Assert.IsTrue(this.generator.IsTrigger(eofNotFirstInLine));
             Assert.Inconclusive();
         }
 
@@ -60,5 +68,11 @@ namespace Automation.Core.Tests.Indentation
 
         // Indention uses correct channel
         // Indention uses correct text
+
+
+        private IToken GetToken(int type, int position)
+        {
+            return new CommonToken(type) { CharPositionInLine = position };
+        }
     }
 }
