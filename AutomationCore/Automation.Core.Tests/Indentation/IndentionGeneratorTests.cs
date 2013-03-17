@@ -76,8 +76,23 @@ namespace Automation.Core.Tests.Indentation
             Assert.AreEqual(dedent, this.generator.Generate(eofThatIsNotFirstInLin).Single().Type);
         }
 
-        // Indention uses correct channel
-        // Indention uses correct text
+        [TestMethod]
+        public void Indention_generator_uses_correct_channel_and_text_for_generated_tokens()
+        {
+            var indentEmitter = this.GetToken(any, " ");
+            var indentToken = this.generator.Generate(indentEmitter).Single();
+
+            Assert.AreEqual(indent, indentToken.Type);
+            Assert.AreEqual("INDENT", indentToken.Text);
+            Assert.AreEqual(channel, indentToken.Channel);
+
+            var dedentEmitter = this.GetToken(any, string.Empty);
+            var dedentToken = this.generator.Generate(dedentEmitter).Single();
+
+            Assert.AreEqual(dedent, dedentToken.Type);
+            Assert.AreEqual("DEDENT", dedentToken.Text);
+            Assert.AreEqual(channel, dedentToken.Channel);
+        }
 
         private IToken GetToken(int type, int position)
         {
