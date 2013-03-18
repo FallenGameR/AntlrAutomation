@@ -40,6 +40,7 @@ section
  */
 
 WORD: 'a'..'z'+;
+
 WS  : (' ' | '\t' )+ { $channel = Hidden; };
 
 EOL : '\r'? '\n' { $channel = Hidden; };
@@ -124,6 +125,10 @@ ID  : 'a'..'z'+;
 file: ID EOL ID EOF -> ^(EOL_ROOT ID+);
 ID  : 'a'..'z'+;
 ";
+
+        public static string EmitBol = @"
+file: BOL ID BOL ID EOF -> ^(BOL_ROOT ID+);
+ID  : 'a'..'z'+;";
 
         public static string EmitWs = @"
 file: ID WS WS ID EOF -> ^(WHITESPACE_ROOT ID+);

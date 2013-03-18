@@ -30,12 +30,12 @@ WS  : (' ' | '\t' )+ <if(!emitWhitespace)>{ $channel = Hidden; }<endif>;
 
 EOL : '\r'? '\n' <if(!emitEndOfLine)>{ $channel = Hidden; }<endif>;
 
-BOL : '\<%\$! BOL tokens are inserted via Emitter during lexing !\$%\>';
+BOL : '\u0000 BOL tokens are inserted via Emitter during lexing \u0000';
 
 INDENT
-    : '\<%\$! INDENT tokens are inserted via Emitter during lexing !\$%\>';
+    : '\u0000 INDENT tokens are inserted via Emitter during lexing \u0000';
 
 DEDENT
-    : '\<%\$! DEDENT tokens are inserted via Emitter during lexing !\$%\>';
+    : '\u0000 DEDENT tokens are inserted via Emitter during lexing \u0000';
 >>
 

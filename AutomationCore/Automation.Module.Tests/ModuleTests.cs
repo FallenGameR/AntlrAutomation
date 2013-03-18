@@ -47,6 +47,7 @@ namespace Automation.Module.Tests
             File.WriteAllText("Temp/Indents.g3", Resources.Indents);
             File.WriteAllText("Temp/EmitBase.g3", Resources.EmitBase);
             File.WriteAllText("Temp/EmitEol.g3", Resources.EmitEol);
+            File.WriteAllText("Temp/EmitBol.g3", Resources.EmitBol);
             File.WriteAllText("Temp/EmitWs.g3", Resources.EmitWs);
             File.WriteAllText("Temp/EmitIndentsText.g3", Resources.EmitIndent);
 
@@ -298,7 +299,7 @@ Parse-Item EmitWs 'Temp\EmitText.txt' | % ToStringTree
         }
 
         [TestMethod]
-        public void Newlines_can_be_emitted()
+        public void End_of_lines_can_be_emitted()
         {
             Powershell.Script(@"
 Import-Module .\AntlrAutomation.psd1
@@ -306,6 +307,18 @@ Set-Grammar 'Temp\EmitEol.g3' -EmitEndOfLine
 Parse-Item EmitEol 'Temp\EmitText.txt' | % ToStringTree
 ");
             Assert.AreEqual("(EOL_ROOT line indent)", Powershell.Out);
+            Assert.AreEqual(string.Empty, Powershell.Err);
+        }
+
+        [TestMethod]
+        public void Beginning_of_lines_can_be_emitted()
+        {
+            Powershell.Script(@"
+Import-Module .\AntlrAutomation.psd1
+Set-Grammar 'Temp\EmitBol.g3' -EmitBeginningOfLine
+Parse-Item EmitBol 'Temp\EmitText.txt' | % ToStringTree
+");
+            Assert.AreEqual("(BOL_ROOT line indent)", Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
