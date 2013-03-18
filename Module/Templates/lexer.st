@@ -1,4 +1,4 @@
-﻿lexer (name, emitIndents) ::=
+﻿lexer (name, emitIndents, emitBeginningOfLine) ::=
 <<
 using Automation.Core;
 using Antlr.Runtime;
@@ -14,11 +14,10 @@ namespace <names/namespace(name=name)>
                 IndentionGenerator.GetInstance(
                     <names/parser(name=name)>.INDENT, 
                     <names/parser(name=name)>.DEDENT, 
-<if(emitIndents)>   
-                    Lexer.DefaultTokenChannel)
-<else>          
-                    Lexer.Hidden)
-<endif> 
+                    Lexer.<if(emitIndents)>DefaultTokenChannel<else>Hidden)<endif>),
+                BeginningOfLineGenerator.GetInstance(
+                    <names/parser(name=name)>.BOL,
+                     Lexer.<if(emitBeginningOfLine)>DefaultTokenChannel<else>Hidden<endif>)
             );
 
         public override IToken NextToken()

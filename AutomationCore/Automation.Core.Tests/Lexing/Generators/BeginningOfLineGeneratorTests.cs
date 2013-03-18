@@ -12,13 +12,14 @@ namespace Automation.Core.Tests
         private const int first = 0;
         private const int notFirst = 1;
         private const int someLine = 4;
+        private const int channel = 5;
 
         private IGenerator generator;
 
         [TestInitialize]
         public void Initialize()
         {
-            this.generator = BeginningOfLineGenerator.GetInstance(bol);
+            this.generator = BeginningOfLineGenerator.GetInstance(bol, channel);
         }
 
         [TestMethod]
@@ -36,7 +37,7 @@ namespace Automation.Core.Tests
             var bolToken = this.generator.Generate(this.GetToken(any, line: someLine)).Single();
 
             Assert.AreEqual(bol, bolToken.Type);
-            Assert.AreEqual(Lexer.DefaultTokenChannel, bolToken.Channel);
+            Assert.AreEqual(channel, bolToken.Channel);
             Assert.AreEqual(string.Empty, bolToken.Text);
             Assert.AreEqual(0, bolToken.CharPositionInLine);
             Assert.AreEqual(someLine, bolToken.Line);

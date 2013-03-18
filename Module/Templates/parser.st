@@ -38,6 +38,9 @@ namespace <names/namespace(name=name)>
                 case <names/parser(name=name)>.WS:
                     return new string('-', token.Text.Length);
 
+                case <names/parser(name=name)>.BOL:
+                    return "{" + token.Line.ToString() + "}";
+
                 case <names/parser(name=name)>.EOL:
                     return "\<EOL\>";
 

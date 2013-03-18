@@ -9,15 +9,17 @@ namespace Automation.Core
     public class BeginningOfLineGenerator : IGenerator
     {
         private readonly int beginningOfLineType;
+        private readonly int channel;
 
-        private BeginningOfLineGenerator(int beginningOfLineType)
+        private BeginningOfLineGenerator(int beginningOfLineType, int channel)
         {
             this.beginningOfLineType = beginningOfLineType;
+            this.channel = channel;
         }
 
-        public static IGenerator GetInstance(int beginningOfLineType)
+        public static IGenerator GetInstance(int beginningOfLineType, int channel)
         {
-            return new BeginningOfLineGenerator(beginningOfLineType);
+            return new BeginningOfLineGenerator(beginningOfLineType, channel);
         }
 
         public bool IsTrigger(IToken token)
@@ -32,7 +34,7 @@ namespace Automation.Core
             {
                 Text = string.Empty,
                 Type = this.beginningOfLineType,
-                Channel = Lexer.DefaultTokenChannel,
+                Channel = this.channel,
                 CharPositionInLine = 0,
             }};
         }

@@ -28,13 +28,14 @@ public <text>
 
 WS  : (' ' | '\t' )+ <if(!emitWhitespace)>{ $channel = Hidden; }<endif>;
 
-EOL
-    : '\r'? '\n' <if(!emitEndOfLine)>{ $channel = Hidden; }<endif>;
+EOL : '\r'? '\n' <if(!emitEndOfLine)>{ $channel = Hidden; }<endif>;
+
+BOL : '\<%\$! BOL tokens are inserted via Emitter during lexing !\$%\>';
 
 INDENT
-    : '\<%\$! INDENT tokens are inserted via IndentionGenerator during lexing !\$%\>';
+    : '\<%\$! INDENT tokens are inserted via Emitter during lexing !\$%\>';
 
 DEDENT
-    : '\<%\$! DEDENT tokens are inserted via IndentionGenerator during lexing !\$%\>';
+    : '\<%\$! DEDENT tokens are inserted via Emitter during lexing !\$%\>';
 >>
 
