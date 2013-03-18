@@ -14,10 +14,10 @@ namespace <names/namespace(name=name)>
                 IndentionGenerator.GetInstance(
                     <names/parser(name=name)>.INDENT, 
                     <names/parser(name=name)>.DEDENT, 
-                    Lexer.<if(emitIndents)>DefaultTokenChannel<else>Hidden)<endif>),
+                    Lexer.<if(emitIndents)>DefaultTokenChannel<else>Hidden<endif>),
                 BeginningOfLineGenerator.GetInstance(
                     <names/parser(name=name)>.BOL,
-                     Lexer.<if(emitBeginningOfLine)>DefaultTokenChannel<else>Hidden<endif>)
+                    Lexer.<if(emitBeginningOfLine)>DefaultTokenChannel<else>Hidden<endif>)
             );
 
         public override IToken NextToken()
