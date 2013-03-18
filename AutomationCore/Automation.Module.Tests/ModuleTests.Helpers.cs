@@ -13,7 +13,7 @@ namespace Automation.Module.Tests
 @"
 Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3'
-$ast = Parse-Item sample 'Temp\Sample.txt';
+$ast = Parse-Item sample 'Temp\SampleText.txt';
 "
 +
 testScript

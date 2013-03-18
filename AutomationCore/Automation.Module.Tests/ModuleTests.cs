@@ -82,13 +82,13 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleFull.g3' -Verbose
 ");
 
-            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\Full");
+            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleFull");
             var expected =
 @"
-VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'Full'
-VERBOSE: Grammar file set for parser 'Full'
-VERBOSE: Sources generated for parser 'Full'
-VERBOSE: Binaries compiled for parser 'Full'
+VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'SampleFull'
+VERBOSE: Grammar file set for parser 'SampleFull'
+VERBOSE: Sources generated for parser 'SampleFull'
+VERBOSE: Binaries compiled for parser 'SampleFull'
 "
 .Replace("<PARSER FOLDER>", parserFolder);
 
@@ -105,13 +105,13 @@ Import-Module .\AntlrAutomation.psd1
 Set-Grammar 'Temp\SampleShort.g3' -Verbose
 ");
 
-            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\Short");
+            var parserFolder = Path.Combine(Environment.CurrentDirectory, @"Parsers\SampleShort");
             var expected =
 @"
-VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'Short'
-VERBOSE: Grammar file set for parser 'Short'
-VERBOSE: Sources generated for parser 'Short'
-VERBOSE: Binaries compiled for parser 'Short'
+VERBOSE: Folder '<PARSER FOLDER>' is cleaned for parser 'SampleShort'
+VERBOSE: Grammar file set for parser 'SampleShort'
+VERBOSE: Sources generated for parser 'SampleShort'
+VERBOSE: Binaries compiled for parser 'SampleShort'
 "
 .Replace("<PARSER FOLDER>", parserFolder);
 
@@ -157,7 +157,7 @@ Parse-Item sample 'Temp\SampleText.txt' | % Text
 ");
             var expected =
 @"
-WARNING: Grammar 'sample' can be resolved as: Full, Short. Grammar 'Full' would be used.
+WARNING: Grammar 'sample' can be resolved as: SampleFull, SampleShort. Grammar 'SampleFull' would be used.
 FILE
 ";
             Assert.AreEqual(expected.Trim(), Powershell.Out);
