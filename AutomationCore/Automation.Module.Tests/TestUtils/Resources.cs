@@ -40,17 +40,17 @@ section
  */
 
 WORD: 'a'..'z'+;
+WS  : (' ' | '\t' )+ { $channel = Hidden; };
 
-WS	: (' ' | '\t')+ { $channel = Hidden; };
+EOL : '\r'? '\n' { $channel = Hidden; };
 
-EOL
-    : '\r'? '\n' { $channel = Hidden; };
+BOL : '\u0000 BOL tokens are inserted via Emitter during lexing \u0000';
 
 INDENT
-    : '<%$! INDENT tokens are inserted via IndentionGenerator during lexing !$%>';
+    : '\u0000 INDENT tokens are inserted via Emitter during lexing \u0000';
 
 DEDENT
-    : '<%$! DEDENT tokens are inserted via IndentionGenerator during lexing !$%>';
+    : '\u0000 DEDENT tokens are inserted via Emitter during lexing \u0000';
 ";
 
         public static string SampleShort =

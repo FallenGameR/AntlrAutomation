@@ -257,7 +257,7 @@ $writer.Flush()
 [Console]::SetOut( $old )
 $writer.GetStringBuilder().ToString()
 ");
-            Assert.AreEqual("VARIABLE [-] ID [<EOL>]" + Environment.NewLine + "<EOF>" + Environment.NewLine, Powershell.Out);
+            Assert.AreEqual("[{1}] VARIABLE [-] ID [<EOL>]" + Environment.NewLine + "<EOF>" + Environment.NewLine, Powershell.Out);
             Assert.AreEqual(string.Empty, Powershell.Err);
         }
 
@@ -318,17 +318,17 @@ Set-Grammar 'Temp\Indents.g3' -EmitIndents
 Parse-Item Indents 'Temp\IndentsText.txt' -Tokens
 ");
             var expected = @"
-[<EOL>]
-ID [<EOL>]
+[{1}] [<EOL>]
+[{2}] ID [<EOL>]
 <INDENT>
-[----] ID [<EOL>]
-[----] ID [<EOL>]
-[----] ID [<EOL>]
+[{3}] [----] ID [<EOL>]
+[{4}] [----] ID [<EOL>]
+[{5}] [----] ID [<EOL>]
 <INDENT>
-[--------] ID [<EOL>]
-[--------] ID [<EOL>]
+[{6}] [--------] ID [<EOL>]
+[{7}] [--------] ID [<EOL>]
 <DEDENT>
-[----] ID [<EOL>]
+[{8}] [----] ID [<EOL>]
 <DEDENT>
 <EOF>";
             Assert.AreEqual(expected.Trim(), Powershell.Out);
